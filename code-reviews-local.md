@@ -1,4 +1,4 @@
-# Rule: Review Pull Request
+# Review Pull Request
 
 ## Goal
 
@@ -21,7 +21,7 @@ To provide a comprehensive report with suggestions for a code change that hasn't
 
 ## Output
 
-* **Format:** `REVIEW.md`
+Please output to chat.
 
 ## Report Format
 
