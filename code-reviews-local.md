@@ -27,13 +27,9 @@ Please output to chat.
 
 1. The report should follow this format
 ```markdown
-# PR URL
-https://github.com/<repo>/pull/<pull_request_id>
 
 # Description
 (Describe what this PR is about. Please follow this format:
-
-This PR adds/removes/changes ....
 
 1. A new model/controller/worker/component/etc ...
 2. Refactoring of ....
