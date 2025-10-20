@@ -2,7 +2,7 @@
 
 ## Goal
 
-To provide a comprehensive report with suggestions for a code change that hasn't been committed yet. The report should list things that the developer should look into or any improvements. Finally, save the report in `REVIEW.md` in the same directory.
+Provide a comprehensive report with suggestions for a code change that hasn't been committed yet. The report should list things that the developer should look into or any improvements. Finally, save the report in `REVIEW.md` in the same directory.
 
 ## Process
 
@@ -21,7 +21,7 @@ To provide a comprehensive report with suggestions for a code change that hasn't
 
 ## Output
 
-Please output to chat.
+Output the report in `REVIEW.md` in the same directory.
 
 ## Report Format
 
