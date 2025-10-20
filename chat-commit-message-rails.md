@@ -1,4 +1,4 @@
-# Rule: Code Review
+# Chat commit message
 
 Draft for me a commit message of for the changes. Below is a template I'd like you to use.
 
