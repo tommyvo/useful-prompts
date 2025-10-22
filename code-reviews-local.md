@@ -98,6 +98,6 @@ File 2: (file_path)
 
 ## What to do after
 
-After you've generated the report, please go ahead and apply any changes you think is appropriate. If there's something that needs a decision you can ask me, and then continue.
+After you've generated the report, please go ahead and apply any changes you think are appropriate. If there's something that needs a decision you can ask me, and then continue.
 
-If you decide to not apply the suggested changes, please highlight and explain why.
+**IMPORTANT:** If you decide to not apply any of the suggested changes, please highlight the ones that were skipped and explain why.
