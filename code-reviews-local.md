@@ -2,7 +2,7 @@
 
 ## Goal
 
-Provide a comprehensive report with suggestions for a code change that hasn't been committed yet. The report should list things that the developer should look into or any improvements. Finally, save the report in `REVIEW.md` in the same directory.
+Provide a comprehensive report with suggestions for a code change that hasn't been committed yet. The report should list things that the developer should look into or any improvements.
 
 ## Process
 
@@ -21,7 +21,7 @@ Provide a comprehensive report with suggestions for a code change that hasn't be
 
 ## Output
 
-Output the report in `REVIEW.md` in the same directory.
+Output the report in Chat.
 
 ## Report Format
 
@@ -43,7 +43,6 @@ Line 3-5:
 
 Suggested changes: (if there are any)
 (suggested changes here - use Unified Diff)
-
 
 2. File: (file 2 path)
 Priority: High (but optional)
@@ -96,3 +95,9 @@ File 2: (file_path)
 
 1. The audience of this report is the PR reviewer. Please make sure it's easy to follow. Usually, the reviewer also doesn't have all the context.
 2. Use emoji color-coding for priority (such as 🟣, 🔴, 🟡, 🟢). SHOULD FIX is purple, HIGH is red, MEDIUM is yellow, LOW is green.
+
+## What to do after
+
+After you've generated the report, please go ahead and apply any changes you think is appropriate. If there's something that needs a decision you can ask me, and then continue.
+
+If you decide to not apply the suggested changes, please highlight and explain why.
