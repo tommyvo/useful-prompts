@@ -17,7 +17,6 @@ Provide a comprehensive report with suggestions for a code change that hasn't be
 4. When suggesting changes related to a code block, please quote the code block.
 5. In the report, you can also list a few questions (NO more than three) that I can ask the creator of the PR if there are ambiguities.
 6. In the report, please provide a brief conclusion whether if it's safe to merge this PR.
-7. Save the report in the same directory.
 
 ## Output
 
@@ -100,4 +99,4 @@ File 2: (file_path)
 
 After you've generated the report, please go ahead and apply any changes you think are appropriate. If there's something that needs a decision you can ask me, and then continue.
 
-**IMPORTANT:** If you decide to not apply any of the suggested changes, please highlight the ones that were skipped and explain why.
+**IMPORTANT:** If you decide to not apply any of the suggested changes, please highlight the ones that were skipped and explain why. Please do not save the report in the filesystem. You should only output to chat.
