@@ -2,6 +2,7 @@
 description: 'Draft a commit message for Rails project'
 mode: ask
 ---
+> **DEPRECATED: Use chat-draft-commit-message.md instead.**
 # Chat commit message - Rails
 
 Draft a commit message of for all the uncommitted changes we've made. You can use `git diff HEAD` to see the changes. Below is a template I'd like you to use.

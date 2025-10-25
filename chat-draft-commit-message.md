@@ -2,18 +2,23 @@
 description: "Draft a commit message"
 mode: ask
 ---
-Draft a commit message for all the uncommitted changes we've made. You can use `git diff HEAD` to see the changes.
-**Please specify the project type: React or Rails.**
-Use the relevant template below. Omit any sections that don't have changes. If a project type wasn't specified, just try your best.
 
-NOTE: If a project type is not specified, try to infer it from the files changed
+Draft a commit message for all the uncommitted changes. Use `git diff HEAD` to see the changes.
+
+**Instructions:**
+- If I specify "React" or "Rails", use the corresponding template below
+- If I don't specify a project type, try to infer it from the file extensions and structure:
+  - React: Look for .jsx, .tsx files, component folders, package.json with React dependencies
+  - Rails: Look for .rb files, controllers/, models/, db/migrate/ folders, Gemfile
+- If the project type cannot be determined, provide a generic commit message with a clear description of changes
+- Omit any template sections that don't have relevant changes
 
 ---
 
 ## React Template
 
 ```
-<feat||fix||chore>: <Brief title of change>
+<feat|fix|chore>: <Brief title of change>
 
 <Brief description of the change>
 
@@ -29,7 +34,8 @@ UI/UX Features:
 Testing:
 - <Any testing updates>
 
-<Any other changes>
+Other Changes:
+- <Any other changes>
 ```
 
 ---
@@ -37,7 +43,7 @@ Testing:
 ## Rails Template
 
 ```
-<feat||fix||chore>: <Brief title of change>
+<feat|fix|chore>: <Brief title of change>
 
 <Brief description of the change>
 
@@ -56,5 +62,22 @@ Model Changes:
 Testing:
 - <Any testing updates>
 
-<Any other changes>
+Other Changes:
+- <Any other changes>
+```
+
+---
+
+## Generic Template (when project type is unclear)
+
+```
+<feat|fix|chore>: <Brief title of change>
+
+<Brief description of the change>
+
+Changes:
+- <List key changes by file or functionality>
+
+Impact:
+- <Any notable impacts or side effects>
 ```
