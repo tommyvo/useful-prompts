@@ -2,11 +2,11 @@
 description: "Draft a commit message"
 mode: ask
 ---
-# Chat Commit Message - React & Rails
-
-Draft a commit message for all the uncommitted changes we've made.
+Draft a commit message for all the uncommitted changes we've made. You can use `git diff HEAD` to see the changes.
 **Please specify the project type: React or Rails.**
-Use the relevant template below. Omit any sections that don't have changes.
+Use the relevant template below. Omit any sections that don't have changes. If a project type wasn't specified, just try your best.
+
+NOTE: If a project type is not specified, try to infer it from the files changed
 
 ---
 
