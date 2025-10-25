@@ -1,6 +1,6 @@
 # Chat commit message - React
 
-Draft for me a commit message of for all the uncommitted changes we've made. Below is a template I'd like you to use.
+Draft a commit message of for all the uncommitted changes we've made. Below is a template I'd like you to use.
 
 You can omit any sections that didn't doesn't have any changes.
 

@@ -1,4 +1,4 @@
-# Rule: Local Review Pull Request
+# Rule: Local Code Review
 
 ## Goal
 
