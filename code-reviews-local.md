@@ -1,3 +1,7 @@
+---
+description: "Local Code Review"
+mode: agent
+---
 # Rule: Local Code Review
 
 ## Goal

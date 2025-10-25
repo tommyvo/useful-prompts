@@ -1,3 +1,7 @@
+---
+description: 'Review GitHub Pull Request'
+mode: ask
+---
 # Rule: Review GitHub Pull Request
 
 <goal>

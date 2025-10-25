@@ -1,3 +1,7 @@
+---
+description: 'Draft a commit message for React project'
+mode: ask
+---
 # Chat commit message - React
 
 Draft a commit message of for all the uncommitted changes we've made. Below is a template I'd like you to use.
