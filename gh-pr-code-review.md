@@ -2,7 +2,7 @@
 description: 'Review GitHub Pull Request'
 mode: ask
 ---
-# Rule: Review GitHub Pull Request
+# Review GitHub Pull Request
 
 <goal>
 To provide a comprehensive report with suggestions for a Pull Request using `gh` commands. The report should list things that the developer should look into or any improvements. Finally, save the report in `REVIEW.md` in the same directory.
