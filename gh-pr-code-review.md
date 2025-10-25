@@ -1,147 +1,149 @@
 ---
 description: 'Review GitHub Pull Request'
-mode: ask
+mode: agent
 ---
 # Review GitHub Pull Request
 
-<goal>
-To provide a comprehensive report with suggestions for a Pull Request using `gh` commands. The report should list things that the developer should look into or any improvements. Finally, save the report in `REVIEW.md` in the same directory.
-</goal>
+Review a GitHub Pull Request using the `gh` CLI tool and provide a comprehensive report with suggestions.
 
-<process>
-1. **Receive Initial Prompt:** The user provides the `pull_request_id`. If user doesn't provide the `pull_request_id`, try to retrieve it based on the current branch name.
-2. **Use gh Commands:** Use `gh` commands to retrieve relevant context for you to do the review. You can read existing files in the current directory for more context.
-3. **Generate The Report:** Generate the comprehensive report in markdown format. List our improvements and rate them in terms of priority.
-</process>
+**Instructions:**
 
-<instructions>
-1. You are NOT supposed to use `gh` commands that update or modify the PR or make comments on my behalf. It's unacceptable. You only use the `gh` commands to get context for the review. Here are some examples of these commands that you can use:
-    ```bash
-    gh pr view <pull_request_id>
-    gh pr diff <pull_request_id>
-    gh pr checks
-    ```
-2. You can also read the files in the current directory if you need more context for the review.
-3. When you give suggestions, please provide concrete examples. Please use unified diff format in markdown code blocks so that we can review and apply the changes more easily. See <unifiedDiffInstructions> section below.
-4. When suggesting changes related to a code block, please quote the code block.
-5. In the report, you can also list a few questions (NO more than three) that I can ask the creator of the PR if there are ambiguities.
-6. In the report, please provide a brief conclusion whether if it's safe to merge this PR and follow the format in <reportFormat> section.
-7. Save the report in the same directory.
-</instructions>
+1. If I provide a PR number, use it directly: `gh pr view <number>`
+2. If I don't provide a PR number, infer it from the current branch: `gh pr view --json number -q .number`
+3. Use read-only `gh` commands to gather context (NEVER modify the PR):
+   - `gh pr view <number>` - Get PR details
+   - `gh pr diff <number>` - Get code changes
+   - `gh pr checks <number>` - Get CI/CD status
+4. Read relevant files in the workspace for additional context
+5. Provide the review report directly in the chat (do NOT create files)
 
-<unifiedDiffInstructions>
-Return edits similar to unified diffs that `diff -U0` would produce.
+**Review Focus Areas (in priority order):**
 
-Make sure you include the first 2 lines with the file paths.
-Don't include timestamps with the file paths.
-Do not use any file path prefixes, just use --- path/to/file and +++ path/to/file.
+1. 🔴 Correctness - Logic errors, bugs, edge cases
+2. 🟠 Security - Vulnerabilities, unsafe practices
+3. 🟡 Code Quality - Clarity, maintainability, best practices
+4. 🟢 Style - Consistency, formatting, naming conventions
 
-Start each hunk of changes with a `@@` line.
+**Response Guidelines:**
 
-The user's patch tool needs CORRECT patches that apply cleanly against the current contents of the file!
-Code can start with line number prefixes for reference (e.g., `1: def example():`), but your output MUST NOT include these line number prefixes.
-Think carefully and make sure you include and mark all lines that need to be removed or changed as `-` lines.
-Make sure you mark all new or modified lines with `+`.
-Don't leave out any lines or the diff patch won't apply correctly.
+- Use concrete examples with code snippets
+- Quote the original code when suggesting changes
+- Provide suggested fixes using unified diff format (see below)
+- Include up to 3 questions for the PR author if clarification is needed
+- Conclude with a merge recommendation (Safe to merge / Needs changes / Blocking issues)
 
-Indentation matters in the diffs!
+---
 
-Start a new hunk for each section of the file that needs changes.
+## Unified Diff Format
 
-Only output hunks that specify changes with `+` or `-` lines.
+When suggesting code changes, use unified diff format:
 
-Output hunks in whatever order makes the most sense.
-Hunks don't need to be in any particular order.
+**Rules:**
 
-When editing a function, method, loop, etc use a hunk to replace the *entire* code block.
-Delete the entire existing version with `-` lines and then add a new, updated version with `+` lines.
-This will help you generate correct code and correct diffs.
+- Include the file paths: `--- path/to/file` and `+++ path/to/file` (no timestamps or prefixes)
+- Start each hunk with `@@` line indicating line numbers
+- Mark removed lines with `-` prefix
+- Mark added/new lines with `+` prefix
+- Preserve exact indentation and spacing
+- Include complete code blocks when editing functions/methods
+- To move code: use 2 hunks (1 to delete, 1 to insert)
+- To create new files: use `--- /dev/null` to `+++ path/to/new/file`
 
-To move code within a file, use 2 hunks: 1 to delete it from its current location, 1 to insert it in the new location.
-To make a new file, show a diff from `--- /dev/null` to `+++ path/to/new/file.ext`.
+**Example:**
 
-</unifiedDiffInstructions>
-
-<outputFormat>
-**Format:** `REVIEW.md`
-</outputFormat>
-
-<reportFormat>
-
-```markdown
-# PR URL
-https://github.com/<repo>/pull/<pull_request_id>
-
-# Description
-(Describe what this PR is about. Please follow this format:
-
-This PR adds/removes/changes ....
-
-1. A new model/controller/worker/component/etc ...
-2. Refactoring of ....
-3. ....
-
-# Specific Suggestions
-1. File: (file 1 path)
-Priority: SHOULD FIX
-Line 3-5:
-(suggestion here)
-
-Suggested changes: (if there are any)
-(suggested changes here - use unified diff)
-
-
-2. File: (file 2 path)
-Priority: High (but optional)
-Line 5-6:
-(suggestion here)
-
-3. File: (file 3 path)
-Looks good. No changes needed
-...
-
-# General Suggestions
-(If there are suggestions that are related to many files. List them here)
-
-1. (Suggestion title here)
-Priority: SHOULD FIX
-
-File 1: (use unified diff)
-(Write what should be changed here)
-
-File 2: (use unified diff)
-(Write what should be changed here)
-
-File 3: (use unified diff)
-(Write what should be changed here)
-
-2. (Suggestion title here)
-Priority: LOW
-
-File 1: (use unified diff)
-(Write what should be changed here)
-
-File 2: (use unified diff)
-(Write what should be changed here)
-
-# Questions
-(If there are questions for the PR owner, list them here)
-
-# Conclusion
-(is it safe to merge)
+```diff
+--- src/example.js
++++ src/example.js
+@@ -10,3 +10,3 @@
+ function calculate(x, y) {
+-  return x + y;
++  return x * y;
+ }
 ```
 
-</reportFormat>
+---
 
-<whatToReview>
-1. Correctness (high priority)
-2. Security
-3. Code clarity
-4. Reusability
-5. Consistency (low priority)
-</whatToReview>
+## Report Format
 
-<targetAudience>
-1. The audience of this report is the PR reviewer. Please make sure it's easy to follow. Usually, the reviewer also doesn't have all the context.
-2. Use emoji color-coding for priority (such as 🟣, 🔴, 🟡, 🟢). SHOULD FIX is purple, HIGH is red, MEDIUM is yellow, LOW is green.
-</targetAudience>
+Structure your review report as follows:
+
+```markdown
+# Pull Request Review
+
+**PR:** https://github.com/<repo>/pull/<number>
+
+## Overview
+Brief description of what this PR does:
+- Adds/Changes/Removes X
+- Updates Y
+- Refactors Z
+
+## File-Specific Suggestions
+
+### 1. `path/to/file1.js`
+**Priority:** 🔴 SHOULD FIX
+**Lines:** 15-20
+
+**Issue:** [Describe the problem]
+
+**Current code:**
+```js
+// Quote the problematic code
+```
+
+**Suggested fix:**
+```diff
+--- path/to/file1.js
++++ path/to/file1.js
+@@ -15,2 +15,2 @@
+-// old code
++// new code
+```
+
+### 2. `path/to/file2.rb`
+**Priority:** 🟡 MEDIUM
+**Lines:** 8-10
+
+**Issue:** [Describe the problem]
+
+[Continue for each file...]
+
+## Cross-Cutting Concerns
+
+### Inconsistent Error Handling
+**Priority:** 🟠 HIGH
+
+Multiple files need consistent error handling:
+
+**File:** `src/api.js`
+```diff
+[diff here]
+```
+
+**File:** `src/utils.js`
+```diff
+[diff here]
+```
+
+## Questions for PR Author
+
+1. [Question about unclear logic or missing context]
+2. [Question about architectural decision]
+3. [Question about test coverage]
+
+## Conclusion
+
+**Recommendation:** [Safe to merge ✅ | Needs changes ⚠️ | Blocking issues ❌]
+
+**Summary:** [Brief summary of overall assessment]
+```
+
+---
+
+## Priority Levels
+
+Use emoji color-coding for priorities:
+- 🟣 CRITICAL - Must fix before merge (security, data loss, breaking changes)
+- 🔴 SHOULD FIX - Important issues (bugs, logic errors, significant problems)
+- 🟡 MEDIUM - Improvements recommended (code quality, maintainability)
+- 🟢 LOW - Nice to have (style, minor optimizations, suggestions)
