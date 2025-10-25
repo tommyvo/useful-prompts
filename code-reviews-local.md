@@ -6,41 +6,58 @@ mode: agent
 
 ## Goal
 
-Provide a comprehensive report with suggestions for a code change that hasn't been committed yet. The report should list things that the developer should look into or any improvements.
+Provide a comprehensive report with suggestions for a code change that hasn't been committed yet. The report should list things that the developer should review, any optimizations that can be applied, and any security concerns.
 
 ## Process
 
 1. **Get Changes via Git** Use `git diff HEAD` to retrieve relevant context for you to do the review. You can read existing files in the current directory for more context.
 2. **Generate The Report:** Generate the comprehensive report in markdown format. List our improvements and rate them in terms of priority.
+3. **Apply Appropriate Fixes:** After generating the report, automatically apply any suggestions that are appropriate. Appropriate fixes are those that: (1) are in scope of the changes being made, and (2) would improve security, readability, fix obvious bugs, or address style/lint issues. Skip suggestions that don't relate to the changes being made or would require significant architectural decisions. **IMPORTANT:** If you decide to not apply any of the suggested changes, please highlight the ones that were skipped and explain why. Please do not save the report in the filesystem. You should only output to chat.
 
 ## Instructions
 
-1. You are NOT supposed to update or modify the PR or make comments on my behalf. It's unacceptable.
+1. After generating the code review report, you will apply appropriate changes as described in the "What to do after" section below.
 2. You can also read the files in the current directory if you need more context for the review.
 3. When you give suggestions, please provide concrete example(s).
 4. When suggesting changes related to a code block, please quote the code block.
-5. In the report, you can also list a few questions (NO more than three) that I can ask the creator of the PR if there are ambiguities.
+5. In the report, you can also list a few questions if there are ambiguities.
 6. In the report, please provide a brief conclusion whether if it's safe to merge this PR.
+
+## What to Review
+1. Correctness (high priority)
+2. Security
+3. Code clarity
+4. Reusability
+5. Consistency (low priority)
+
+## Audience
+
+1. The audience of this report is the PR reviewer. Please make sure it's easy to follow. Usually, the reviewer also doesn't have all the context.
+2. Use emoji color-coding for priority levels:
+   - 🟣 SHOULD FIX (purple) - Critical issues that must be addressed
+   - 🔴 HIGH (red) - Important issues that should be addressed
+   - 🟡 MEDIUM (yellow) - Nice-to-have improvements
+   - 🟢 LOW (green) - Minor suggestions or style preferences
 
 ## Output
 
-Output the report in Chat.
+Output the report in Chat as markdown.
 
 ## Report Format
 
-1. The report should follow this format
+The report should follow this format:
+
 ```markdown
-
 # Description
-(Describe what this PR is about. Please follow this format:
-
-1. A new model/controller/worker/component/etc ...
-2. Refactoring of ....
-3. ....
+(Describe what this change is about. Examples:)
+- A new model/controller/worker/component/etc.
+- Refactoring of [specific component/module]
+- Bug fix for [specific issue]
+- Performance optimization for [specific area]
 
 # Specific Suggestions
 1. File: (file 1 path)
-Priority: SHOULD FIX
+Priority: 🟣 SHOULD FIX
 Line 3-5:
 (suggestion here)
 
@@ -48,7 +65,7 @@ Suggested changes: (if there are any)
 (suggested changes here - use Unified Diff)
 
 2. File: (file 2 path)
-Priority: High (but optional)
+Priority: 🔴 HIGH
 Line 5-6:
 (suggestion here)
 
@@ -60,7 +77,7 @@ Looks good. No changes needed
 (If there are suggestions that are related to many files. List them here)
 
 1. (Suggestion title here)
-Priority: SHOULD FIX
+Priority: 🟣 SHOULD FIX
 
 File 1: (file path)
 (Write what should be changed here)
@@ -72,7 +89,7 @@ File 3: (file_path)
 (Write what should be changed here)
 
 2. (Suggestion title here)
-Priority: LOW
+Priority: 🟢 LOW
 
 File 1: (file path)
 (Write what should be changed here)
@@ -84,7 +101,9 @@ File 2: (file_path)
 (If there are questions for the PR owner, list them here)
 
 # Conclusion
-(is it safe to merge)
+- Overall code quality: (Good/Needs Work/Requires Significant Changes)
+- Blocking issues: (None/List them)
+- Recommendation: (Safe to merge/Merge after fixes/Needs discussion)
 ```
 
 ## What to Review
@@ -97,10 +116,8 @@ File 2: (file_path)
 ## Audience
 
 1. The audience of this report is the PR reviewer. Please make sure it's easy to follow. Usually, the reviewer also doesn't have all the context.
-2. Use emoji color-coding for priority (such as 🟣, 🔴, 🟡, 🟢). SHOULD FIX is purple, HIGH is red, MEDIUM is yellow, LOW is green.
-
-## What to do after
-
-After you've generated the report, please go ahead and apply any changes you think are appropriate. If there's something that needs a decision you can ask me, and then continue.
-
-**IMPORTANT:** If you decide to not apply any of the suggested changes, please highlight the ones that were skipped and explain why. Please do not save the report in the filesystem. You should only output to chat.
+2. Use emoji color-coding for priority levels:
+   - 🟣 SHOULD FIX (purple) - Critical issues that must be addressed
+   - 🔴 HIGH (red) - Important issues that should be addressed
+   - 🟡 MEDIUM (yellow) - Nice-to-have improvements
+   - 🟢 LOW (green) - Minor suggestions or style preferences
