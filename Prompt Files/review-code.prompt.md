@@ -17,12 +17,13 @@ Provide a comprehensive report with suggestions for a code change that hasn't be
 ## Instructions
 
 1. After generating the code review report, you will apply appropriate changes as described in the "What to do after" section below.
-2. You can also read the files in the current directory if you need more context for the review.
-3. When you give suggestions, please provide concrete example(s).
-4. When suggesting changes related to a code block, please quote the code block.
-5. In the report, you can also list a few questions if there are ambiguities.
-6. In the report, please provide a brief conclusion whether if it's safe to merge this PR.
-7. **Only include files in the report that have specific suggestions or issues.** Do not create sections for files that look good with no changes needed.
+2. **Before applying changes, create a todo list** of all the suggestions that will be automatically applied, so the user can track the progress.
+3. You can also read the files in the current directory if you need more context for the review.
+4. When you give suggestions, please provide concrete example(s).
+5. When suggesting changes related to a code block, please quote the code block.
+6. In the report, you can also list a few questions if there are ambiguities.
+7. In the report, please provide a brief conclusion whether if it's safe to merge this PR.
+8. **Only include files in the report that have specific suggestions or issues.** Do not create sections for files that look good with no changes needed.
 
 ## What to Review
 1. Correctness (high priority)
