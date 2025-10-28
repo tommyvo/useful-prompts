@@ -1,6 +1,6 @@
 ---
 description: "Draft a commit message"
-mode: ask
+mode: agent
 ---
 
 Draft a commit message for all the uncommitted changes. Use `git diff HEAD` to see the changes.
