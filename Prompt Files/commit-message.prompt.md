@@ -12,6 +12,7 @@ Draft a commit message for all the uncommitted changes. Use `git diff HEAD` to s
   - Rails: Look for .rb files, controllers/, models/, db/migrate/ folders, Gemfile
 - If the project type cannot be determined, provide a generic commit message with a clear description of changes
 - **Important** Omit any template sections that don't have relevant changes
+- **Important** Do not use fenced code blocks (```) within the commit message as they will break formatting - include raw JSON or code directly
 
 ---
 
@@ -65,17 +66,20 @@ Testing:
 Other Changes:
 - <Any other changes>
 
-Response Body Changes:
-- <If API response bodies changed, include the full response structure for both success and error cases>
-  Success Response:
-  ```json
-  <Full JSON response body for successful requests>
-  ```
+Request Body Changes:
+<If any API endpoints were added or modified that accept request bodies, include the full request structure>
 
-  Error Response(s):
-  ```json
-  <Full JSON response body for error cases>
-  ```
+Example Request Body:
+<Full JSON request body structure with required/optional fields>
+
+Response Body Changes:
+<If API response bodies changed, include the full response structure for both success and error cases>
+
+Success Response:
+<Full JSON response body for successful requests>
+
+Error Response(s):
+<Full JSON response body for error cases>
 
 ```
 
@@ -93,4 +97,5 @@ Changes:
 
 Impact:
 - <Any notable impacts or side effects>
+
 ```
