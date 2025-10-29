@@ -11,7 +11,7 @@ Draft a commit message for all the uncommitted changes. Use `git diff HEAD` to s
   - React: Look for .jsx, .tsx files, component folders, package.json with React dependencies
   - Rails: Look for .rb files, controllers/, models/, db/migrate/ folders, Gemfile
 - If the project type cannot be determined, provide a generic commit message with a clear description of changes
-- Omit any template sections that don't have relevant changes
+- **Important** Omit any template sections that don't have relevant changes
 
 ---
 
@@ -53,9 +53,6 @@ Database Changes:
 API Changes:
 - <Any overall API updates>
 
-Response Body Changes:
-- <Any changes to API response bodies>
-
 Controller Changes:
 - <Any controller updates>
 
@@ -67,6 +64,19 @@ Testing:
 
 Other Changes:
 - <Any other changes>
+
+Response Body Changes:
+- <If API response bodies changed, include the full response structure for both success and error cases>
+  Success Response:
+  ```json
+  <Full JSON response body for successful requests>
+  ```
+
+  Error Response(s):
+  ```json
+  <Full JSON response body for error cases>
+  ```
+
 ```
 
 ---
