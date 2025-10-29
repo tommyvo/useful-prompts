@@ -53,6 +53,9 @@ Database Changes:
 API Changes:
 - <Any overall API updates>
 
+Response Body Changes:
+- <Any changes to API response bodies>
+
 Controller Changes:
 - <Any controller updates>
 
