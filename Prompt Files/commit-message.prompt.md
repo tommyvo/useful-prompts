@@ -6,6 +6,8 @@ mode: agent
 # Commit message draft
 
 Draft a commit message for all the uncommitted changes.
+
+**CRITICAL**: DO NOT SKIP STEPS. Skipping any steps is NOT acceptable!
 **Very Important** Use `git diff HEAD` to see the changes.
 
 **Instructions:**

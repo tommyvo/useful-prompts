@@ -11,6 +11,8 @@ Provide a comprehensive report with suggestions for a code change that hasn't be
 
 ## Process
 
+**CRITICAL**: DO NOT SKIP STEPS. Skipping any steps is NOT acceptable!
+
 1. **Get Changes via Git, VERY IMPORTANT MUST DO! DO NOT SKIP!!!!!!!!** Use `git diff HEAD` to retrieve relevant context for you to do the review. You can read existing files in the current directory for more context.
 2. **Generate The Report:** Generate the comprehensive report in markdown format. List our improvements and rate them in terms of priority.
 3. **Apply Appropriate Fixes:** After generating the report, automatically apply any suggestions that are appropriate. Appropriate fixes are those that: (1) are in scope of the changes being made, and (2) would improve security, readability, fix obvious bugs, or address style/lint issues. Skip suggestions that don't relate to the changes being made or would require significant architectural decisions. **IMPORTANT:** If you decide to not apply any of the suggested changes, please highlight the ones that were skipped and explain why. Please do not save the report in the filesystem. You should only output to chat.
