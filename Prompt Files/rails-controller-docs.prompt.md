@@ -45,11 +45,10 @@ For each controller action, document:
 2. Parse all actions, filters, and helper methods
 3. Check routes file for corresponding route definitions
 4. Generate complete documentation following the format below
-5. **Save the documentation** as a markdown file named `(controller_name)_documentation.md` in the workspace
-6. Inform the user where the documentation was saved
-7. **Important:** Be thorough - include all actions even if some information is inferred
-8. **Important:** Provide realistic example JSON structures based on the actual model attributes
-9. If certain details cannot be determined from the code, note them as "Not specified in controller" or "Requires additional context"
+5. **Output the documentation** Output the documentation in Chat as markdown. You can use four backticks (````) for the outer markdown fenced code block, and three backticks for any fenced code blocks within the markdown.
+6. **Important:** Be thorough - include all actions even if some information is inferred
+7. **Important:** Provide realistic example JSON structures based on the actual model attributes
+8. If certain details cannot be determined from the code, note them as "Not specified in controller" or "Requires additional context"
 
 ## Output
 
