@@ -24,7 +24,7 @@ Generate comprehensive markdown documentation for a Rails controller, including 
 
 3. **Generate Documentation:** Create a comprehensive markdown document following the format specified below
 
-4. **Output:** Save the documentation as a new markdown file in the workspace with the naming pattern: `(controller_name)_documentation.md`
+4. **Output:** Output the documentation in Chat as markdown. You can use four backticks (````) for the outer markdown fenced code block, and three backticks for any fenced code blocks within the markdown.
 
 ## What to Analyze
 
