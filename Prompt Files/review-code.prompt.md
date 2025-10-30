@@ -2,6 +2,7 @@
 description: "Local Code Review"
 mode: agent
 ---
+
 # Local Code Review
 
 ## Goal
@@ -26,6 +27,7 @@ Provide a comprehensive report with suggestions for a code change that hasn't be
 8. **Only include files in the report that have specific suggestions or issues.** Do not create sections for files that look good with no changes needed.
 
 ## What to Review
+
 1. Correctness (high priority)
 2. Security
 3. Code clarity
@@ -43,13 +45,13 @@ Provide a comprehensive report with suggestions for a code change that hasn't be
 
 ## Output
 
-Output the report in Chat as markdown.
+Output the report in Chat as markdown. You can use four backticks (````) for the outer markdown fenced code block, and three backticks for any fenced code blocks within the markdown.
 
 ## Report Format
 
 The report should follow this format:
 
-```markdown
+````markdown
 # Description
 (Describe what this change is about. Examples:)
 - A new model/controller/worker/component/etc.
@@ -104,20 +106,4 @@ File 2: (file_path)
 - Overall code quality: (Good/Needs Work/Requires Significant Changes)
 - Blocking issues: (None/List them)
 - Recommendation: (Safe to merge/Merge after fixes/Needs discussion)
-```
-
-## What to Review
-1. Correctness (high priority)
-2. Security
-3. Code clarity
-4. Reusability
-5. Consistency (low priority)
-
-## Audience
-
-1. The audience of this report is the PR reviewer. Please make sure it's easy to follow. Usually, the reviewer also doesn't have all the context.
-2. Use emoji color-coding for priority levels:
-   - 🟣 SHOULD FIX (purple) - Critical issues that must be addressed
-   - 🔴 HIGH (red) - Important issues that should be addressed
-   - 🟡 MEDIUM (yellow) - Nice-to-have improvements
-   - 🟢 LOW (green) - Minor suggestions or style preferences
+````

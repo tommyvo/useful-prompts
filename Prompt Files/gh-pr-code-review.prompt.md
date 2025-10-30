@@ -2,6 +2,7 @@
 description: 'Review GitHub Pull Request'
 mode: agent
 ---
+
 # Review GitHub Pull Request
 
 Review a GitHub Pull Request using the `gh` CLI tool and provide a comprehensive report with suggestions.
@@ -67,7 +68,7 @@ When suggesting code changes, use unified diff format:
 
 Structure your review report as follows:
 
-```markdown
+````markdown
 # Pull Request Review
 
 **PR:** https://github.com/<repo>/pull/<number>
@@ -136,7 +137,7 @@ Multiple files need consistent error handling:
 **Recommendation:** [Safe to merge ✅ | Needs changes ⚠️ | Blocking issues ❌]
 
 **Summary:** [Brief summary of overall assessment]
-```
+````
 
 ---
 
