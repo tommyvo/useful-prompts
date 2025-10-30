@@ -5,7 +5,8 @@ mode: agent
 
 # Commit message draft
 
-Draft a commit message for all the uncommitted changes. Use `git diff HEAD` to see the changes.
+Draft a commit message for all the uncommitted changes.
+**Very Important** Use `git diff HEAD` to see the changes.
 
 **Instructions:**
 
