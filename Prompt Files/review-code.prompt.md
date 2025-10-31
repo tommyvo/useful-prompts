@@ -53,7 +53,6 @@ Output the report in Chat as markdown. You can use four backticks (````) for the
 
 The report should follow this format:
 
-````markdown
 # Description
 (Describe what this change is about. Examples:)
 - A new model/controller/worker/component/etc.
@@ -108,4 +107,3 @@ File 2: (file_path)
 - Overall code quality: (Good/Needs Work/Requires Significant Changes)
 - Blocking issues: (None/List them)
 - Recommendation: (Safe to merge/Merge after fixes/Needs discussion)
-````
