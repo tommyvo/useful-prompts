@@ -264,4 +264,3 @@ Key safety guidelines:
 - Some prompts adapted from [GitHub Awesome Copilot](https://github.com/github/awesome-copilot) community collection
 - Inspired by best practices from the AI and developer communities
 - Built for use with [GitHub Copilot](https://github.com/features/copilot) and [VS Code](https://code.visualstudio.com)
-- Special thanks to all contributors who help improve this collection
