@@ -27,18 +27,17 @@
 
 Pre-built prompts for common development tasks. See the [Prompt Files README](./Prompt%20Files/README.md) for detailed usage instructions.
 
-| Prompt | Description | Mode |
-|--------|-------------|------|
-| [code-review.prompt.md](./Prompt%20Files/code-review.prompt.md) | Comprehensive local code review with security analysis | Agent |
-| [commit-message.prompt.md](./Prompt%20Files/commit-message.prompt.md) | Generate standardized commit messages for React/Rails projects | Agent |
-| [gh-pr-code-review.prompt.md](./Prompt%20Files/gh-pr-code-review.prompt.md) | Review GitHub pull requests with unified diff suggestions | Agent |
-| [rails-controller-docs.prompt.md](./Prompt%20Files/rails-controller-docs.prompt.md) | Generate comprehensive Rails controller documentation | Agent |
-| [create-readme.prompt.md](./Prompt%20Files/create-readme.prompt.md) | Create well-structured README files for projects | Agent |
+| Prompt                                                                              | Description                                                    | Mode  |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------- | ----- |
+| [code-review.prompt.md](./Prompt%20Files/code-review.prompt.md)                     | Comprehensive local code review with security analysis         | Agent |
+| [commit-message.prompt.md](./Prompt%20Files/commit-message.prompt.md)               | Generate standardized commit messages for React/Rails projects | Agent |
+| [gh-pr-code-review.prompt.md](./Prompt%20Files/gh-pr-code-review.prompt.md)         | Review GitHub pull requests with unified diff suggestions      | Agent |
+| [rails-controller-docs.prompt.md](./Prompt%20Files/rails-controller-docs.prompt.md) | Generate comprehensive Rails controller documentation          | Agent |
+| [create-readme.prompt.md](./Prompt%20Files/create-readme.prompt.md)                 | Create well-structured README files for projects               | Agent |
 
 ### 🎯 Instructions
 
-> [!WARNING]
-> **Using instruction prompts will consume part of the AI model's context window.** The more or larger instructions you have, the less room there is for your code and chat history in each Copilot request.
+> [!WARNING] > **Using instruction prompts will consume part of the AI model's context window.** The more or larger instructions you have, the less room there is for your code and chat history in each Copilot request.
 
 Language and framework-specific coding guidelines that automatically apply to relevant files.
 
@@ -65,6 +64,7 @@ Prompt files can be invoked directly in GitHub Copilot Chat in VS Code:
 3. **Provide context** as needed for your specific task
 
 **Example:**
+
 ```
 Follow instructions in create-readme.prompt.md
 ```
@@ -97,6 +97,7 @@ git add .
 ```
 
 The AI will:
+
 - Analyze your uncommitted changes using `git diff HEAD`
 - Generate a comprehensive review report with priority-coded suggestions
 - Automatically apply appropriate fixes for security, bugs, and style issues
@@ -113,6 +114,7 @@ git add .
 ```
 
 The AI will:
+
 - Analyze your changes via `git diff HEAD`
 - Auto-detect project type (React/Rails/Generic)
 - Generate a structured commit message following conventions
@@ -126,6 +128,7 @@ The AI will:
 ```
 
 The AI will:
+
 - Fetch PR details using the `gh` CLI
 - Review code changes with priority-coded feedback
 - Provide specific fix suggestions in unified diff format
@@ -168,6 +171,7 @@ This allows you to pass the PR number as an argument when invoking the command i
 > Review the [AI Safety Best Practices](./Instructions/ai-prompt-engineering-safety-best-practices.instructions.md) before using prompts in production environments.
 
 Key safety guidelines:
+
 - Never include sensitive data (passwords, API keys, PII) in prompts
 - Always review AI-generated code for security vulnerabilities
 - Use appropriate moderation and validation for user-facing features
