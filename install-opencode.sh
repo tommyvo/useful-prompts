@@ -23,7 +23,7 @@ if [ ! -d "$SOURCE_DIR" ]; then
     exit 1
 fi
 
-# Function to check for file conflicts
+# Function to check for file conflicts (files that exist and have different content)
 check_conflicts() {
     local target_dir="$1"
     local source_dir="$2"
@@ -34,7 +34,10 @@ check_conflicts() {
             [ -f "$file" ] || continue
             local filename=$(basename "$file")
             if [ -f "$target_dir/$filename" ]; then
-                conflicts+=("$filename")
+                # Check if files differ
+                if ! cmp -s "$file" "$target_dir/$filename"; then
+                    conflicts+=("$filename")
+                fi
             fi
         done
     fi
@@ -91,18 +94,40 @@ echo ""
 agent_conflicts=($(check_conflicts "$OPENCODE_CONFIG_DIR/agent" "$SOURCE_DIR/agent"))
 command_conflicts=($(check_conflicts "$OPENCODE_CONFIG_DIR/command" "$SOURCE_DIR/command"))
 
-# Compute which files will be added (present in source but not in target)
+# Compute which files will be added (new files) and which are unchanged (identical)
 agent_added=()
+agent_unchanged=()
 command_added=()
+command_unchanged=()
 
 for file in "${agent_files[@]}"; do
-    if [[ ! " ${agent_conflicts[*]} " =~ " $file " ]]; then
+    if [ -f "$OPENCODE_CONFIG_DIR/agent/$file" ]; then
+        # File exists - check if it's in conflicts (different) or unchanged (identical)
+        if [[ " ${agent_conflicts[*]} " =~ " $file " ]]; then
+            # File is different, it's in conflicts array (will be shown as modified)
+            :
+        else
+            # File exists and is identical
+            agent_unchanged+=("$file")
+        fi
+    else
+        # File doesn't exist - it will be added
         agent_added+=("$file")
     fi
 done
 
 for file in "${command_files[@]}"; do
-    if [[ ! " ${command_conflicts[*]} " =~ " $file " ]]; then
+    if [ -f "$OPENCODE_CONFIG_DIR/command/$file" ]; then
+        # File exists - check if it's in conflicts (different) or unchanged (identical)
+        if [[ " ${command_conflicts[*]} " =~ " $file " ]]; then
+            # File is different, it's in conflicts array (will be shown as modified)
+            :
+        else
+            # File exists and is identical
+            command_unchanged+=("$file")
+        fi
+    else
+        # File doesn't exist - it will be added
         command_added+=("$file")
     fi
 done
@@ -148,9 +173,35 @@ if [ ${#agent_conflicts[@]} -gt 0 ] || [ ${#command_conflicts[@]} -gt 0 ]; then
     fi
 fi
 
+if [ ${#agent_unchanged[@]} -gt 0 ] || [ ${#command_unchanged[@]} -gt 0 ]; then
+    echo -e "${BLUE}The following files are already up-to-date (no changes):${NC}"
+    echo ""
+    if [ ${#agent_unchanged[@]} -gt 0 ]; then
+        echo -e "${BLUE}Agents:${NC}"
+        for file in "${agent_unchanged[@]}"; do
+            echo "  • $file"
+        done
+        echo ""
+    fi
+    if [ ${#command_unchanged[@]} -gt 0 ]; then
+        echo -e "${BLUE}Commands:${NC}"
+        for file in "${command_unchanged[@]}"; do
+            echo "  • $file"
+        done
+        echo ""
+    fi
+fi
+
 if [ -f "$OPENCODE_CONFIG_DIR/config" ] || [ -f "$OPENCODE_CONFIG_DIR/config.json" ]; then
     echo -e "${GREEN}✓${NC} Existing config file will NOT be modified"
     echo ""
+fi
+
+# Check if there are any changes to install
+if [ ${#agent_added[@]} -eq 0 ] && [ ${#command_added[@]} -eq 0 ] && [ ${#agent_conflicts[@]} -eq 0 ] && [ ${#command_conflicts[@]} -eq 0 ]; then
+    echo -e "${GREEN}✅ All files are already up-to-date. Nothing to install.${NC}"
+    echo ""
+    exit 0
 fi
 
 # Confirm installation (default: Yes)

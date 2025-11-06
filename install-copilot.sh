@@ -29,7 +29,7 @@ if [ ! -d "$PROMPT_FILES_DIR" ]; then
     exit 1
 fi
 
-# Function to check for file conflicts
+# Function to check for file conflicts (files that exist and have different content)
 check_conflicts() {
     local target_dir="$1"
     local source_dir="$2"
@@ -39,7 +39,10 @@ check_conflicts() {
         while IFS= read -r -d '' file; do
             local filename=$(basename "$file")
             if [ -f "$target_dir/$filename" ]; then
-                conflicts+=("$filename")
+                # Check if files differ
+                if ! cmp -s "$file" "$target_dir/$filename"; then
+                    conflicts+=("$filename")
+                fi
             fi
         done < <(find "$source_dir" -maxdepth 1 -name "*.md" -type f -print0)
     fi
@@ -110,32 +113,46 @@ while IFS= read -r file; do
     [ -n "$file" ] && prompt_conflicts+=("$file")
 done < <(check_conflicts "$COPILOT_PROMPTS_DIR" "$PROMPT_FILES_DIR")
 
-# Compute which files will be added (present in source but not in target)
+# Compute which files will be added (new files) and which are unchanged (identical)
 chatmode_added=()
+chatmode_unchanged=()
 prompt_added=()
+prompt_unchanged=()
 
 for file in "${chatmode_files[@]}"; do
-    found=false
-    for conflict in "${chatmode_conflicts[@]}"; do
-        if [ "$file" = "$conflict" ]; then
-            found=true
-            break
+    if [ -f "$COPILOT_PROMPTS_DIR/$file" ]; then
+        # File exists - check if it's in conflicts (different) or unchanged (identical)
+        found_conflict=false
+        for conflict in "${chatmode_conflicts[@]}"; do
+            if [ "$file" = "$conflict" ]; then
+                found_conflict=true
+                break
+            fi
+        done
+        if [ "$found_conflict" = false ]; then
+            chatmode_unchanged+=("$file")
         fi
-    done
-    if [ "$found" = false ]; then
+    else
+        # File doesn't exist - it will be added
         chatmode_added+=("$file")
     fi
 done
 
 for file in "${prompt_files[@]}"; do
-    found=false
-    for conflict in "${prompt_conflicts[@]}"; do
-        if [ "$file" = "$conflict" ]; then
-            found=true
-            break
+    if [ -f "$COPILOT_PROMPTS_DIR/$file" ]; then
+        # File exists - check if it's in conflicts (different) or unchanged (identical)
+        found_conflict=false
+        for conflict in "${prompt_conflicts[@]}"; do
+            if [ "$file" = "$conflict" ]; then
+                found_conflict=true
+                break
+            fi
+        done
+        if [ "$found_conflict" = false ]; then
+            prompt_unchanged+=("$file")
         fi
-    done
-    if [ "$found" = false ]; then
+    else
+        # File doesn't exist - it will be added
         prompt_added+=("$file")
     fi
 done
@@ -179,6 +196,32 @@ if [ ${#chatmode_conflicts[@]} -gt 0 ] || [ ${#prompt_conflicts[@]} -gt 0 ]; the
         done
         echo ""
     fi
+fi
+
+if [ ${#chatmode_unchanged[@]} -gt 0 ] || [ ${#prompt_unchanged[@]} -gt 0 ]; then
+    echo -e "${BLUE}The following files are already up-to-date (no changes):${NC}"
+    echo ""
+    if [ ${#chatmode_unchanged[@]} -gt 0 ]; then
+        echo -e "${BLUE}Chat Modes:${NC}"
+        for file in "${chatmode_unchanged[@]}"; do
+            echo "  • $file"
+        done
+        echo ""
+    fi
+    if [ ${#prompt_unchanged[@]} -gt 0 ]; then
+        echo -e "${BLUE}Prompt Files:${NC}"
+        for file in "${prompt_unchanged[@]}"; do
+            echo "  • $file"
+        done
+        echo ""
+    fi
+fi
+
+# Check if there are any changes to install
+if [ ${#chatmode_added[@]} -eq 0 ] && [ ${#prompt_added[@]} -eq 0 ] && [ ${#chatmode_conflicts[@]} -eq 0 ] && [ ${#prompt_conflicts[@]} -eq 0 ]; then
+    echo -e "${GREEN}✅ All files are already up-to-date. Nothing to install.${NC}"
+    echo ""
+    exit 0
 fi
 
 # Confirm installation (default: Yes)
