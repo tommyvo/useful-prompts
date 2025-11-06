@@ -136,6 +136,27 @@ The AI will:
 
 ## Configuration
 
+### Installing for GitHub Copilot
+
+To make all prompts and chat modes available globally in VS Code, use the automated installer:
+
+```bash
+./install-copilot.sh
+```
+
+The script will:
+
+- Copy all chat modes from `Chat Modes/` to `~/Library/Application Support/Code/User/prompts` (macOS)
+- Copy all prompt files from `Prompt Files/` to the same directory
+- Show which files will be ADDED (new) and which will be MODIFIED/OVERWRITTEN (existing files with same name)
+- The confirmation prompt defaults to Yes; pressing Enter will proceed with installation
+- **Note:** Restart VS Code after installation if prompts don't appear immediately
+
+After installation, all prompts and chat modes will be available in GitHub Copilot Chat:
+
+- Reference prompt files: `Follow instructions in <filename>`
+- Select chat modes from the chat mode dropdown menu
+
 ### Using with Opencode
 
 Pre-converted Opencode versions of all prompts and chat modes are available in the `opencode/` directory. These files use Opencode's frontmatter syntax (`agent: build` / `agent: plan`) and include support for `{$ARGUMENTS}` where applicable.

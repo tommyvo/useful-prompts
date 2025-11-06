@@ -2,6 +2,9 @@
 
 This directory contains pre-converted versions of all prompts and chat modes for use with [Opencode](https://opencode.ai/).
 
+> [!NOTE]
+> For GitHub Copilot installation, use `./install-copilot.sh` from the repository root instead. This installer is specifically for Opencode CLI users.
+
 ## Directory Structure
 
 ```text
