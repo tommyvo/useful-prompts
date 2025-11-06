@@ -136,25 +136,62 @@ The AI will:
 
 ## Configuration
 
-### Adapting for Opencode
+### Using with Opencode
 
-To use these prompts with Opencode instead of GitHub Copilot:
+Pre-converted Opencode versions of all prompts and chat modes are available in the `opencode/` directory. These files use Opencode's frontmatter syntax (`agent: build` / `agent: plan`) and include support for `{$ARGUMENTS}` where applicable.
 
-- Change `mode: agent` → `agent: build`
-- Change `mode: ask` → `agent: plan`
-- For prompt files, you may need to add `{$ARGUMENTS}` in the prompt to support Opencode's argument passing. See the [Opencode arguments documentation](https://opencode.ai/docs/commands/#arguments) for details.
+#### Installation
 
-**Example:**
+**Agents** (autonomous task execution):
 
-To adapt the `gh-pr-code-review.prompt.md` for Opencode, you could change the instructions section like this:
+```bash
+# Copy all agent prompts to Opencode config
+cp opencode/agent/*.md ~/.config/opencode/agent/
 
+# Or copy individual agents
+cp opencode/agent/code-review.md ~/.config/opencode/agent/
+cp opencode/agent/commit-message.md ~/.config/opencode/agent/
 ```
-1. The PR number is {$ARGUMENTS}
-2. Use `gh pr view {$ARGUMENTS}` to get PR details
-3. ...rest of the instructions remain the same
+
+**Commands** (interactive chat modes):
+
+```bash
+# Copy all commands to Opencode config
+cp opencode/command/*.md ~/.config/opencode/command/
+
+# Or copy individual commands
+cp opencode/command/beast-mode.md ~/.config/opencode/command/
+cp opencode/command/principal-engineer.md ~/.config/opencode/command/
 ```
 
-This allows you to pass the PR number as an argument when invoking the command in Opencode.
+#### Usage in Opencode
+
+Once installed, use them like this:
+
+```bash
+# Run an agent with no arguments
+opencode agent code-review
+
+# Run an agent with arguments (e.g., PR number for review)
+opencode agent gh-pr-code-review 123
+
+# Use a command mode
+opencode command beast-mode "your task here"
+```
+
+#### Key Differences from GitHub Copilot
+
+**Frontmatter:**
+
+- GitHub Copilot: `mode: agent` / `mode: ask`
+- Opencode: `agent: build` / `agent: plan`
+
+**Arguments:**
+
+- Opencode agents support `{$ARGUMENTS}` for passing parameters (e.g., PR numbers, file paths). `{$ARGUMENTS}` will be interpolated in the prompt at runtime.
+- Example: `opencode agent gh-pr-code-review 42` passes `42` as `{$ARGUMENTS}`
+
+For more details, see the [Opencode documentation](https://opencode.ai/docs/).
 
 ## Best Practices
 
