@@ -9,13 +9,24 @@ mode: agent
 
 Provide a comprehensive report with suggestions for a code change that hasn't been committed yet. The report should list things that the developer should review, any optimizations that can be applied, and any security concerns.
 
+## CRITICAL: MANDATORY FIRST STEP
+
+**YOU MUST run `git diff HEAD` as your ABSOLUTE FIRST action before doing ANYTHING else.**
+
+- DO NOT attempt to review code from context or memory
+- DO NOT skip this step under any circumstances
+- DO NOT proceed to the next step without running this command first
+- DO NOT assume you know what changed
+
+If you do not run `git diff HEAD` first, you are failing to follow instructions.
+
 ## Process
 
-**CRITICAL**: DO NOT SKIP STEPS. Skipping any steps is NOT acceptable!
+Follow these steps IN ORDER. DO NOT skip any step:
 
-1. **Get Changes via Git, VERY IMPORTANT MUST DO! DO NOT SKIP!!!!!!!!** Use `git diff HEAD` to retrieve relevant context for you to do the review. You can read existing files in the current directory for more context.
-2. **Generate The Report:** Generate the comprehensive report in markdown format. List our improvements and rate them in terms of priority.
-3. **Apply Appropriate Fixes:** After generating the report, automatically apply any suggestions that are appropriate. Appropriate fixes are those that: (1) are in scope of the changes being made, and (2) would improve security, readability, fix obvious bugs, or address style/lint issues. Skip suggestions that don't relate to the changes being made or would require significant architectural decisions. **IMPORTANT:** If you decide to not apply any of the suggested changes, please highlight the ones that were skipped and explain why. Please do not save the report in the filesystem. You should only output to chat.
+1. **STEP 1 - Get Changes via Git (MANDATORY):** Run `git diff HEAD` in the terminal to retrieve ALL uncommitted changes. This is your primary source of truth for what to review. You can read existing files in the current directory for additional context if needed.
+2. **STEP 2 - Generate The Report:** Generate the comprehensive report in markdown format. List improvements and rate them in terms of priority using the emoji system.
+3. **STEP 3 - Apply Appropriate Fixes:** After generating the report, automatically apply any suggestions that are appropriate. Appropriate fixes are those that: (1) are in scope of the changes being made, and (2) would improve security, readability, fix obvious bugs, or address style/lint issues. Skip suggestions that don't relate to the changes being made or would require significant architectural decisions. **IMPORTANT:** If you decide to not apply any of the suggested changes, please highlight the ones that were skipped and explain why. Please do not save the report in the filesystem. You should only output to chat.
 
 ## Instructions
 

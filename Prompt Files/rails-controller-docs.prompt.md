@@ -9,53 +9,75 @@ mode: agent
 
 Generate comprehensive markdown documentation for a Rails controller, including all actions, routes, request/response formats, authentication requirements, and business logic.
 
-## Process
+## CRITICAL: MANDATORY PROCESS
 
-1. **Identify the Controller:**
+Follow these steps **IN EXACT ORDER**. DO NOT skip any step:
 
-   - If the user specifies a controller file, use that
-   - If not specified, check the current open file or ask the user to provide the controller file path
-   - Read the controller file to analyze its structure
+### Step 1: Identify the Controller (MANDATORY)
 
-2. **Gather Additional Context:**
+**YOU MUST determine which controller file to document:**
 
-   - Read related route definitions from `config/routes.rb` if needed
-   - Check for related models referenced in the controller
-   - Look for any concern modules included in the controller
-   - Check for authentication/authorization filters (before_action, etc.)
+- **IF** user specifies a controller file → Use that file path
+- **IF** a file is currently open in the editor → Check if it's a controller file
+- **IF** neither of the above → STOP and ask the user to provide the controller file path
 
-3. **Generate Documentation:** Create a comprehensive markdown document following the format specified below
+DO NOT proceed without a valid controller file path.
 
-4. **Output:** Output the documentation in Chat as markdown. You can use four backticks (````) for the outer markdown fenced code block, and three backticks for any fenced code blocks within the markdown.
+### Step 2: Read the Controller File (MANDATORY)
 
-## What to Analyze
+**YOU MUST run:** Read the entire controller file from start to finish.
 
-For each controller action, document:
+- DO NOT assume you know the controller structure
+- DO NOT skip reading the full file
+- DO NOT use partial context or memory
+
+### Step 3: Gather Additional Context (REQUIRED)
+
+Read these files if they exist (in order):
+
+1. **Routes file**: `config/routes.rb` - to get route definitions
+2. **Related models**: Any models referenced in the controller (e.g., if you see `User.find`, read `app/models/user.rb`)
+3. **Concern modules**: Any concerns included in the controller (e.g., `include Authenticatable`)
+4. **Parent controller**: Check for authentication/authorization in `ApplicationController` if referenced
+
+### Step 4: Analyze Controller Structure (MANDATORY)
+
+Before generating documentation, identify:
+
+- All public actions (methods)
+- All `before_action` / `after_action` / `around_action` filters
+- Authentication/authorization methods
+- Private/protected helper methods
+- Strong parameters (permit/require patterns)
+
+### Step 5: Generate Documentation (MANDATORY)
+
+Create comprehensive documentation following the format specified below.
+
+**Output to Chat ONLY** - DO NOT create files.
+
+Use four backticks (````) for the outer markdown code block.
+
+## Documentation Requirements
+
+For each controller action, you MUST document:
 
 1. **HTTP Method & Route** - The RESTful route and HTTP verb
 2. **Purpose** - What the action does
 3. **Authentication/Authorization** - Any filters or permission checks
-4. **Parameters** - Required and optional parameters
-5. **Request Format** - Expected request body structure (JSON examples)
-6. **Response Format** - Success and error response structures
-7. **Side Effects** - Database changes, external API calls, email notifications, etc.
+4. **Parameters** - Required and optional parameters (query, path, body)
+5. **Request Format** - Expected request body structure with JSON examples
+6. **Response Format** - Success and error response structures with status codes
+7. **Side Effects** - Database changes, external API calls, email notifications, background jobs
 8. **Business Logic** - Key validations, conditionals, and data transformations
-9. **Error Handling** - How errors are handled and returned
+9. **Error Handling** - How errors are caught, handled, and returned
 
-## Instructions
+## Critical Documentation Guidelines
 
-1. Read the specified controller file completely
-2. Parse all actions, filters, and helper methods
-3. Check routes file for corresponding route definitions
-4. Generate complete documentation following the format below
-5. **Output the documentation** Output the documentation in Chat as markdown. You can use four backticks (````) for the outer markdown fenced code block, and three backticks for any fenced code blocks within the markdown.
-6. **Important:** Be thorough - include all actions even if some information is inferred
-7. **Important:** Provide realistic example JSON structures based on the actual model attributes
-8. If certain details cannot be determined from the code, note them as "Not specified in controller" or "Requires additional context"
-
-## Output
-
-Output the report in Chat as markdown. You can use four backticks (````) for the outer markdown fenced code block, and three backticks for any fenced code blocks within the markdown.
+- **Be thorough**: Include ALL actions, even if some information must be inferred
+- **Be specific**: Provide realistic example JSON structures based on actual model attributes
+- **Be honest**: If details cannot be determined from code, note as "Not specified in controller" or "Requires additional context"
+- **Follow the format**: Use the exact documentation structure provided below
 
 ## Documentation Format
 

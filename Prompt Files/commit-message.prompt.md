@@ -7,8 +7,18 @@ mode: agent
 
 Draft a commit message for all the uncommitted changes.
 
-**CRITICAL**: DO NOT SKIP STEPS. Skipping any steps is NOT acceptable!
-**Very Important** Use `git diff HEAD` to see the changes.
+## CRITICAL: MANDATORY FIRST STEP
+
+**YOU MUST run `git diff HEAD` as your FIRST action before doing anything else.**
+
+DO NOT attempt to infer changes from context or memory. DO NOT skip this step. DO NOT proceed without running this command first.
+
+## Process
+
+1. **FIRST**: Run `git diff HEAD` in the terminal to get ALL uncommitted changes
+2. **SECOND**: Analyze the diff output to understand what changed
+3. **THIRD**: Detect the project type from the files in the diff
+4. **FOURTH**: Generate the commit message using the appropriate template
 
 **Instructions:**
 

@@ -7,16 +7,37 @@ mode: agent
 
 Review a GitHub Pull Request using the `gh` CLI tool and provide a comprehensive report with suggestions.
 
-**Instructions:**
+## CRITICAL: MANDATORY FIRST STEPS
 
-1. If I provide a PR number, use it directly: `gh pr view <number>`
-2. If I don't provide a PR number, infer it from the current branch: `gh pr view --json number -q .number`
-3. Use read-only `gh` commands to gather context (NEVER modify the PR):
-   - `gh pr view <number>` - Get PR details
-   - `gh pr diff <number>` - Get code changes
-   - `gh pr checks <number>` - Get CI/CD status
-4. Read relevant files in the workspace for additional context
-5. Provide the review report directly in the chat (do NOT create files)
+**YOU MUST follow these steps IN ORDER. DO NOT skip any step:**
+
+### Step 1: Get PR Number (MANDATORY)
+
+- **IF** user provides a PR number → Use it directly
+- **IF** no PR number provided → Run `gh pr view --json number -q .number` to get it from current branch
+- DO NOT proceed without a valid PR number
+
+### Step 2: Gather PR Context (MANDATORY)
+
+Run these `gh` CLI commands **in this exact order**:
+
+1. **FIRST**: `gh pr view <number>` - Get PR title, description, and metadata
+2. **SECOND**: `gh pr diff <number>` - Get ALL code changes (this is your primary source of truth)
+3. **THIRD**: `gh pr checks <number>` - Get CI/CD status
+
+**CRITICAL WARNINGS:**
+- DO NOT attempt to review the PR without running these commands first
+- DO NOT use context or memory - use ONLY the output from these commands
+- DO NOT modify the PR - use ONLY read-only `gh` commands
+- DO NOT skip any of these three commands
+
+### Step 3: Additional Context (Optional)
+
+You MAY read relevant files in the workspace for additional context if needed.
+
+### Step 4: Generate Report (MANDATORY)
+
+Provide the review report directly in the chat (do NOT create files).
 
 **Review Focus Areas (in priority order):**
 
