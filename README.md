@@ -139,7 +139,19 @@ To use these prompts with Opencode instead of GitHub Copilot:
 
 - Change `mode: agent` → `agent: build`
 - Change `mode: ask` → `agent: plan`
-- See individual README files in each directory for more details
+- For prompt files, you may need to add `{$ARGUMENTS}` in the prompt to support Opencode's argument passing. See the [Opencode arguments documentation](https://opencode.ai/docs/commands/#arguments) for details.
+
+**Example:**
+
+To adapt the `gh-pr-code-review.prompt.md` for Opencode, you could change the instructions section like this:
+
+```
+1. The PR number is {$ARGUMENTS}
+2. Use `gh pr view {$ARGUMENTS}` to get PR details
+3. ...rest of the instructions remain the same
+```
+
+This allows you to pass the PR number as an argument when invoking the command in Opencode.
 
 ## Best Practices
 
