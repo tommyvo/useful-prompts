@@ -12,33 +12,54 @@ opencode/
 
 ## Installation
 
-### Agents
+### Automated Installation (Recommended)
+
+Use the provided install script from the root of this repository:
+
+```bash
+./install-opencode.sh
+```
+
+The script will:
+
+- Show you what will be installed (agents and commands)
+- Preserve your existing config file
+- Copy all agents to `~/.config/opencode/agent/`
+- Copy all commands to `~/.config/opencode/command/`
+- The installer shows which files will be ADDED (new) and which will be MODIFIED / OVERWRITTEN (existing files with the same name).
+- The confirmation prompt defaults to Yes; pressing Enter will proceed with installation.
+
+### Manual Installation
+
+If you prefer to install manually or selectively:
+
+#### Agents
 
 Copy agent prompts to your Opencode config directory:
 
 ```bash
 # Install all agents
-cp agent/*.md ~/.config/opencode/agent/
+cp opencode/agent/*.md ~/.config/opencode/agent/
 
 # Or install individually
-cp agent/code-review.md ~/.config/opencode/agent/
-cp agent/commit-message.md ~/.config/opencode/agent/
-cp agent/gh-pr-code-review.md ~/.config/opencode/agent/
-cp agent/rails-controller-docs.md ~/.config/opencode/agent/
-cp agent/create-readme.md ~/.config/opencode/agent/
+cp opencode/agent/code-review.md ~/.config/opencode/agent/
+cp opencode/agent/commit-message.md ~/.config/opencode/agent/
+cp opencode/agent/gh-pr-code-review.md ~/.config/opencode/agent/
+cp opencode/agent/rails-controller-docs.md ~/.config/opencode/agent/
+cp opencode/agent/create-readme.md ~/.config/opencode/agent/
 ```
 
-### Commands
+#### Commands
 
 Copy command prompts to your Opencode config directory:
 
 ```bash
 # Install all commands
-cp command/*.md ~/.config/opencode/command/
+cp opencode/command/*.md ~/.config/opencode/command/
 
 # Or install individually
-cp command/beast-mode.md ~/.config/opencode/command/
-cp command/principal-engineer.md ~/.config/opencode/command/
+cp opencode/command/beast-mode.md ~/.config/opencode/command/
+cp opencode/command/principal-engineer.md ~/.config/opencode/command/
 ```
 
 ## Usage

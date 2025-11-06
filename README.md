@@ -140,7 +140,23 @@ The AI will:
 
 Pre-converted Opencode versions of all prompts and chat modes are available in the `opencode/` directory. These files use Opencode's frontmatter syntax (`agent: build` / `agent: plan`) and include support for `{$ARGUMENTS}` where applicable.
 
-#### Installation
+#### Quick Installation
+
+Use the automated install script to install all Opencode prompts:
+
+```bash
+./install-opencode.sh
+```
+
+The script will:
+
+- Show you what will be installed (agents and commands)
+- Preserve your existing Opencode config file
+- Install all agents and commands to `~/.config/opencode/`
+- The installer distinguishes between files that will be ADDED (new) and files that will be MODIFIED/OVERWRITTEN (existing with same name).
+- The confirmation prompt defaults to Yes; pressing Enter will proceed with installation.
+
+#### Manual Installation
 
 **Agents** (autonomous task execution):
 
