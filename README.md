@@ -29,11 +29,11 @@ Pre-built prompts for common development tasks. See the [Prompt Files README](./
 
 | Prompt                                                                              | Description                                                    | Mode  |
 | ----------------------------------------------------------------------------------- | -------------------------------------------------------------- | ----- |
-| [code-review.prompt.md](./Prompt%20Files/code-review.prompt.md)                     | Comprehensive local code review with security analysis         | Agent |
-| [commit-message.prompt.md](./Prompt%20Files/commit-message.prompt.md)               | Generate standardized commit messages for React/Rails projects | Agent |
-| [gh-pr-code-review.prompt.md](./Prompt%20Files/gh-pr-code-review.prompt.md)         | Review GitHub pull requests with unified diff suggestions      | Agent |
-| [rails-controller-docs.prompt.md](./Prompt%20Files/rails-controller-docs.prompt.md) | Generate comprehensive Rails controller documentation          | Agent |
-| [create-readme.prompt.md](./Prompt%20Files/create-readme.prompt.md)                 | Create well-structured README files for projects               | Agent |
+| [code-review.prompt.md](./Prompt%20Files/code-review.prompt.md)                     | Comprehensive local code review with security analysis         | Prompt File |
+| [commit-message.prompt.md](./Prompt%20Files/commit-message.prompt.md)               | Generate standardized commit messages for React/Rails projects | Prompt File |
+| [gh-pr-code-review.prompt.md](./Prompt%20Files/gh-pr-code-review.prompt.md)         | Review GitHub pull requests with unified diff suggestions      | Prompt File |
+| [rails-controller-docs.prompt.md](./Prompt%20Files/rails-controller-docs.prompt.md) | Generate comprehensive Rails controller documentation          | Prompt File |
+| [create-readme.prompt.md](./Prompt%20Files/create-readme.prompt.md)                 | Create well-structured README files for projects               | Prompt File |
 
 ### 🎯 Instructions
 

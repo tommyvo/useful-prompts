@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This is a collection of reusable prompt files, instructions, and chat modes for GitHub Copilot and other AI coding assistants. The repository is designed to be used as a reference library, not a running application.
+This is a **reference library**, not a running application. It contains reusable prompt files, instructions, and chat modes for GitHub Copilot and Opencode CLI. Files are authored in Markdown with YAML frontmatter and are deployed via shell scripts to user config directories.
 
 ## Repository Structure
 
@@ -11,43 +11,83 @@ This is a collection of reusable prompt files, instructions, and chat modes for 
 ├── Instructions/          # Language/framework-specific coding guidelines that auto-apply
 ├── Chat Modes/            # Custom chat mode configurations for GitHub Copilot
 ├── opencode/              # Pre-converted versions for Opencode CLI
-│   ├── agent/            # Autonomous agents (beast-mode, principal-engineer)
-│   └── command/          # Task commands (code-review, commit-message, etc.)
+│   ├── agent/            # Chat mode equivalents (beast-mode, principal-engineer)
+│   └── command/          # Task command equivalents (code-review, commit-message, etc.)
+├── install-copilot.sh    # Installs to ~/Library/Application Support/Code/User/prompts (macOS)
+├── install-opencode.sh   # Installs to ~/.config/opencode/{agent,command}/ (cross-platform)
 └── .github/              # Repository configuration
 ```
 
-## Key Concepts
+**Deployment targets:**
+- **GitHub Copilot (VS Code)**: `~/Library/Application Support/Code/User/prompts` (macOS) or equivalent on other platforms
+- **Opencode CLI**: `~/.config/opencode/agent/` and `~/.config/opencode/command/`
 
-### Three Types of AI Customizations
+## Architecture: Three Types of AI Customizations
 
-1. **Prompt Files** (`.prompt.md`) - Invoked on-demand via Copilot Chat for specific tasks
-   - Use frontmatter: `mode: agent` (autonomous) or `mode: ask` (interactive)
-   - Reference with: "Follow instructions in [filename].prompt.md"
+### 1. Prompt Files (`.prompt.md`) - On-Demand Task Automation
+Invoked explicitly in Copilot Chat for specific one-time tasks.
 
-2. **Instructions** (`.instructions.md`) - Auto-apply to files matching `applyTo` patterns
-   - Use frontmatter: `applyTo: "**/*.ts"` to target specific file types
-   - Automatically included in context when editing matching files
-   - **Warning**: Large instructions consume significant context window space
+**Frontmatter:**
+```yaml
+---
+description: "Brief description"
+mode: agent  # Autonomous execution (or `mode: ask` for interactive Q&A)
+---
+```
 
-3. **Chat Modes** (`.chatmode.md`) - Specialized AI personas/behaviors
-   - Use frontmatter: `tools: [...]` to enable specific capabilities
-   - Activated via chat mode dropdown in Copilot Chat
+**Usage:** In Copilot Chat, type: `"Follow instructions in code-review.prompt.md"`
 
-### Frontmatter Compatibility
+**Examples:**
+- `code-review.prompt.md` - Runs `git diff HEAD`, generates priority-coded review (🟣🔴🟡🟢), auto-applies appropriate fixes
+- `commit-message.prompt.md` - Auto-detects React/Rails/Generic project, generates structured commit message
+- `gh-pr-code-review.prompt.md` - Uses `gh` CLI to fetch PR data, provides unified diff suggestions
 
-**GitHub Copilot:**
-- `mode: agent` - Autonomous task execution
-- `mode: ask` - Interactive Q&A mode
+### 2. Instructions (`.instructions.md`) - Auto-Applied Context
+Language/framework-specific guidelines that automatically activate when editing matching files.
 
-**Opencode Alternative:**
-- `agent: build` (equivalent to `mode: agent`)
-- `agent: plan` (equivalent to `mode: ask`)
+**Frontmatter:**
+```yaml
+---
+description: "Brief description"
+applyTo: "**/*.ts"  # Glob pattern to target specific file types
+---
+```
 
-**Important:** Opencode files live in `opencode/` and are MIRRORS of the main prompt files with converted frontmatter. The structure differs:
-- `Prompt Files/*.prompt.md` (Copilot) → `opencode/command/*.md` (Opencode)
-- `Chat Modes/*.chatmode.md` (Copilot) → `opencode/agent/*.md` (Opencode)
+**⚠️ Warning:** Large instructions consume significant context window space. Use judiciously.
 
-When updating a prompt, update BOTH versions to keep them in sync.
+**Examples:**
+- `typescript-5-es2022.instructions.md` - `applyTo: "**/*.ts"` - Target ES2022, avoid `any`, use discriminated unions
+- `reactjs.instructions.md` - `applyTo: "**/*.jsx,**/*.tsx"` - Hooks patterns, component conventions
+- `ruby-on-rails.instructions.md` - `applyTo: "**/*.rb"` - Rails conventions, RESTful patterns
+
+### 3. Chat Modes (`.chatmode.md`) - Specialized AI Personas
+Custom chat mode configurations activated via the chat mode dropdown in Copilot Chat.
+
+**Frontmatter:**
+```yaml
+---
+description: "Brief description"
+tools: ['codebase', 'search', 'editFiles', ...]  # Enable specific VS Code capabilities
+---
+```
+
+**Examples:**
+- `Beast Mode 3.1.chatmode.md` - Autonomous problem-solving with extensive web research, iterates until problem is solved
+- `Principal Engineer.chatmode.md` - Expert-level engineering guidance and technical leadership
+
+## Dual-Platform Architecture
+
+Files must be maintained in TWO versions for cross-platform compatibility:
+
+**GitHub Copilot (VS Code):**
+- `Prompt Files/*.prompt.md` with `mode: agent`
+- `Chat Modes/*.chatmode.md` with `tools: [...]`
+
+**Opencode CLI:**
+- `opencode/command/*.md` with `agent: build` (equivalent to `mode: agent`)
+- `opencode/agent/*.md` with `agent: build` (chat mode equivalents)
+
+**CRITICAL:** When creating or updating any prompt/chat mode, update BOTH versions to keep them in sync. The Opencode versions are MIRRORS with converted frontmatter, not separate implementations.
 
 ## Common Patterns
 
