@@ -7,9 +7,12 @@ This is a collection of reusable prompt files, instructions, and chat modes for 
 ## Repository Structure
 
 ```
-├── Prompt Files/          # Task-specific prompts (code review, commit messages, etc.)
-├── Instructions/          # Language/framework-specific coding guidelines
-├── Chat Modes/            # Custom chat mode configurations
+├── Prompt Files/          # Task-specific prompts for GitHub Copilot (code review, commit messages, etc.)
+├── Instructions/          # Language/framework-specific coding guidelines that auto-apply
+├── Chat Modes/            # Custom chat mode configurations for GitHub Copilot
+├── opencode/              # Pre-converted versions for Opencode CLI
+│   ├── agent/            # Autonomous agents (beast-mode, principal-engineer)
+│   └── command/          # Task commands (code-review, commit-message, etc.)
 └── .github/              # Repository configuration
 ```
 
@@ -39,6 +42,12 @@ This is a collection of reusable prompt files, instructions, and chat modes for 
 **Opencode Alternative:**
 - `agent: build` (equivalent to `mode: agent`)
 - `agent: plan` (equivalent to `mode: ask`)
+
+**Important:** Opencode files live in `opencode/` and are MIRRORS of the main prompt files with converted frontmatter. The structure differs:
+- `Prompt Files/*.prompt.md` (Copilot) → `opencode/command/*.md` (Opencode)
+- `Chat Modes/*.chatmode.md` (Copilot) → `opencode/agent/*.md` (Opencode)
+
+When updating a prompt, update BOTH versions to keep them in sync.
 
 ## Common Patterns
 
@@ -97,6 +106,11 @@ Detailed guidance with numbered steps
 4. **Use emoji priority** - For reviews/reports: 🟣🔴🟡🟢 for severity levels
 5. **Reference git commands** - Most prompts should start with `git diff HEAD` or similar
 6. **Output format** - Specify whether output goes to chat or files
+7. **Dual maintenance** - Create both Copilot version AND Opencode version:
+   - Copilot: `Prompt Files/name.prompt.md` with `mode: agent`
+   - Opencode: `opencode/command/name.md` with `agent: build`
+   - Chat modes go to `Chat Modes/*.chatmode.md` and `opencode/agent/*.md`
+8. **Update README.md** - Add new prompts to the main README table for discoverability
 
 ## Important Notes
 
@@ -113,3 +127,4 @@ Detailed guidance with numbered steps
 3. Check that `applyTo` patterns work for instructions
 4. Ensure examples reference real files from this repo
 5. Update main README.md table when adding new prompts
+6. Convert and test the Opencode version if creating a prompt file or chat mode
