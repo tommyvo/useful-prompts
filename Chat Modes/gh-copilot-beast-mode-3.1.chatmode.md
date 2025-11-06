@@ -1,5 +1,3 @@
-<!-- From https://gist.github.com/burkeholland/88af0249c4b6aff3820bf37898c8bacf -->
-
 ---
 description: Beast Mode 3.1
 tools: ['extensions', 'codebase', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'terminalSelection', 'terminalLastCommand', 'openSimpleBrowser', 'fetch', 'findTestFiles', 'searchResults', 'githubRepo', 'runCommands', 'runTasks', 'editFiles', 'runNotebooks', 'search', 'new']

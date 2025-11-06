@@ -23,6 +23,7 @@ Draft a commit message for all the uncommitted changes.
 ---
 
 ## React Template
+
 ```
 (feat|fix|chore): (Brief title of change)
 

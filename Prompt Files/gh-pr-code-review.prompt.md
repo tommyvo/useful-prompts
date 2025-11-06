@@ -1,5 +1,5 @@
 ---
-description: 'Review GitHub Pull Request'
+description: "Review GitHub Pull Request"
 mode: agent
 ---
 
@@ -74,7 +74,9 @@ Structure your review report as follows:
 **PR:** https://github.com/<repo>/pull/<number>
 
 ## Overview
+
 Brief description of what this PR does:
+
 - Adds/Changes/Removes X
 - Updates Y
 - Refactors Z
@@ -82,17 +84,20 @@ Brief description of what this PR does:
 ## File-Specific Suggestions
 
 ### 1. `path/to/file1.js`
+
 **Priority:** 🔴 SHOULD FIX
 **Lines:** 15-20
 
 **Issue:** [Describe the problem]
 
 **Current code:**
+
 ```js
 // Quote the problematic code
 ```
 
 **Suggested fix:**
+
 ```diff
 --- path/to/file1.js
 +++ path/to/file1.js
@@ -102,6 +107,7 @@ Brief description of what this PR does:
 ```
 
 ### 2. `path/to/file2.rb`
+
 **Priority:** 🟡 MEDIUM
 **Lines:** 8-10
 
@@ -112,16 +118,19 @@ Brief description of what this PR does:
 ## Cross-Cutting Concerns
 
 ### Inconsistent Error Handling
+
 **Priority:** 🟠 HIGH
 
 Multiple files need consistent error handling:
 
 **File:** `src/api.js`
+
 ```diff
 [diff here]
 ```
 
 **File:** `src/utils.js`
+
 ```diff
 [diff here]
 ```
@@ -144,6 +153,7 @@ Multiple files need consistent error handling:
 ## Priority Levels
 
 Use emoji color-coding for priorities:
+
 - 🟣 CRITICAL - Must fix before merge (security, data loss, breaking changes)
 - 🔴 SHOULD FIX - Important issues (bugs, logic errors, significant problems)
 - 🟡 MEDIUM - Improvements recommended (code quality, maintainability)

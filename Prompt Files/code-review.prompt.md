@@ -54,33 +54,37 @@ Output the report in Chat as markdown. You can use four backticks (````) for the
 The report should follow this format:
 
 # Description
+
 (Describe what this change is about. Examples:)
+
 - A new model/controller/worker/component/etc.
 - Refactoring of [specific component/module]
 - Bug fix for [specific issue]
 - Performance optimization for [specific area]
 
 # Specific Suggestions
+
 1. File: (file 1 path)
-Priority: 🟣 SHOULD FIX
-Line 3-5:
-(suggestion here)
+   Priority: 🟣 SHOULD FIX
+   Line 3-5:
+   (suggestion here)
 
 Suggested changes: (if there are any)
 (suggested changes here - use Unified Diff)
 
 2. File: (file 2 path)
-Priority: 🔴 HIGH
-Line 5-6:
-(suggestion here)
+   Priority: 🔴 HIGH
+   Line 5-6:
+   (suggestion here)
 
 (Note: Only include files that have specific suggestions. Omit files with no issues.)
 
 # General Suggestions
+
 (If there are suggestions that are related to many files. List them here)
 
 1. (Suggestion title here)
-Priority: 🟣 SHOULD FIX
+   Priority: 🟣 SHOULD FIX
 
 File 1: (file path)
 (Write what should be changed here)
@@ -92,7 +96,7 @@ File 3: (file_path)
 (Write what should be changed here)
 
 2. (Suggestion title here)
-Priority: 🟢 LOW
+   Priority: 🟢 LOW
 
 File 1: (file path)
 (Write what should be changed here)
@@ -101,9 +105,11 @@ File 2: (file_path)
 (Write what should be changed here)
 
 # Questions
+
 (If there are questions for the PR owner, list them here)
 
 # Conclusion
+
 - Overall code quality: (Good/Needs Work/Requires Significant Changes)
 - Blocking issues: (None/List them)
 - Recommendation: (Safe to merge/Merge after fixes/Needs discussion)

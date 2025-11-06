@@ -12,11 +12,13 @@ Generate comprehensive markdown documentation for a Rails controller, including 
 ## Process
 
 1. **Identify the Controller:**
+
    - If the user specifies a controller file, use that
    - If not specified, check the current open file or ask the user to provide the controller file path
    - Read the controller file to analyze its structure
 
 2. **Gather Additional Context:**
+
    - Read related route definitions from `config/routes.rb` if needed
    - Check for related models referenced in the controller
    - Look for any concern modules included in the controller
@@ -29,6 +31,7 @@ Generate comprehensive markdown documentation for a Rails controller, including 
 ## What to Analyze
 
 For each controller action, document:
+
 1. **HTTP Method & Route** - The RESTful route and HTTP verb
 2. **Purpose** - What the action does
 3. **Authentication/Authorization** - Any filters or permission checks
@@ -73,6 +76,7 @@ The generated documentation should follow this structure:
 (Describe authentication requirements, filters, and authorization policies)
 
 Example:
+
 - Requires authentication for all actions via `authenticate_user!`
 - Admin access required for destroy action
 - Uses CanCanCan for authorization
@@ -88,6 +92,7 @@ Example:
 **Purpose:** (What this action does)
 
 #### Authentication
+
 - (Authentication requirements)
 
 #### Parameters
@@ -111,6 +116,7 @@ Authorization: Bearer (token)
 ```
 
 For POST/PUT/PATCH requests:
+
 ```json
 {
   "user": {
@@ -124,6 +130,7 @@ For POST/PUT/PATCH requests:
 #### Response
 
 **Success Response (200/201):**
+
 ```json
 {
   "data": {
@@ -146,14 +153,16 @@ For POST/PUT/PATCH requests:
 
 **Error Responses:**
 
-*401 Unauthorized:*
+_401 Unauthorized:_
+
 ```json
 {
   "error": "Authentication required"
 }
 ```
 
-*422 Unprocessable Entity:*
+_422 Unprocessable Entity:_
+
 ```json
 {
   "errors": {

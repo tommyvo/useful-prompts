@@ -1,6 +1,6 @@
 ---
-description: 'Ruby on Rails coding conventions and guidelines'
-applyTo: '**/*.rb'
+description: "Ruby on Rails coding conventions and guidelines"
+applyTo: "**/*.rb"
 ---
 
 # Ruby on Rails
@@ -65,7 +65,6 @@ applyTo: '**/*.rb'
 - Use `rails test` to run the test suite.
 - Use `rails routes` to list all defined routes in the application.
 - Use `rails assets:precompile` to compile assets for production.
-
 
 ## API Development Best Practices
 
