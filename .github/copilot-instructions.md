@@ -4,6 +4,8 @@
 
 This is a **reference library**, not a running application. It contains reusable prompt files, instructions, and chat modes for GitHub Copilot and Opencode CLI. Files are authored in Markdown with YAML frontmatter and are deployed via shell scripts to user config directories.
 
+**CRITICAL:** No build/test/lint commands exist. This is a content repository that deploys via shell scripts.
+
 ## Repository Structure
 
 ```
@@ -75,19 +77,26 @@ tools: ['codebase', 'search', 'editFiles', ...]  # Enable specific VS Code capab
 - `Beast Mode 3.1.chatmode.md` - Autonomous problem-solving with extensive web research, iterates until problem is solved
 - `Principal Engineer.chatmode.md` - Expert-level engineering guidance and technical leadership
 
-## Dual-Platform Architecture
+## Dual-Platform Architecture: THE MOST CRITICAL RULE
 
-Files must be maintained in TWO versions for cross-platform compatibility:
+**NEVER create or update just one version.** Files MUST be maintained in TWO versions for cross-platform compatibility:
 
 **GitHub Copilot (VS Code):**
-- `Prompt Files/*.prompt.md` with `mode: agent`
-- `Chat Modes/*.chatmode.md` with `tools: [...]`
+- `Prompt Files/*.prompt.md` with `mode: agent` frontmatter
+- `Chat Modes/*.chatmode.md` with `tools: [...]` frontmatter
 
 **Opencode CLI:**
 - `opencode/command/*.md` with `agent: build` (equivalent to `mode: agent`)
 - `opencode/agent/*.md` with `agent: build` (chat mode equivalents)
 
-**CRITICAL:** When creating or updating any prompt/chat mode, update BOTH versions to keep them in sync. The Opencode versions are MIRRORS with converted frontmatter, not separate implementations.
+**The conversion is simple:**
+1. Copilot → Opencode: Strip `.prompt` or `.chatmode` from filename, change `mode: agent` to `agent: build`
+2. Opencode versions are MIRRORS with converted frontmatter, not separate implementations
+3. Content in both files should be identical except for frontmatter
+
+**Example:**
+- `Prompt Files/code-review.prompt.md` → `opencode/command/code-review.md`
+- `Chat Modes/Beast Mode 3.1.chatmode.md` → `opencode/agent/beast-mode.md`
 
 ## Common Patterns
 
@@ -112,24 +121,33 @@ Step-by-step instructions with **CRITICAL** markers for mandatory steps
 Detailed guidance with numbered steps
 ```
 
-### Critical Workflows
+## Critical Workflows
 
-**Code Review Pattern:**
-- ALWAYS use `git diff HEAD` to get uncommitted changes
+**Code Review Pattern (`code-review.prompt.md`):**
+- **ALWAYS** start with `git diff HEAD` - this is mandatory, not optional
 - Generate report with priority emoji coding: 🟣 CRITICAL, 🔴 HIGH, 🟡 MEDIUM, 🟢 LOW
-- Auto-apply appropriate fixes (security, bugs, style)
-- Create todo lists to track progress
+- Auto-apply appropriate fixes (security, bugs, style) that are in scope
+- Create todo lists to track progress using markdown checklist format
+- Only include files in report that have specific suggestions (skip files with no issues)
 
-**Commit Message Pattern:**
-- ALWAYS use `git diff HEAD` to analyze changes
-- Auto-detect project type (React/Rails/Generic) from file structure
+**Commit Message Pattern (`commit-message.prompt.md`):**
+- **ALWAYS** start with `git diff HEAD` to analyze changes
+- Auto-detect project type from file structure:
+  - React: Look for `.jsx`, `.tsx`, `package.json` with React deps
+  - Rails: Look for `.rb`, `controllers/`, `models/`, `Gemfile`
 - Use structured templates with sections (Components, API, Database, etc.)
-- Output in fenced code blocks with 4 backticks to preserve inner code blocks
+- Output in fenced code blocks with 4 backticks (````) to preserve inner code blocks with 3 backticks
+- Omit template sections that don't have relevant changes
 
-**PR Review Pattern:**
-- Use `gh` CLI to fetch PR data (`gh pr view`, `gh pr diff`)
+**PR Review Pattern (`gh-pr-code-review.prompt.md`):**
+- Use `gh` CLI to fetch PR data: `gh pr view`, `gh pr diff` (read-only operations only)
 - Provide suggestions in unified diff format
 - Include merge recommendations (Safe/Needs changes/Blocking issues)
+
+**Gitignore Generation Pattern (`generate-gitignore.prompt.md`):**
+- Check if `.gitignore` exists before overwriting
+- Use the comprehensive template from this repo's `.gitignore` as-is
+- No customization or project detection - always use full template
 
 ## File Naming Conventions
 
@@ -140,7 +158,7 @@ Detailed guidance with numbered steps
 
 ## When Creating New Prompts
 
-1. **Use frontmatter** - All markdown files need YAML frontmatter with `description` and `mode`/`agent`
+1. **Use frontmatter** - All markdown files need YAML frontmatter with `description` and `mode`/`agent` fields
 2. **Include examples** - Show concrete examples from actual use cases
 3. **Add critical markers** - Use `**CRITICAL**: DO NOT SKIP STEPS` for mandatory workflow steps
 4. **Use emoji priority** - For reviews/reports: 🟣🔴🟡🟢 for severity levels
@@ -149,22 +167,15 @@ Detailed guidance with numbered steps
 7. **Dual maintenance** - Create both Copilot version AND Opencode version:
    - Copilot: `Prompt Files/name.prompt.md` with `mode: agent`
    - Opencode: `opencode/command/name.md` with `agent: build`
-   - Chat modes go to `Chat Modes/*.chatmode.md` and `opencode/agent/*.md`
+   - Chat modes: `Chat Modes/*.chatmode.md` and `opencode/agent/*.md`
 8. **Update README.md** - Add new prompts to the main README table for discoverability
 
 ## Important Notes
 
-- **Context Window**: Instructions auto-apply and consume context space - use judiciously
+- **No Build Commands**: This is a reference library - no `npm`, `bundle`, or test commands exist
+- **Context Window**: Instructions (`.instructions.md`) auto-apply and consume context space - use judiciously
 - **Git Integration**: Many prompts assume git repository context
 - **Read-only Operations**: PR review prompts use ONLY read-only `gh` commands
 - **Autonomous Execution**: "Agent" mode prompts should solve problems completely before returning control
 - **Todo Lists**: Use markdown checklist format for tracking multi-step tasks
-
-## Testing New Prompts
-
-1. Test with GitHub Copilot in VS Code
-2. Verify frontmatter is valid YAML
-3. Check that `applyTo` patterns work for instructions
-4. Ensure examples reference real files from this repo
-5. Update main README.md table when adding new prompts
-6. Convert and test the Opencode version if creating a prompt file or chat mode
+- **Deprecation**: Move deprecated files to `deprecated/` subfolder, don't delete them
