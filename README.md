@@ -34,6 +34,7 @@ Pre-built prompts for common development tasks. See the [Prompt Files README](./
 | [gh-pr-code-review.prompt.md](./Prompt%20Files/gh-pr-code-review.prompt.md)         | Review GitHub pull requests with unified diff suggestions      | Prompt File |
 | [rails-controller-docs.prompt.md](./Prompt%20Files/rails-controller-docs.prompt.md) | Generate comprehensive Rails controller documentation          | Prompt File |
 | [create-readme.prompt.md](./Prompt%20Files/create-readme.prompt.md)                 | Create well-structured README files for projects               | Prompt File |
+| [standup-update.prompt.md](./Prompt%20Files/standup-update.prompt.md)               | Generate Slack standup updates from work log markdown files    | Prompt File |
 
 ### 🎯 Instructions
 

@@ -149,6 +149,22 @@ Detailed guidance with numbered steps
 - Use the comprehensive template from this repo's `.gitignore` as-is
 - No customization or project detection - always use full template
 
+**Standup Update Pattern (`standup-update.prompt.md`):**
+- Reads work log markdown files from user's workspace
+- Generates Slack-formatted standup updates
+- Extracts completed tasks, in-progress work, and blockers
+- Formats output for direct paste into Slack channels
+
+## Installation & Deployment
+
+**Install Scripts (`install-copilot.sh` and `install-opencode.sh`):**
+- Both scripts show file preview with NEW/MODIFIED indicators before installation
+- Default confirmation is Yes (pressing Enter proceeds)
+- `install-copilot.sh` copies to `~/Library/Application Support/Code/User/prompts` (macOS)
+- `install-opencode.sh` copies to `~/.config/opencode/{agent,command}/`
+- Scripts detect file conflicts and preserve unchanged files
+- For GitHub Copilot: Restart VS Code after installation if prompts don't appear immediately
+
 ## File Naming Conventions
 
 - **Prompt Files**: `kebab-case.prompt.md`
@@ -168,7 +184,7 @@ Detailed guidance with numbered steps
    - Copilot: `Prompt Files/name.prompt.md` with `mode: agent`
    - Opencode: `opencode/command/name.md` with `agent: build`
    - Chat modes: `Chat Modes/*.chatmode.md` and `opencode/agent/*.md`
-8. **Update README.md** - Add new prompts to the main README table for discoverability
+8. **Update README.md** - **CRITICAL:** Add new prompts to the main README table for discoverability. Users rely on the README to find available prompts. Update the appropriate table section with the prompt name, description, and file path.
 
 ## Important Notes
 

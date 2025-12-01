@@ -1,27 +1,25 @@
 # Agent Guidelines for useful-prompts
 
 ## Project Type
-Reference library of AI prompts (Markdown files with YAML frontmatter). NOT a running application - no build/test/lint commands.
+Reference library of AI prompts - Markdown files with YAML frontmatter. NO build/test/lint commands exist. Files deploy via shell scripts.
 
-## Key Rules from .github/copilot-instructions.md
-- This is a REFERENCE LIBRARY - files are deployed via shell scripts, not executed directly
-- ALWAYS maintain DUAL versions: GitHub Copilot (`Prompt Files/`, `Chat Modes/`) AND Opencode (`opencode/command/`, `opencode/agent/`)
-- NEVER delete deprecated files - move to `deprecated/` subfolder instead
-- ALL markdown files MUST have YAML frontmatter with `description` and `mode`/`agent` fields
-- Use `git diff HEAD` extensively in prompt workflows for code review and commit message generation
+## Build/Test Commands
+N/A - This is a content repository, not a running application. No npm/bundle/test/lint commands.
 
-## File Structure & Naming
-- Prompt Files: `kebab-case.prompt.md` with `mode: agent` frontmatter
-- Chat Modes: `Title Case.chatmode.md` with `tools: [...]` frontmatter
-- Instructions: `kebab-case.instructions.md` with `applyTo: "glob pattern"` frontmatter
-- Opencode equivalents: Strip `.prompt` and use `agent: build` instead of `mode: agent`
+## Code Style & Conventions
+- **File naming**: `kebab-case.prompt.md`, `Title Case.chatmode.md`, `kebab-case.instructions.md`
+- **Frontmatter**: REQUIRED on ALL .md files with `description` + `mode`/`agent` fields
+- **Dual-platform**: ALWAYS maintain BOTH versions: GitHub Copilot (`Prompt Files/`, `Chat Modes/`) AND Opencode (`opencode/command/`, `opencode/agent/`)
+- **Content sync**: Strip `.prompt`/`.chatmode` from filename, change `mode: agent` → `agent: build` for Opencode versions
+- **Deprecation**: Move deprecated files to `deprecated/` subfolder - NEVER delete
+- **Git patterns**: Most prompts start with `git diff HEAD` to analyze changes
+- **Priority emojis**: Code reviews use 🟣 CRITICAL, 🔴 HIGH, 🟡 MEDIUM, 🟢 LOW
+- **Documentation**: When creating/updating prompts, update README.md table for discoverability
 
-## Critical Workflows
-- Code reviews use priority emoji coding: 🟣 CRITICAL, 🔴 HIGH, 🟡 MEDIUM, 🟢 LOW
-- Commit messages auto-detect project type (React/Rails/Generic) and use structured templates
-- PR reviews use read-only `gh` CLI commands only, provide unified diff format suggestions
-- When creating/updating prompts, MUST update README.md table for discoverability
+## Deployment & Installation
+- Copilot: `./install-copilot.sh` → `~/Library/Application Support/Code/User/prompts` (macOS)
+- Opencode: `./install-opencode.sh` → `~/.config/opencode/{agent,command}/`
 
-## Deployment
-- GitHub Copilot: `./install-copilot.sh` → `~/Library/Application Support/Code/User/prompts` (macOS)
-- Opencode: `./install-opencode.sh` → `~/.config/opencode/agent/` and `~/.config/opencode/command/`
+## See Also
+- Full project documentation: `.github/copilot-instructions.md` (182 lines)
+- Usage examples & architecture: `README.md`
