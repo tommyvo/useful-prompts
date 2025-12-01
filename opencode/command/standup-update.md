@@ -6,14 +6,14 @@ agent: build
 # Standup Update Generator
 
 ## Goal
-Generate a formatted Slack standup update by summarizing entries from the last working day and current day (if present) in a work log markdown file.
+Generate a formatted Slack standup update by summarizing entries from the last working day and current day (if present) in a work log markdown file. File can be found at {$ARGUMENTS}.
 
 ## Process
 
 **CRITICAL: DO NOT SKIP STEPS**
 
 1. **Locate the work log file**
-   - If a file path is provided by the user, use that file
+   - If a file path is provided by the user, use that file ({$ARGUMENTS})
    - If no file path is provided, ask the user for the location of their work log markdown file
    - Read the entire file to understand the structure
 
