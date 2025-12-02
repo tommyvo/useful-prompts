@@ -102,10 +102,11 @@ After (consolidated):
 Generate markdown output with these specifications:
 
 1. **Indentation**: Use 4 spaces per level (required for Slack formatting)
-2. **Date format**: Keep as `MM/DD/YYYY`
+2. **Date format**: Use ONLY `MM/DD/YYYY` - NO labels like "(today)" or "(last working day)"
 3. **Order**: Newest date first
 4. **Preserve**: Links, inline code, nested structure
 5. **Remove**: Any wiki-style links like `[[...]]`
+6. **No commentary**: Do not add any explanatory text before or after the code block
 
 ### Output Format Example
 
@@ -127,9 +128,13 @@ Generate markdown output with these specifications:
 
 ### Step 6: Present the Output
 
-1. Output the formatted standup update in a fenced code block with 4 backticks (````)
-2. Use `markdown` as the language identifier
-3. Inform the user that the output is ready to paste into Slack
+**CRITICAL: Output ONLY the code block, nothing else**
+
+1. Start with four backticks followed by `markdown`: ````markdown
+2. Output ONLY the formatted dates and bullet points
+3. End with four backticks: ````
+4. Do NOT include any text before or after the code block
+5. Do NOT include processing notes or explanations in the output
 
 ## Important Notes
 
