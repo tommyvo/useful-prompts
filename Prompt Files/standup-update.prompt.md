@@ -13,7 +13,9 @@ Generate a formatted Slack standup update by summarizing entries from the last w
 **CRITICAL: DO NOT SKIP STEPS**
 
 1. **Locate the work log file**
-   - If a file path is provided by the user, use that file
+   - If a file path is provided by the user, resolve it relative to the workspace root
+   - Handle file paths with spaces correctly (e.g., `Work/Soraban/Work Log.md`)
+   - If the file is not found, try searching the workspace for files matching the pattern
    - If no file path is provided, ask the user for the location of their work log markdown file
    - Read the entire file to understand the structure
 
@@ -25,9 +27,10 @@ Generate a formatted Slack standup update by summarizing entries from the last w
 3. **Extract and summarize entries**
    - Extract bullet points from the last working day
    - Extract bullet points from today (if present)
-   - Preserve the hierarchical structure of nested bullets
+   - **Summarize and consolidate**: Group related tasks, remove redundant details, focus on outcomes
    - Convert past entries to past tense
    - Keep today's entries in present tense
+   - Keep summaries concise (1-2 levels of nesting max)
 
 4. **Format for Slack**
    - Use 4 spaces for indentation (not 2 spaces)
@@ -48,7 +51,39 @@ Read the provided markdown file completely to understand its structure. The file
 3. If there's an entry for today, note it
 4. Extract all bullet points and sub-bullets from these entries
 
-### Step 3: Convert Tense
+### Step 3: Summarize Content
+
+**CRITICAL: This is a summary, not a copy-paste**
+
+1. **Consolidate related tasks**: If multiple bullets describe parts of the same work, combine them
+2. **Focus on outcomes**: Emphasize what was accomplished, not every implementation detail
+3. **Remove noise**: Skip overly technical details, internal ticket references, or verbose explanations
+4. **Limit nesting**: Keep to 1-2 levels of bullet points maximum
+5. **Keep it scannable**: Each top-level bullet should be a distinct area of work
+
+**Examples of summarization:**
+
+Before (verbose):
+- worked on user authentication bug
+    - investigated the session timeout issue
+    - found the problem in middleware
+    - fixed the bug in auth.rb
+    - added tests for the fix
+    - deployed to staging
+
+After (summarized):
+- fixed user authentication session timeout bug and deployed to staging
+
+Before (redundant):
+- attended standup meeting
+- attended sprint planning
+- had 1:1 with manager
+- attended architecture review
+
+After (consolidated):
+- attended team meetings (standup, sprint planning, architecture review)
+
+### Step 4: Convert Tense
 
 - **For past entries (last working day)**: Convert verbs to past tense
   - "create" → "created"
@@ -62,7 +97,7 @@ Read the provided markdown file completely to understand its structure. The file
   - "work on" → "work on"
   - "start" → "start"
 
-### Step 4: Format Output
+### Step 5: Format Output
 
 Generate markdown output with these specifications:
 
@@ -90,7 +125,7 @@ Generate markdown output with these specifications:
         - PR: https://github.com/Soraban/soraban-infra/pull/31
 ```
 
-### Step 5: Present the Output
+### Step 6: Present the Output
 
 1. Output the formatted standup update in a fenced code block with 4 backticks (````)
 2. Use `markdown` as the language identifier
