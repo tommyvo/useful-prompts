@@ -92,7 +92,6 @@ When suggesting code changes, use unified diff format:
 
 Structure your review report as follows:
 
-````markdown
 # Pull Request Review
 
 **PR:** https://github.com/<repo>/pull/<number>
@@ -170,7 +169,6 @@ Multiple files need consistent error handling:
 **Recommendation:** [Safe to merge ✅ | Needs changes ⚠️ | Blocking issues ❌]
 
 **Summary:** [Brief summary of overall assessment]
-````
 
 ---
 
