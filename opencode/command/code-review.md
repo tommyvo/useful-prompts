@@ -56,10 +56,6 @@ Follow these steps IN ORDER. DO NOT skip any step:
    - 🟡 MEDIUM (yellow) - Nice-to-have improvements
    - 🟢 LOW (green) - Minor suggestions or style preferences
 
-## Output
-
-Output the report in Chat as markdown. You can use four backticks (````) for the outer markdown fenced code block, and three backticks for any fenced code blocks within the markdown.
-
 ## Report Format
 
 The report should follow this format:
