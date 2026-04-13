@@ -5,37 +5,49 @@ agent: agent
 
 # Review GitHub Pull Request
 
-Review a GitHub Pull Request using the `gh` CLI tool and provide a comprehensive report with suggestions.
+Review a GitHub Pull Request using the GitHub Pull Request extension and provide a comprehensive report with suggestions.
 
 ## CRITICAL: MANDATORY FIRST STEPS
 
 **YOU MUST follow these steps IN ORDER. DO NOT skip any step:**
 
-### Step 1: Get PR Number (MANDATORY)
+### Step 1: Get PR Details (MANDATORY)
 
-- **IF** user provides a PR number → Use it directly
-- **IF** no PR number provided → Run `gh pr view --json number -q .number` to get it from current branch
-- DO NOT proceed without a valid PR number
+Use the GitHub Pull Request extension tools to gather PR information:
 
-### Step 2: Gather PR Context (MANDATORY)
+- **IF** the PR is currently checked out → Use `github-pull-request_activePullRequest` to get PR title, description, changed files, and review comments
+- **IF** the PR is open in VS Code → Use `github-pull-request_openPullRequest` to get PR title, description, changed files, and review comments
+- **IF** user provides a PR number → Use `github-pull-request_issue_fetch` with the PR number to get PR metadata
 
-Run these `gh` CLI commands **in this exact order**:
+DO NOT proceed without PR metadata.
 
-1. **FIRST**: `gh pr view <number>` - Get PR title, description, and metadata
-2. **SECOND**: `gh pr diff <number>` - Get ALL code changes (this is your primary source of truth)
-3. **THIRD**: `gh pr checks <number>` - Get CI/CD status
+### Step 2: Get Code Diff (MANDATORY)
+
+**DO NOT use `gh pr diff` — it is known to crash VS Code.**
+
+Instead, get the actual code changes using git:
+
+1. Run `gh pr view <number> --json baseRefName,headRefName` to get the base and head branch names
+2. Run `git fetch origin` to ensure remote refs are up to date
+3. Run `git diff origin/<baseRefName>...origin/<headRefName>` to get all code changes
+
+This is your primary source of truth for the actual code changes.
+
+### Step 3: Get CI/CD Status (MANDATORY)
+
+Use `github-pull-request_pullRequestStatusChecks` with the PR number to get CI/CD status.
 
 **CRITICAL WARNINGS:**
-- DO NOT attempt to review the PR without running these commands first
-- DO NOT use context or memory - use ONLY the output from these commands
-- DO NOT modify the PR - use ONLY read-only `gh` commands
-- DO NOT skip any of these three commands
+- DO NOT use `gh pr diff` under any circumstances — it crashes VS Code
+- DO NOT attempt to review the PR without completing Steps 1-3 first
+- DO NOT use context or memory — use ONLY the output from these tools and commands
+- DO NOT modify the PR
 
-### Step 3: Additional Context (Optional)
+### Step 4: Additional Context (Optional)
 
 You MAY read relevant files in the workspace for additional context if needed.
 
-### Step 4: Generate Report (MANDATORY)
+### Step 5: Generate Report (MANDATORY)
 
 Provide the review report directly in the chat (do NOT create files).
 
