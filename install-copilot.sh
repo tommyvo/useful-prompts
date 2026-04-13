@@ -15,8 +15,8 @@ NC='\033[0m' # No Color
 # Configuration
 COPILOT_PROMPTS_DIR="$HOME/Library/Application Support/Code/User/prompts"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CHAT_MODES_DIR="$SCRIPT_DIR/Chat Modes"
-PROMPT_FILES_DIR="$SCRIPT_DIR/Prompt Files"
+CHAT_MODES_DIR="$SCRIPT_DIR/Github Copilot/Chat Modes"
+PROMPT_FILES_DIR="$SCRIPT_DIR/Github Copilot/Prompt Files"
 
 # Check if source directories exist
 if [ ! -d "$CHAT_MODES_DIR" ]; then
