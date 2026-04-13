@@ -1,6 +1,6 @@
 ---
 description: "Review GitHub Pull Request"
-mode: agent
+agent: agent
 ---
 
 # Review GitHub Pull Request

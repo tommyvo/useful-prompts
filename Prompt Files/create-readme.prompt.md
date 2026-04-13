@@ -1,6 +1,6 @@
 ---
 description: "Create a README.md file for the project"
-mode: agent
+agent: agent
 ---
 
 ## Role

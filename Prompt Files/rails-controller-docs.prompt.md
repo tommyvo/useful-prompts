@@ -1,10 +1,9 @@
 ---
 description: "Generate documentation for Rails controller"
-mode: agent
+agent: agent
 ---
 
 # Rails Controller Documentation Generator
-
 ## Goal
 
 Generate comprehensive markdown documentation for a Rails controller, including all actions, routes, request/response formats, authentication requirements, and business logic.

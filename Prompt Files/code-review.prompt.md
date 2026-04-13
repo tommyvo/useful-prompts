@@ -1,6 +1,6 @@
 ---
 description: "Local Code Review"
-mode: agent
+agent: agent
 ---
 
 # Local Code Review

@@ -1,6 +1,6 @@
 ---
 description: "Generate a comprehensive .gitignore file at project root"
-mode: agent
+agent: agent
 ---
 
 # Generate .gitignore File

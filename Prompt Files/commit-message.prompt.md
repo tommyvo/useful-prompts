@@ -1,6 +1,6 @@
 ---
 description: "Draft a commit message"
-mode: agent
+agent: agent
 ---
 
 # Commit message draft

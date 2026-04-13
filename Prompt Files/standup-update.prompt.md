@@ -1,6 +1,6 @@
 ---
 description: "Generate a Slack standup update from a work log markdown file"
-mode: agent
+agent: agent
 ---
 
 # Standup Update Generator

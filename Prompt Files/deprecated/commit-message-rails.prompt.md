@@ -1,6 +1,6 @@
 ---
 description: 'Draft a commit message for Rails project'
-mode: ask
+agent: ask
 ---
 > **DEPRECATED: Use chat-draft-commit-message.md instead.**
 # Chat commit message - Rails
