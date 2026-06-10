@@ -137,7 +137,7 @@ The AI will:
 
 ## Configuration
 
-### Installing for GitHub Copilot
+### Installing for GitHub Copilot (VS Code)
 
 To make all prompts and chat modes available globally in VS Code, use the automated installer:
 
@@ -157,6 +157,33 @@ After installation, all prompts and chat modes will be available in GitHub Copil
 
 - Reference prompt files: `Follow instructions in <filename>`
 - Select chat modes from the chat mode dropdown menu
+
+### Installing for Cursor
+
+To make all prompts available as global slash commands in Cursor, use the automated installer:
+
+```bash
+./install-cursor.sh
+```
+
+The script will:
+
+- Copy all commands from `Cursor/Commands/` to `~/.cursor/skills-cursor/`
+- Show which files will be ADDED (new) and which will be MODIFIED/OVERWRITTEN (existing)
+- The confirmation prompt defaults to Yes; pressing Enter will proceed with installation
+- **Note:** Restart Cursor after installation if commands don't appear immediately
+
+Once installed, invoke them as slash commands in Cursor chat:
+
+| Command | Description |
+|---|---|
+| `/code-review` | Review uncommitted local changes with prioritized suggestions |
+| `/commit-message` | Draft a structured commit message (auto-detects React/Rails/Generic) |
+| `/gh-pr-code-review` | Review a GitHub PR using the `gh` CLI |
+| `/rails-controller-docs` | Generate documentation for a Rails controller |
+| `/create-readme` | Create a comprehensive README.md for the project |
+| `/standup-update` | Generate a Slack standup update from a work log file |
+| `/generate-gitignore` | Generate a comprehensive .gitignore at project root |
 
 ### Using with Opencode
 
