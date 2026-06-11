@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Cursor Commands Installer
-# Installs slash commands to ~/.cursor/skills-cursor/ for global use
+# Installs slash commands to ~/.cursor/skills/ for global use
 
 set -e
 
