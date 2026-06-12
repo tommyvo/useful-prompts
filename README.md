@@ -168,7 +168,7 @@ To make all prompts available as global slash commands in Cursor, use the automa
 
 The script will:
 
-- Copy all commands from `Cursor/Commands/` to `~/.cursor/skills-cursor/`
+- Copy all commands from `Cursor/Commands/` to `~/.cursor/skills/`
 - Show which files will be ADDED (new) and which will be MODIFIED/OVERWRITTEN (existing)
 - The confirmation prompt defaults to Yes; pressing Enter will proceed with installation
 - **Note:** Restart Cursor after installation if commands don't appear immediately
@@ -178,6 +178,33 @@ Once installed, invoke them as slash commands in Cursor chat:
 | Command | Description |
 |---|---|
 | `/code-review` | Review uncommitted local changes with prioritized suggestions |
+| `/commit-message` | Draft a structured commit message (auto-detects React/Rails/Generic) |
+| `/gh-pr-code-review` | Review a GitHub PR using the `gh` CLI |
+| `/rails-controller-docs` | Generate documentation for a Rails controller |
+| `/create-readme` | Create a comprehensive README.md for the project |
+| `/standup-update` | Generate a Slack standup update from a work log file |
+| `/generate-gitignore` | Generate a comprehensive .gitignore at project root |
+
+### Installing for Claude Code
+
+To make all prompts available as skills in Claude Code, use the automated installer:
+
+```bash
+./install-claude.sh
+```
+
+The script will:
+
+- Copy all skills from `Claude Code/Skills/` to `~/.claude/skills/`
+- Show which files will be ADDED (new) and which will be MODIFIED/OVERWRITTEN (existing)
+- The confirmation prompt defaults to Yes; pressing Enter will proceed with installation
+- **Note:** Restart Claude Code if skills don't appear immediately
+
+Once installed, invoke them as slash commands in Claude Code:
+
+| Command | Description |
+|---|---|
+| `/local-code-review` | Review uncommitted local changes with prioritized suggestions |
 | `/commit-message` | Draft a structured commit message (auto-detects React/Rails/Generic) |
 | `/gh-pr-code-review` | Review a GitHub PR using the `gh` CLI |
 | `/rails-controller-docs` | Generate documentation for a Rails controller |
