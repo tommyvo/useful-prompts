@@ -88,3 +88,7 @@ Desktop.ini
 .directory
 .Trash-*
 .nfs*
+
+# Claude Code local settings and session data
+.claude/settings.local.json
+.claude/worktrees/
