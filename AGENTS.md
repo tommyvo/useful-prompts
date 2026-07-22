@@ -31,13 +31,14 @@ Every prompt/skill/command is maintained in **four parallel copies**, one per pl
 - **Deprecation**: Move deprecated files to `deprecated/` subfolder (see `Github Copilot/Prompt Files/deprecated/`) - NEVER delete
 - **Git patterns**: Most prompts start with `git diff HEAD` to analyze changes
 - **Priority emojis**: Code reviews use 🟣 CRITICAL, 🔴 HIGH, 🟡 MEDIUM, 🟢 LOW
-- **Documentation**: When creating/updating a prompt, update the root `README.md` table, `opencode/README.md`, and this file for discoverability
+- **Documentation**: `README.md` MUST be kept in sync with every change to this repo — not just new prompts. Any change to file structure, scripts (e.g. `install-*.sh`), directory layout, or available commands requires a matching `README.md` update in the same change. When creating/updating a prompt specifically, also update the root `README.md` table, `opencode/README.md`, and this file for discoverability
 
 ## Deployment & Installation
 - Copilot: `./install-copilot.sh` → `~/Library/Application Support/Code/User/prompts` (macOS)
 - Cursor: `./install-cursor.sh` → `~/.cursor/skills/`
 - Claude Code: `./install-claude.sh` → `~/.claude/skills/`
 - Opencode: `./install-opencode.sh` → `~/.config/opencode/{agent,command}/`
+- All platforms at once: `./install-all.sh` runs every `install-*.sh` script in sequence
 
 ## Importing New Skills (reverse direction)
 The `import-*.sh` scripts (sharing helpers from `import-lib.sh`) go the other way: they scan a platform's global config dir for skills/prompts/agents not yet tracked in this repo, copy the new item into its canonical directory, and auto-generate best-effort ports to the other three platforms (frontmatter translated, body copied as-is).

@@ -177,6 +177,14 @@ The AI will:
 
 ## Configuration
 
+### Installing Everything at Once
+
+```bash
+./install-all.sh
+```
+
+Runs every `install-*.sh` script in the repo root (Copilot, Cursor, Claude Code, Opencode) one after another, in order. Each script's own confirmation prompt still applies — the runner just chains them together and stops if any one fails.
+
 ### Installing for GitHub Copilot (VS Code)
 
 ```bash
