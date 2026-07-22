@@ -317,6 +317,30 @@ opencode agent beast-mode "your task here"
 
 For more details, see the [Opencode documentation](https://opencode.ai/docs/) and [opencode/README.md](./opencode/README.md).
 
+## Importing New Skills
+
+If you've written a new skill/prompt/command/agent directly in one tool's global config (e.g. dropped a new `SKILL.md` in `~/.claude/skills/` or created a Copilot chat mode in VS Code) and want to bring it into this repo, use the matching import script instead of manually copying files around:
+
+```bash
+./import-claude.sh    # ~/.claude/skills/                                   -> Claude Code/Skills/
+./import-cursor.sh     # ~/.cursor/skills/                                   -> Cursor/Skills/
+./import-copilot.sh    # ~/Library/Application Support/Code/User/prompts    -> Github Copilot/Prompt Files/ + Chat Modes/
+./import-opencode.sh   # ~/.config/opencode/{command,agent}                 -> opencode/command/ + agent/
+```
+
+Each script:
+
+- Scans the corresponding global config directory for skills/prompts/commands/agents that don't yet exist in this repo
+- Shows what's new (and what's already tracked, so you can spot local edits worth reconciling by hand) before doing anything
+- Copies the new item into its canonical home directory for that platform
+- Auto-generates best-effort ports to the other platforms (frontmatter translated, body copied as-is)
+- The confirmation prompt defaults to Yes; pressing Enter proceeds
+
+Chat modes / agents only port between GitHub Copilot and Opencode (Cursor and Claude Code have no chat-mode equivalent), matching the existing four-platform split described in [AGENTS.md](./AGENTS.md).
+
+> [!NOTE]
+> The generated ports are a starting point, not a final draft. Frontmatter is templated automatically, but review the new files for tone and platform-specific instructions (see AGENTS.md's notes on exceptions like `gh-pr-code-review`'s Copilot variant), then update the README tables above and run the relevant `install-*.sh` script(s).
+
 ## Best Practices
 
 ### Prompt Engineering Tips

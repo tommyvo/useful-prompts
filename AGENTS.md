@@ -39,6 +39,15 @@ Every prompt/skill/command is maintained in **four parallel copies**, one per pl
 - Claude Code: `./install-claude.sh` → `~/.claude/skills/`
 - Opencode: `./install-opencode.sh` → `~/.config/opencode/{agent,command}/`
 
+## Importing New Skills (reverse direction)
+The `import-*.sh` scripts (sharing helpers from `import-lib.sh`) go the other way: they scan a platform's global config dir for skills/prompts/agents not yet tracked in this repo, copy the new item into its canonical directory, and auto-generate best-effort ports to the other three platforms (frontmatter translated, body copied as-is).
+- `./import-claude.sh` ← `~/.claude/skills/`
+- `./import-cursor.sh` ← `~/.cursor/skills/`
+- `./import-copilot.sh` ← `~/Library/Application Support/Code/User/prompts` (both `*.prompt.md` and `*.chatmode.md`)
+- `./import-opencode.sh` ← `~/.config/opencode/{command,agent}/`
+
+Auto-generated ports are a first draft only — always hand-review for tone, tool lists (chat mode/agent conversions need their `tools:`/`agent: build|plan` picked manually), and the platform-specific exceptions noted above, then update `README.md` and this file.
+
 ## See Also
 - Full project documentation: `.github/copilot-instructions.md`
 - Usage examples & architecture: `README.md`
