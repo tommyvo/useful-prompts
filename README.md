@@ -180,15 +180,15 @@ The AI will:
 ### Installing Everything at Once
 
 ```bash
-./install-all.sh
+./scripts/install-all.sh
 ```
 
-Runs every `install-*.sh` script in the repo root (Copilot, Cursor, Claude Code, Opencode) one after another, in order. Each script's own confirmation prompt still applies — the runner just chains them together and stops if any one fails.
+Runs every `install-*.sh` script in the `scripts/` directory (Copilot, Cursor, Claude Code, Opencode) one after another, in order. Each script's own confirmation prompt still applies — the runner just chains them together and stops if any one fails.
 
 ### Installing for GitHub Copilot (VS Code)
 
 ```bash
-./install-copilot.sh
+./scripts/install-copilot.sh
 ```
 
 The script will:
@@ -207,7 +207,7 @@ After installation, all prompts and chat modes will be available in GitHub Copil
 ### Installing for Cursor
 
 ```bash
-./install-cursor.sh
+./scripts/install-cursor.sh
 ```
 
 The script will:
@@ -233,7 +233,7 @@ Once installed, invoke them as slash commands in Cursor chat:
 ### Installing for Claude Code
 
 ```bash
-./install-claude.sh
+./scripts/install-claude.sh
 ```
 
 The script will:
@@ -263,7 +263,7 @@ Pre-converted Opencode versions of all prompts and chat modes are available in t
 #### Quick Installation
 
 ```bash
-./install-opencode.sh
+./scripts/install-opencode.sh
 ```
 
 The script will:
@@ -330,10 +330,10 @@ For more details, see the [Opencode documentation](https://opencode.ai/docs/) an
 If you've written a new skill/prompt/command/agent directly in one tool's global config (e.g. dropped a new `SKILL.md` in `~/.claude/skills/` or created a Copilot chat mode in VS Code) and want to bring it into this repo, use the matching import script instead of manually copying files around:
 
 ```bash
-./import-claude.sh    # ~/.claude/skills/                                   -> Claude Code/Skills/
-./import-cursor.sh     # ~/.cursor/skills/                                   -> Cursor/Skills/
-./import-copilot.sh    # ~/Library/Application Support/Code/User/prompts    -> Github Copilot/Prompt Files/ + Chat Modes/
-./import-opencode.sh   # ~/.config/opencode/{command,agent}                 -> opencode/command/ + agent/
+./scripts/import-claude.sh    # ~/.claude/skills/                                   -> Claude Code/Skills/
+./scripts/import-cursor.sh     # ~/.cursor/skills/                                   -> Cursor/Skills/
+./scripts/import-copilot.sh    # ~/Library/Application Support/Code/User/prompts    -> Github Copilot/Prompt Files/ + Chat Modes/
+./scripts/import-opencode.sh   # ~/.config/opencode/{command,agent}                 -> opencode/command/ + agent/
 ```
 
 Each script:
