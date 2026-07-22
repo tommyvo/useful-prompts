@@ -70,8 +70,8 @@ fix can be tied back to its thread.
 ## Step 4: Verify fixes
 
 Before resolving anything, run the affected tests and linter for changed files (see the repo's own
-conventions for the exact test/lint commands, or the project's standard test runner otherwise). Fix
-any failures before proceeding.
+skills for the exact test/lint commands, e.g. `soraban-running-rspecs` / `soraban-running-rubocop`
+in this repo, or the project's standard test runner otherwise). Fix any failures before proceeding.
 
 ## Step 5: Resolve fixed threads, reply only where you didn't fix
 
