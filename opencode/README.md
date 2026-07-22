@@ -3,14 +3,14 @@
 This directory contains pre-converted versions of all prompts and chat modes for use with [Opencode](https://opencode.ai/).
 
 > [!NOTE]
-> For GitHub Copilot installation, use `./install-copilot.sh` from the repository root instead. This installer is specifically for Opencode CLI users.
+> For GitHub Copilot installation, use `./install-copilot.sh` from the repository root instead. For Cursor, use `./install-cursor.sh`. For Claude Code, use `./install-claude.sh`. This installer is specifically for Opencode CLI users.
 
 ## Directory Structure
 
 ```text
 opencode/
-├── agent/      # Autonomous task execution prompts (agent: build)
-└── command/    # Interactive chat mode prompts (agent: plan)
+├── agent/      # Chat-mode equivalents (agent: build or agent: plan)
+└── command/    # Task automation prompts, equivalent to Copilot's prompt files (agent: build)
 ```
 
 ## Installation
@@ -45,11 +45,8 @@ Copy agent prompts to your Opencode config directory:
 cp opencode/agent/*.md ~/.config/opencode/agent/
 
 # Or install individually
-cp opencode/agent/code-review.md ~/.config/opencode/agent/
-cp opencode/agent/commit-message.md ~/.config/opencode/agent/
-cp opencode/agent/gh-pr-code-review.md ~/.config/opencode/agent/
-cp opencode/agent/rails-controller-docs.md ~/.config/opencode/agent/
-cp opencode/agent/create-readme.md ~/.config/opencode/agent/
+cp opencode/agent/beast-mode.md ~/.config/opencode/agent/
+cp opencode/agent/principal-engineer.md ~/.config/opencode/agent/
 ```
 
 #### Commands
@@ -61,81 +58,99 @@ Copy command prompts to your Opencode config directory:
 cp opencode/command/*.md ~/.config/opencode/command/
 
 # Or install individually
-cp opencode/command/beast-mode.md ~/.config/opencode/command/
-cp opencode/command/principal-engineer.md ~/.config/opencode/command/
+cp opencode/command/code-review.md ~/.config/opencode/command/
+cp opencode/command/commit-message.md ~/.config/opencode/command/
+cp opencode/command/gh-pr-code-review.md ~/.config/opencode/command/
+cp opencode/command/address-pr-comments.md ~/.config/opencode/command/
+cp opencode/command/rails-controller-docs.md ~/.config/opencode/command/
+cp opencode/command/create-readme.md ~/.config/opencode/command/
+cp opencode/command/standup-update.md ~/.config/opencode/command/
+cp opencode/command/generate-gitignore.md ~/.config/opencode/command/
 ```
 
 ## Usage
 
-### Running Agents
+### Running Commands
 
-Agents run autonomously to complete tasks:
+Commands run autonomously to complete tasks:
 
 ```bash
 # Code review of uncommitted changes
-opencode agent code-review
+opencode command code-review
 
 # Generate commit message
-opencode agent commit-message
+opencode command commit-message
 
 # Review a specific pull request (with PR number)
-opencode agent gh-pr-code-review 123
+opencode command gh-pr-code-review 123
+
+# Address unresolved review comments on a pull request
+opencode command address-pr-comments 123
 
 # Document a Rails controller (with file path)
-opencode agent rails-controller-docs app/controllers/users_controller.rb
+opencode command rails-controller-docs app/controllers/users_controller.rb
 
 # Create a README for the project
-opencode agent create-readme
+opencode command create-readme
+
+# Generate a Slack standup update from a work log file
+opencode command standup-update
+
+# Generate a comprehensive .gitignore
+opencode command generate-gitignore
 ```
 
-### Using Commands
+### Using Agents
 
-Commands provide interactive chat modes:
+Agents provide chat-mode-style personas:
 
 ```bash
 # Beast Mode - autonomous problem-solving with extensive research
-opencode command beast-mode "your task here"
+opencode agent beast-mode "your task here"
 
 # Principal Engineer - expert-level guidance and reviews
-opencode command principal-engineer "your question here"
+opencode agent principal-engineer "your question here"
 ```
 
 ## Key Differences from GitHub Copilot
 
 **Frontmatter:**
 
-- GitHub Copilot uses: `mode: agent` / `mode: ask`
-- Opencode uses: `agent: build` / `agent: plan`
+- GitHub Copilot prompt files use: `agent: agent`
+- Opencode uses: `agent: build` (autonomous execution) or `agent: plan` (advisory/read-only)
 
 **Arguments:**
 
-Many Opencode agents support `{$ARGUMENTS}` for passing parameters. When you pass an argument, it gets interpolated into the prompt at runtime:
+Many Opencode commands support `{$ARGUMENTS}` for passing parameters. When you pass an argument, it gets interpolated into the prompt at runtime:
 
 ```bash
 # Pass PR number as argument
-opencode agent gh-pr-code-review 123
+opencode command gh-pr-code-review 123
 # The prompt will show: "PR Number: 123"
 
 # Pass file path as argument
-opencode agent rails-controller-docs app/controllers/api/v1/users_controller.rb
+opencode command rails-controller-docs app/controllers/api/v1/users_controller.rb
 # The prompt will show: "Controller File Path: app/controllers/api/v1/users_controller.rb"
 ```
 
-The agent uses this information to know what to work with.
-
-## Available Agents
-
-| Agent | Description | Arguments Support |
-|-------|-------------|-------------------|
-| `code-review` | Comprehensive code review of uncommitted changes | No |
-| `commit-message` | Generate structured commit messages | No |
-| `gh-pr-code-review` | Review GitHub pull requests with suggestions | Yes (PR number) |
-| `rails-controller-docs` | Generate Rails controller documentation | Yes (controller path) |
-| `create-readme` | Create comprehensive README files | No |
+The command uses this information to know what to work with.
 
 ## Available Commands
 
-| Command | Description | Mode |
+| Command | Description | Arguments Support |
+|-------|-------------|-------------------|
+| `code-review` | Comprehensive code review of uncommitted changes | No |
+| `commit-message` | Generate structured commit messages (auto-detects React/Rails/Generic) | No |
+| `gh-pr-code-review` | Review GitHub pull requests with unified diff suggestions | Yes (PR number/URL) |
+| `address-pr-comments` | Find, fix, and resolve unresolved GitHub PR review comments | Yes (PR number/URL) |
+| `rails-controller-docs` | Generate Rails controller documentation | Yes (controller path) |
+| `create-readme` | Create comprehensive README files | No |
+| `standup-update` | Generate a Slack standup update from a work log markdown file | No |
+| `generate-gitignore` | Generate a comprehensive .gitignore at project root | No |
+
+## Available Agents
+
+| Agent | Description | Mode |
 |---------|-------------|------|
 | `beast-mode` | Autonomous problem-solving with extensive research | build |
 | `principal-engineer` | Expert engineering guidance and reviews | plan |
@@ -150,9 +165,9 @@ For more details on using Opencode, see:
 
 ## Syncing Updates
 
-If the original GitHub Copilot prompts are updated, you can regenerate these Opencode versions by:
+If the original prompts are updated (in `Github Copilot/`, `Cursor/`, or `Claude Code/`), regenerate these Opencode versions by:
 
-1. Changing `mode: agent` → `agent: build`
-2. Changing `mode: ask` → `agent: plan`
-3. Adding `{$ARGUMENTS}` support where applicable
+1. Changing `agent: agent` (Copilot) → `agent: build` (or `agent: plan` for advisory/read-only modes)
+2. Adding `{$ARGUMENTS}` support where the prompt takes a natural argument (PR number, file path, etc.)
+3. Keeping the body content identical apart from frontmatter and argument wiring
 4. Testing with Opencode to ensure compatibility

@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 # Configuration
 CURSOR_SKILLS_DIR="$HOME/.cursor/skills"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMANDS_DIR="$SCRIPT_DIR/Cursor/Commands"
+COMMANDS_DIR="$SCRIPT_DIR/Cursor/Skills"
 
 # Check if source directory exists
 if [ ! -d "$COMMANDS_DIR" ]; then
