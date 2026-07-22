@@ -35,6 +35,7 @@ Pre-built prompts for common development tasks. See the [Prompt Files README](./
 | [rails-controller-docs.prompt.md](./Prompt%20Files/rails-controller-docs.prompt.md) | Generate comprehensive Rails controller documentation          | Prompt File |
 | [create-readme.prompt.md](./Prompt%20Files/create-readme.prompt.md)                 | Create well-structured README files for projects               | Prompt File |
 | [standup-update.prompt.md](./Prompt%20Files/standup-update.prompt.md)               | Generate Slack standup updates from work log markdown files    | Prompt File |
+| [address-pr-comments.prompt.md](./Prompt%20Files/address-pr-comments.prompt.md)     | Address unresolved GitHub PR review comments                   | Prompt File |
 
 ### 🎯 Instructions
 
@@ -184,6 +185,7 @@ Once installed, invoke them as slash commands in Cursor chat:
 | `/create-readme` | Create a comprehensive README.md for the project |
 | `/standup-update` | Generate a Slack standup update from a work log file |
 | `/generate-gitignore` | Generate a comprehensive .gitignore at project root |
+| `/address-pr-comments` | Find, fix, and resolve unresolved GitHub PR review comments |
 
 ### Installing for Claude Code
 
@@ -211,6 +213,7 @@ Once installed, invoke them as slash commands in Claude Code:
 | `/create-readme` | Create a comprehensive README.md for the project |
 | `/standup-update` | Generate a Slack standup update from a work log file |
 | `/generate-gitignore` | Generate a comprehensive .gitignore at project root |
+| `/address-pr-comments` | Find, fix, and resolve unresolved GitHub PR review comments |
 
 ### Using with Opencode
 
