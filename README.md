@@ -40,7 +40,7 @@ Pre-built prompts for common development tasks, available on every platform:
 
 | Prompt | Description | Copilot | Cursor | Claude Code | Opencode |
 | --- | --- | --- | --- | --- | --- |
-| code-review | Comprehensive local code review with security analysis | [Prompt File](<./Github Copilot/Prompt Files/code-review.prompt.md>) | [Skill](<./Cursor/Skills/code-review/SKILL.md>) | [Skill](<./Claude Code/Skills/local-code-review/SKILL.md>) | [Command](./opencode/command/code-review.md) |
+| local-code-review | Comprehensive local code review with security analysis | [Prompt File](<./Github Copilot/Prompt Files/local-code-review.prompt.md>) | [Skill](<./Cursor/Skills/local-code-review/SKILL.md>) | [Skill](<./Claude Code/Skills/local-code-review/SKILL.md>) | [Command](./opencode/command/local-code-review.md) |
 | commit-message | Generate standardized commit messages for React/Rails projects | [Prompt File](<./Github Copilot/Prompt Files/commit-message.prompt.md>) | [Skill](<./Cursor/Skills/commit-message/SKILL.md>) | [Skill](<./Claude Code/Skills/commit-message/SKILL.md>) | [Command](./opencode/command/commit-message.md) |
 | gh-pr-code-review | Review a GitHub PR using the `gh` CLI with unified diff suggestions | [Prompt File](<./Github Copilot/Prompt Files/gh-pr-code-review.prompt.md>) | [Skill](<./Cursor/Skills/gh-pr-code-review/SKILL.md>) | [Skill](<./Claude Code/Skills/gh-pr-code-review/SKILL.md>) | [Command](./opencode/command/gh-pr-code-review.md) |
 | address-pr-comments | Find, fix, and resolve unresolved GitHub PR review comments via the `gh` CLI | [Prompt File](<./Github Copilot/Prompt Files/address-pr-comments.prompt.md>) | [Skill](<./Cursor/Skills/address-pr-comments/SKILL.md>) | [Skill](<./Claude Code/Skills/address-pr-comments/SKILL.md>) | [Command](./opencode/command/address-pr-comments.md) |
@@ -49,7 +49,7 @@ Pre-built prompts for common development tasks, available on every platform:
 | standup-update | Generate Slack standup updates from a work log markdown file | [Prompt File](<./Github Copilot/Prompt Files/standup-update.prompt.md>) | [Skill](<./Cursor/Skills/standup-update/SKILL.md>) | [Skill](<./Claude Code/Skills/standup-update/SKILL.md>) | [Command](./opencode/command/standup-update.md) |
 | generate-gitignore | Generate a comprehensive `.gitignore` at the project root | [Prompt File](<./Github Copilot/Prompt Files/generate-gitignore.prompt.md>) | [Skill](<./Cursor/Skills/generate-gitignore/SKILL.md>) | [Skill](<./Claude Code/Skills/generate-gitignore/SKILL.md>) | [Command](./opencode/command/generate-gitignore.md) |
 
-> Note: the Claude Code slash command for `code-review` is `/local-code-review` (its skill folder is named `local-code-review`) to avoid clashing with Claude Code's own review tooling; every other platform uses `code-review`.
+> Note: the local code review skill is named `local-code-review` (folder/file and slash command) on all four platforms, including Claude Code, to avoid clashing with Claude Code's own `/code-review` review tooling.
 
 Deprecated prompts (kept for reference, not removed) live in [`Github Copilot/Prompt Files/deprecated/`](<./Github Copilot/Prompt Files/deprecated/>).
 
@@ -106,7 +106,7 @@ Activate custom chat modes to get specialized AI assistance:
 
 ### Using Skills (Cursor / Claude Code)
 
-Once installed (see Configuration below), invoke skills as slash commands in chat, e.g. `/code-review`, `/gh-pr-code-review`, `/address-pr-comments`.
+Once installed (see Configuration below), invoke skills as slash commands in chat, e.g. `/local-code-review`, `/gh-pr-code-review`, `/address-pr-comments`.
 
 ## Examples
 
@@ -116,10 +116,10 @@ Once installed (see Configuration below), invoke skills as slash commands in cha
 # Make some changes to your code
 git add .
 
-# Copilot:    "Follow instructions in code-review.prompt.md"
-# Cursor:     /code-review
+# Copilot:    "Follow instructions in local-code-review.prompt.md"
+# Cursor:     /local-code-review
 # Claude Code: /local-code-review
-# Opencode:   opencode command code-review
+# Opencode:   opencode command local-code-review
 ```
 
 The AI will:
@@ -221,7 +221,7 @@ Once installed, invoke them as slash commands in Cursor chat:
 
 | Command | Description |
 |---|---|
-| `/code-review` | Review uncommitted local changes with prioritized suggestions |
+| `/local-code-review` | Review uncommitted local changes with prioritized suggestions |
 | `/commit-message` | Draft a structured commit message (auto-detects React/Rails/Generic) |
 | `/gh-pr-code-review` | Review a GitHub PR using the `gh` CLI |
 | `/address-pr-comments` | Find, fix, and resolve unresolved GitHub PR review comments |
@@ -294,7 +294,7 @@ cp opencode/agent/principal-engineer.md ~/.config/opencode/agent/
 cp opencode/command/*.md ~/.config/opencode/command/
 
 # Or copy individually
-cp opencode/command/code-review.md ~/.config/opencode/command/
+cp opencode/command/local-code-review.md ~/.config/opencode/command/
 cp opencode/command/gh-pr-code-review.md ~/.config/opencode/command/
 ```
 
@@ -302,7 +302,7 @@ cp opencode/command/gh-pr-code-review.md ~/.config/opencode/command/
 
 ```bash
 # Run a command with no arguments
-opencode command code-review
+opencode command local-code-review
 
 # Run a command with arguments (e.g., PR number for review)
 opencode command gh-pr-code-review 123

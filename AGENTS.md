@@ -27,7 +27,7 @@ Every prompt/skill/command is maintained in **four parallel copies**, one per pl
 - **Quadruple-platform**: ALWAYS maintain ALL FOUR versions (Copilot, Cursor, Claude Code, Opencode) for every prompt/skill
 - **Content sync**: Body content should be identical across all four versions except for frontmatter and, where genuinely necessary, tool-specific instructions (e.g. `gh-pr-code-review`'s Copilot version routes PR metadata through VS Code's GitHub PR extension instead of raw `gh` CLI calls, because `gh pr diff` crashes VS Code — that's the exception, not the norm)
 - **Opencode arguments**: add a `{$ARGUMENTS}` slot in the Opencode version when the prompt naturally takes one argument (PR number/URL, file path)
-- **Naming mismatch**: Claude Code's `code-review` skill is named `local-code-review` (folder and slash command) to avoid colliding with Claude Code's own review tooling — every other platform calls it `code-review`
+- **Naming**: the local code review skill is named `local-code-review` (folder/file and slash command) across all four platforms, including Claude Code, to avoid colliding with Claude Code's own review tooling
 - **Deprecation**: Move deprecated files to `deprecated/` subfolder (see `Github Copilot/Prompt Files/deprecated/`) - NEVER delete
 - **Git patterns**: Most prompts start with `git diff HEAD` to analyze changes
 - **Priority emojis**: Code reviews use 🟣 CRITICAL, 🔴 HIGH, 🟡 MEDIUM, 🟢 LOW

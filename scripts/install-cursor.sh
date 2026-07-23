@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 # Configuration
 CURSOR_SKILLS_DIR="$HOME/.cursor/skills"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-COMMANDS_DIR="$SCRIPT_DIR/Cursor/Skills"
+COMMANDS_DIR="$SCRIPT_DIR/../Cursor/Skills"
 
 # Check if source directory exists
 if [ ! -d "$COMMANDS_DIR" ]; then
@@ -144,7 +144,7 @@ echo -e "${BLUE}Usage in Cursor:${NC}"
 echo "  Type a slash command in the Cursor chat to invoke it:"
 echo ""
 echo -e "${BLUE}Examples:${NC}"
-echo "  • /code-review"
+echo "  • /local-code-review"
 echo "  • /commit-message"
 echo "  • /gh-pr-code-review"
 echo "  • /standup-update"

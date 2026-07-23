@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 # Configuration
 OPENCODE_CONFIG_DIR="$HOME/.config/opencode"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SOURCE_DIR="$SCRIPT_DIR/opencode"
+SOURCE_DIR="$SCRIPT_DIR/../opencode"
 
 # Check if opencode directory exists
 if [ ! -d "$SOURCE_DIR" ]; then
@@ -253,7 +253,7 @@ echo "  opencode agent <agent-name>       # Run an agent"
 echo "  opencode command <command-name>   # Start a command session"
 echo ""
 echo -e "${BLUE}Examples:${NC}"
-echo "  opencode agent code-review"
+echo "  opencode agent local-code-review"
 echo "  opencode agent commit-message"
 echo "  opencode command beast-mode"
 echo ""

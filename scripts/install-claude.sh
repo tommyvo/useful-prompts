@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 # Configuration
 CLAUDE_SKILLS_DIR="$HOME/.claude/skills"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILLS_DIR="$SCRIPT_DIR/Claude Code/Skills"
+SKILLS_DIR="$SCRIPT_DIR/../Claude Code/Skills"
 
 # Check if source directory exists
 if [ ! -d "$SKILLS_DIR" ]; then

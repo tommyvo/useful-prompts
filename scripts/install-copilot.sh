@@ -15,8 +15,8 @@ NC='\033[0m' # No Color
 # Configuration
 COPILOT_PROMPTS_DIR="$HOME/Library/Application Support/Code/User/prompts"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CHAT_MODES_DIR="$SCRIPT_DIR/Github Copilot/Chat Modes"
-PROMPT_FILES_DIR="$SCRIPT_DIR/Github Copilot/Prompt Files"
+CHAT_MODES_DIR="$SCRIPT_DIR/../Github Copilot/Chat Modes"
+PROMPT_FILES_DIR="$SCRIPT_DIR/../Github Copilot/Prompt Files"
 
 # Check if source directories exist
 if [ ! -d "$CHAT_MODES_DIR" ]; then
@@ -273,7 +273,7 @@ echo "  2. Reference a prompt file: 'Follow instructions in <filename>'"
 echo "  3. Or select a chat mode from the dropdown menu"
 echo ""
 echo -e "${BLUE}Examples:${NC}"
-echo "  • 'Follow instructions in code-review.prompt.md'"
+echo "  • 'Follow instructions in local-code-review.prompt.md'"
 echo "  • 'Follow instructions in commit-message.prompt.md'"
 echo "  • Select 'Beast Mode' or 'Principal Engineer' from chat modes"
 echo ""

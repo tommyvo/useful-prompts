@@ -52,10 +52,10 @@ agent: agent
 ```
 Every current prompt file in this repo uses `agent: agent` (autonomous execution). There is no `mode:` key in use anywhere in this repo — if you encounter old docs or examples using `mode: agent` / `mode: ask`, treat them as stale and don't reproduce that pattern.
 
-**Usage:** In Copilot Chat, type: `"Follow instructions in code-review.prompt.md"`
+**Usage:** In Copilot Chat, type: `"Follow instructions in local-code-review.prompt.md"`
 
 **Examples:**
-- `code-review.prompt.md` - Runs `git diff HEAD`, generates priority-coded review (🟣🔴🟡🟢), auto-applies appropriate fixes
+- `local-code-review.prompt.md` - Runs `git diff HEAD`, generates priority-coded review (🟣🔴🟡🟢), auto-applies appropriate fixes
 - `commit-message.prompt.md` - Auto-detects React/Rails/Generic project, generates structured commit message
 - `gh-pr-code-review.prompt.md` - Fetches PR data via VS Code's GitHub PR extension tools (not `gh pr diff`, which crashes VS Code), provides unified diff suggestions
 - `address-pr-comments.prompt.md` - Uses `gh` CLI + GitHub GraphQL API to find, fix, and resolve unresolved PR review threads
@@ -110,7 +110,7 @@ disable-model-invocation: true
 ### 5. Claude Code Skills (`Claude Code/Skills/<name>/SKILL.md`)
 Same shape as Cursor skills, invoked as `/name` in Claude Code. Body content is usually a byte-identical copy of the Cursor version, since both run in a bash-capable agent and the underlying instructions (e.g. `gh` CLI usage) work unchanged.
 
-**Naming exception:** the code-review skill is named `local-code-review` here (not `code-review`) because Claude Code has its own built-in `/code-review` command this would otherwise collide with.
+**Naming:** the local code review skill is named `local-code-review` across all platforms (not `code-review`) because Claude Code has its own built-in `/code-review` command this would otherwise collide with.
 
 ### 6. Opencode Commands/Agents (`opencode/command/*.md`, `opencode/agent/*.md`)
 Mirrors of the Copilot prompt files (→ `command/`) and chat modes (→ `agent/`).
@@ -131,8 +131,10 @@ Opencode commands additionally support `{$ARGUMENTS}` for passing a single param
 
 1. `Github Copilot/Prompt Files/name.prompt.md` (or `Chat Modes/Title Case.chatmode.md`)
 2. `Cursor/Skills/name/SKILL.md`
-3. `Claude Code/Skills/name/SKILL.md` (or `local-code-review` for the code-review skill)
+3. `Claude Code/Skills/name/SKILL.md`
 4. `opencode/command/name.md` (or `opencode/agent/name.md` for chat-mode equivalents)
+
+(the local code review skill is named `local-code-review` in all four locations, not `code-review`)
 
 **The conversion between platforms:**
 1. Copilot `agent: agent` → Cursor/Claude Code `name` + `description` + `disable-model-invocation: true` → Opencode `agent: build`
@@ -141,7 +143,7 @@ Opencode commands additionally support `{$ARGUMENTS}` for passing a single param
 4. Add `{$ARGUMENTS}` in the Opencode version wherever the prompt takes a natural single argument
 
 **Example:**
-- `Github Copilot/Prompt Files/code-review.prompt.md` → `Cursor/Skills/code-review/SKILL.md` → `Claude Code/Skills/local-code-review/SKILL.md` → `opencode/command/code-review.md`
+- `Github Copilot/Prompt Files/local-code-review.prompt.md` → `Cursor/Skills/local-code-review/SKILL.md` → `Claude Code/Skills/local-code-review/SKILL.md` → `opencode/command/local-code-review.md`
 - `Github Copilot/Chat Modes/Beast Mode 3.1.chatmode.md` → `opencode/agent/beast-mode.md` (chat modes are Copilot + Opencode only; no Cursor/Claude Code equivalent exists in this repo today)
 
 ## Common Patterns
@@ -169,7 +171,7 @@ Detailed guidance with numbered steps
 
 ## Critical Workflows
 
-**Code Review Pattern (`code-review.prompt.md` / Cursor+Claude Code `code-review`/`local-code-review` / `opencode/command/code-review.md`):**
+**Code Review Pattern (`local-code-review.prompt.md` / Cursor+Claude Code `local-code-review` / `opencode/command/local-code-review.md`):**
 - **ALWAYS** start with `git diff HEAD` - this is mandatory, not optional
 - Generate report with priority emoji coding: 🟣 CRITICAL, 🔴 HIGH, 🟡 MEDIUM, 🟢 LOW
 - Auto-apply appropriate fixes (security, bugs, style) that are in scope

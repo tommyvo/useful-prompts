@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: local-code-review
 description: Review uncommitted local code changes and provide a prioritized report with suggested fixes.
 disable-model-invocation: true
 ---
