@@ -93,4 +93,5 @@ Desktop.ini
 .claude/settings.local.json
 .claude/worktrees/
 
-worktrees
+# Worktrees
+worktrees/
