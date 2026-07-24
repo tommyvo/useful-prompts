@@ -92,3 +92,5 @@ Desktop.ini
 # Claude Code local settings and session data
 .claude/settings.local.json
 .claude/worktrees/
+
+worktrees
