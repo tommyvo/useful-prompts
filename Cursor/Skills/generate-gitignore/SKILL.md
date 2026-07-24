@@ -82,6 +82,9 @@ dist/
 .env.test.local
 .env.production.local
 
+# Worktrees
+worktrees/
+
 # DevOps / Infrastructure
 *.tfstate
 *.tfstate.*
