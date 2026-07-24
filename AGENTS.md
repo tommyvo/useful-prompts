@@ -43,7 +43,7 @@ Every prompt/skill/command is maintained in **four parallel copies**, one per pl
 ## Importing New Skills (reverse direction)
 The `import-*.sh` scripts (sharing helpers from `scripts/import-lib.sh`) go the other way: they scan a platform's global config dir for skills/prompts/agents not yet tracked in this repo, copy the new item into its canonical directory, and auto-generate best-effort ports to the other three platforms (frontmatter translated, body copied as-is).
 - `./scripts/import-claude.sh` ← `~/.claude/skills/`
-- `./scripts/import-cursor.sh` ← `~/.cursor/skills/`
+- `./scripts/import-cursor.sh` ← `~/.cursor/skills/` (also imports `~/.cursor/rules/*.mdc` → `Cursor/rules/`, Cursor-only, no porting — rules have no established equivalent on the other three platforms yet)
 - `./scripts/import-copilot.sh` ← `~/Library/Application Support/Code/User/prompts` (both `*.prompt.md` and `*.chatmode.md`)
 - `./scripts/import-opencode.sh` ← `~/.config/opencode/{command,agent}/`
 

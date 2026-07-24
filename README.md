@@ -332,6 +332,7 @@ If you've written a new skill/prompt/command/agent directly in one tool's global
 ```bash
 ./scripts/import-claude.sh    # ~/.claude/skills/                                   -> Claude Code/Skills/
 ./scripts/import-cursor.sh     # ~/.cursor/skills/                                   -> Cursor/Skills/
+                                # ~/.cursor/rules/                                    -> Cursor/rules/ (Cursor-only, no porting)
 ./scripts/import-copilot.sh    # ~/Library/Application Support/Code/User/prompts    -> Github Copilot/Prompt Files/ + Chat Modes/
 ./scripts/import-opencode.sh   # ~/.config/opencode/{command,agent}                 -> opencode/command/ + agent/
 ```
@@ -342,6 +343,8 @@ Each script:
 - Shows what's new (and what's already tracked, so you can spot local edits worth reconciling by hand) before doing anything
 - Copies the new item into its canonical home directory for that platform
 - Auto-generates best-effort ports to the other platforms (frontmatter translated, body copied as-is)
+
+`import-cursor.sh` additionally imports Cursor rules (`~/.cursor/rules/*.mdc` -> `Cursor/rules/`). Rules are Cursor-only for now — there's no established equivalent format on the other three platforms yet, so no porting happens for them.
 - The confirmation prompt defaults to Yes; pressing Enter proceeds
 
 Chat modes / agents only port between GitHub Copilot and Opencode (Cursor and Claude Code have no chat-mode equivalent), matching the existing four-platform split described in [AGENTS.md](./AGENTS.md).
