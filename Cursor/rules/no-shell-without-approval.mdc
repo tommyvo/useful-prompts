@@ -1,0 +1,14 @@
+---
+description: Never run shell commands without explicit user approval
+alwaysApply: true
+---
+
+# No Shell Commands Without Explicit Approval
+
+Never run any shell or terminal command unless the user has explicitly asked you to run it in their message.
+
+- CRITICAL: NEVER EVER RUN AWS CLI COMMANDS. MUST FOLLOW WITH NO EXCEPTIONS
+- Do NOT run commands proactively, speculatively, or as a "helpful" follow-up
+- Do NOT run git commands (git add, git commit, git rebase, git push, etc.) unless the user explicitly says to
+- If a command would be useful, describe what it would do and ask the user first
+- This applies to all commands: shell, git, docker, rails, rspec, rubocop, etc.
