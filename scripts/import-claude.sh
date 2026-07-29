@@ -8,13 +8,14 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 source "$SCRIPT_DIR/import-lib.sh"
 
 SOURCE_DIR="$HOME/.claude/skills"
-CLAUDE_SKILLS_DIR="$SCRIPT_DIR/Claude Code/Skills"
-CURSOR_SKILLS_DIR="$SCRIPT_DIR/Cursor/Skills"
-COPILOT_PROMPTS_DIR="$SCRIPT_DIR/Github Copilot/Prompt Files"
-OPENCODE_COMMAND_DIR="$SCRIPT_DIR/opencode/command"
+CLAUDE_SKILLS_DIR="$REPO_ROOT/Claude Code/Skills"
+CURSOR_SKILLS_DIR="$REPO_ROOT/Cursor/Skills"
+COPILOT_PROMPTS_DIR="$REPO_ROOT/Github Copilot/Prompt Files"
+OPENCODE_COMMAND_DIR="$REPO_ROOT/opencode/command"
 
 import_banner "Claude Code Skills Importer"
 

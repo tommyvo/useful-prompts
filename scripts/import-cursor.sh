@@ -11,16 +11,17 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 source "$SCRIPT_DIR/import-lib.sh"
 
 SOURCE_DIR="$HOME/.cursor/skills"
-CURSOR_SKILLS_DIR="$SCRIPT_DIR/Cursor/Skills"
-CLAUDE_SKILLS_DIR="$SCRIPT_DIR/Claude Code/Skills"
-COPILOT_PROMPTS_DIR="$SCRIPT_DIR/Github Copilot/Prompt Files"
-OPENCODE_COMMAND_DIR="$SCRIPT_DIR/opencode/command"
+CURSOR_SKILLS_DIR="$REPO_ROOT/Cursor/Skills"
+CLAUDE_SKILLS_DIR="$REPO_ROOT/Claude Code/Skills"
+COPILOT_PROMPTS_DIR="$REPO_ROOT/Github Copilot/Prompt Files"
+OPENCODE_COMMAND_DIR="$REPO_ROOT/opencode/command"
 
 RULES_SOURCE_DIR="$HOME/.cursor/rules"
-CURSOR_RULES_DIR="$SCRIPT_DIR/Cursor/rules"
+CURSOR_RULES_DIR="$REPO_ROOT/Cursor/rules"
 
 import_banner "Cursor Skills & Rules Importer"
 

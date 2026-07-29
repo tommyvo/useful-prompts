@@ -11,15 +11,16 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 source "$SCRIPT_DIR/import-lib.sh"
 
 SOURCE_DIR="$HOME/Library/Application Support/Code/User/prompts"
-COPILOT_PROMPTS_DIR="$SCRIPT_DIR/Github Copilot/Prompt Files"
-COPILOT_CHATMODES_DIR="$SCRIPT_DIR/Github Copilot/Chat Modes"
-CURSOR_SKILLS_DIR="$SCRIPT_DIR/Cursor/Skills"
-CLAUDE_SKILLS_DIR="$SCRIPT_DIR/Claude Code/Skills"
-OPENCODE_COMMAND_DIR="$SCRIPT_DIR/opencode/command"
-OPENCODE_AGENT_DIR="$SCRIPT_DIR/opencode/agent"
+COPILOT_PROMPTS_DIR="$REPO_ROOT/Github Copilot/Prompt Files"
+COPILOT_CHATMODES_DIR="$REPO_ROOT/Github Copilot/Chat Modes"
+CURSOR_SKILLS_DIR="$REPO_ROOT/Cursor/Skills"
+CLAUDE_SKILLS_DIR="$REPO_ROOT/Claude Code/Skills"
+OPENCODE_COMMAND_DIR="$REPO_ROOT/opencode/command"
+OPENCODE_AGENT_DIR="$REPO_ROOT/opencode/agent"
 
 import_banner "GitHub Copilot Prompts Importer"
 

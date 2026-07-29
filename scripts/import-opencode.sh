@@ -10,15 +10,16 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 source "$SCRIPT_DIR/import-lib.sh"
 
 OPENCODE_CONFIG_DIR="$HOME/.config/opencode"
-OPENCODE_COMMAND_DIR="$SCRIPT_DIR/opencode/command"
-OPENCODE_AGENT_DIR="$SCRIPT_DIR/opencode/agent"
-CURSOR_SKILLS_DIR="$SCRIPT_DIR/Cursor/Skills"
-CLAUDE_SKILLS_DIR="$SCRIPT_DIR/Claude Code/Skills"
-COPILOT_PROMPTS_DIR="$SCRIPT_DIR/Github Copilot/Prompt Files"
-COPILOT_CHATMODES_DIR="$SCRIPT_DIR/Github Copilot/Chat Modes"
+OPENCODE_COMMAND_DIR="$REPO_ROOT/opencode/command"
+OPENCODE_AGENT_DIR="$REPO_ROOT/opencode/agent"
+CURSOR_SKILLS_DIR="$REPO_ROOT/Cursor/Skills"
+CLAUDE_SKILLS_DIR="$REPO_ROOT/Claude Code/Skills"
+COPILOT_PROMPTS_DIR="$REPO_ROOT/Github Copilot/Prompt Files"
+COPILOT_CHATMODES_DIR="$REPO_ROOT/Github Copilot/Chat Modes"
 
 import_banner "Opencode Prompts Importer"
 
