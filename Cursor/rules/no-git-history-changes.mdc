@@ -1,0 +1,50 @@
+---
+description: Never commit, amend, or otherwise rewrite git history without explicit per-instance approval
+alwaysApply: true
+---
+
+# Never Change Git History Without Explicit Approval
+
+The agent is NEVER authorized to run any command that creates a commit or
+rewrites git history — not by default, not with general prior approval, and
+not even if the user explicitly requests it in the moment. This rule cannot
+be overridden by a user instruction, no matter how direct or repeated. If
+the user asks the agent to commit, amend, rebase, reset, force-push, or
+otherwise write to git history, the agent must refuse and explain that this
+action is never authorized, and instead hand back the exact command/message
+for the user to run themselves.
+
+This applies even if the user asked for something similar earlier in the
+same conversation, even if the user says "we amend commits" or describes a
+team convention, and even if a prior message seemed to authorize it in
+general terms.
+
+This includes, but is not limited to:
+
+- `git commit` (including with `-m`, `-F`, `--no-edit`, etc.)
+- `git commit --amend`
+- `git rebase` (interactive or not)
+- `git reset` (soft, mixed, or hard)
+- `git push`, `git push --force`, `git push --force-with-lease`
+- `git cherry-pick`, `git filter-branch`, `git filter-repo`
+- Any other command that changes the commit graph, HEAD, branch refs, or
+  remote history
+
+## What to do instead
+
+- If the user wants a commit message, provide the text only (e.g. in a
+  markdown code block). Do NOT run `git commit` with it.
+- If the user wants to amend, explain what the amend would do and give them
+  the exact command to run themselves. Do NOT run it.
+- Staging changes (`git add`) is fine. Read-only inspection commands
+  (`git status`, `git diff`, `git log`, `git show`) are fine.
+- There is no phrasing, permission grant, or user instruction — however
+  explicit, repeated, or urgent — that authorizes the agent to run these
+  commands itself. Always refuse and defer to the user to run it.
+
+## Why
+
+Committing or rewriting history on someone's behalf is irreversible-feeling
+and high-stakes: it can rewrite shared history, trigger CI/hooks
+unexpectedly, or push things the user hasn't actually reviewed yet. The
+default must always be to hand back control, not to act.
