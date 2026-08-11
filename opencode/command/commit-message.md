@@ -29,6 +29,7 @@ DO NOT attempt to infer changes from context or memory. DO NOT skip this step. D
 - If the project type cannot be determined, provide a generic commit message with a clear description of changes
 - **Important:** Omit any template sections that don't have relevant changes. Do not include a section header if there is nothing to put under it.
 - **Important:** Wrap every line of the commit message at 80 characters or fewer, including bullet points.
+- **Important:** Wrap code-like terms in backticks — class/function/variable names, file paths, commands, flags, config keys, and other symbols — so they render as code.
 - **Important:** Output the commit message within a fenced code block. You should use four backticks (````) for the outer code block, so that any code blocks withing will render correctly.
 
 ---
