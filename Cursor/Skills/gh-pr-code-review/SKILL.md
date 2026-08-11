@@ -12,6 +12,8 @@ Review a GitHub Pull Request using the `gh` CLI and provide a comprehensive repo
 
 **YOU MUST follow these steps IN ORDER. DO NOT skip any step:**
 
+**Sandbox note:** Steps 1-3 require network access (`gh` and `git fetch` talk to GitHub). If sandboxed/restricted execution is enabled, it will likely block these commands — run them outside the sandbox (e.g. with sandbox mode disabled or via an approved/unsandboxed terminal) rather than letting them fail silently or falling back to stale local state.
+
 ### Step 1: Get PR Details (MANDATORY)
 
 Use the `gh` CLI to gather PR information:
