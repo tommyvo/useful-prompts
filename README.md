@@ -48,6 +48,7 @@ Pre-built prompts for common development tasks, available on every platform:
 | create-readme | Create well-structured README files for projects | [Prompt File](<./Github Copilot/Prompt Files/create-readme.prompt.md>) | [Skill](<./Cursor/Skills/create-readme/SKILL.md>) | [Skill](<./Claude Code/Skills/create-readme/SKILL.md>) | [Command](./opencode/command/create-readme.md) |
 | standup-update | Generate Slack standup updates from a work log markdown file | [Prompt File](<./Github Copilot/Prompt Files/standup-update.prompt.md>) | [Skill](<./Cursor/Skills/standup-update/SKILL.md>) | [Skill](<./Claude Code/Skills/standup-update/SKILL.md>) | [Command](./opencode/command/standup-update.md) |
 | generate-gitignore | Generate a comprehensive `.gitignore` at the project root | [Prompt File](<./Github Copilot/Prompt Files/generate-gitignore.prompt.md>) | [Skill](<./Cursor/Skills/generate-gitignore/SKILL.md>) | [Skill](<./Claude Code/Skills/generate-gitignore/SKILL.md>) | [Command](./opencode/command/generate-gitignore.md) |
+| linear-implementation-subtickets | Investigate a Linear issue across the API and UI repos, design a shared contract, then create `[API]` / `[UI]` coding-agent subtickets | [Prompt File](<./Github Copilot/Prompt Files/linear-implementation-subtickets.prompt.md>) | [Skill](<./Cursor/Skills/linear-implementation-subtickets/SKILL.md>) | [Skill](<./Claude Code/Skills/linear-implementation-subtickets/SKILL.md>) | [Command](./opencode/command/linear-implementation-subtickets.md) |
 
 > Note: the local code review skill is named `local-code-review` (folder/file and slash command) on all four platforms, including Claude Code, to avoid clashing with Claude Code's own `/code-review` review tooling.
 
@@ -64,6 +65,16 @@ Language and framework-specific coding guidelines that automatically apply to re
 - **[Ruby on Rails](<./Github Copilot/Instructions/ruby-on-rails.instructions.md>)** - Rails conventions and best practices
 - **[ReactJS](<./Github Copilot/Instructions/reactjs.instructions.md>)** - React development standards with hooks and modern patterns
 - **[AI Prompt Engineering](<./Github Copilot/Instructions/ai-prompt-engineering-safety-best-practices.instructions.md>)** - Comprehensive AI safety and prompt engineering guidelines
+
+### 📏 Rules (Cursor only)
+
+Always-applied guardrails that Cursor loads into every chat automatically — no equivalent format exists on the other platforms yet:
+
+| Rule | Description |
+| --- | --- |
+| [concise-answers](<./Cursor/rules/concise-answers.mdc>) | Answer concisely with short numbered steps, not prose essays |
+| [no-git-history-changes](<./Cursor/rules/no-git-history-changes.mdc>) | Never commit, amend, or otherwise rewrite git history without explicit per-instance approval |
+| [no-shell-without-approval](<./Cursor/rules/no-shell-without-approval.mdc>) | Never run shell commands without explicit user approval |
 
 ### 💬 Chat Modes / Agents
 
@@ -229,6 +240,7 @@ Once installed, invoke them as slash commands in Cursor chat:
 | `/create-readme` | Create a comprehensive README.md for the project |
 | `/standup-update` | Generate a Slack standup update from a work log file |
 | `/generate-gitignore` | Generate a comprehensive .gitignore at project root |
+| `/linear-implementation-subtickets` | Split a Linear issue into `[API]` / `[UI]` coding-agent subtickets |
 
 ### Installing for Claude Code
 
@@ -255,6 +267,7 @@ Once installed, invoke them as slash commands in Claude Code:
 | `/create-readme` | Create a comprehensive README.md for the project |
 | `/standup-update` | Generate a Slack standup update from a work log file |
 | `/generate-gitignore` | Generate a comprehensive .gitignore at project root |
+| `/linear-implementation-subtickets` | Split a Linear issue into `[API]` / `[UI]` coding-agent subtickets |
 
 ### Using with Opencode
 
