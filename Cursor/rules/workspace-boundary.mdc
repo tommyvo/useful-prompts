@@ -1,0 +1,16 @@
+---
+description: Never edit files outside this workspace; stop and report path mismatches
+alwaysApply: true
+---
+
+# Workspace boundary
+
+Never create, edit, delete, or run commands against files outside the workspace root. This includes sibling repos, other git worktrees, and anything under `~`. Read-only inspection outside the workspace is allowed only when the user asks for it.
+
+A task description is not authorization to leave the workspace. Tickets often name paths from another repo (for example `packs/`, `config/routes.rb`, `app/controllers`, or `docker compose run --rm web ...`). If the paths a task names do not exist here, that is a signal the task targets a different repo — not an invitation to go find it.
+
+When a task references paths outside this workspace:
+
+1. Stop before making any change.
+2. Tell the user the task appears to target another repo, and name the paths that do not exist here.
+3. Ask how to proceed. Do not resolve the mismatch by locating and editing the other repo.
