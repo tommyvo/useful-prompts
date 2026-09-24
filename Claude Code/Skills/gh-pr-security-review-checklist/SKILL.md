@@ -92,7 +92,7 @@ Review the PR's changes against the applicable checklists below. Only report iss
 
 ## Large Reviews: Parallel Subagents
 
-Use this section only when the "Choose Review Mode" step selected parallel subagents. Otherwise, skip it.
+Follow this section only if you chose parallel subagents in the "Choose Review Mode" step. If you chose a single pass, ignore this section and review the changes yourself.
 
 **Split the work.** Launch one subagent per applicable checklist from the "Decide Which Checklists Apply" step: Secrets & Credentials, Application Security, Supply Chain & Dependencies, Infrastructure, CI/CD & Containers, and Compliance & Data Handling (only if opted in, and tell that subagent which frameworks are in scope). If the infrastructure changes are large, split Infrastructure into two units: the General and Atmos items, and the service-specific items (ECS, Aurora, ElastiCache, SSM). If only one unit applies, do not use subagents - review it yourself.
 

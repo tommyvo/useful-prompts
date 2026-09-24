@@ -75,7 +75,7 @@ Review the PR's changes against BOTH checklists below. Only report items that ac
 
 ## Large Reviews: Parallel Subagents
 
-Use this section only when the "Choose Review Mode" step selected parallel subagents. Otherwise, skip it.
+Follow this section only if you chose parallel subagents in the "Choose Review Mode" step. If you chose a single pass, ignore this section and review the changes yourself.
 
 **Split the work.** Launch one subagent per checklist unit: the Ruby Checklist, the Rails Checklist's "Design and data" items, and the Rails Checklist's "Testing" items. Skip any unit that does not apply to the diff. If only one unit applies, do not use subagents - review it yourself.
 

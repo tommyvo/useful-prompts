@@ -66,7 +66,7 @@ Review the PR against the areas listed in **What to Review** below.
 
 ## Large Reviews: Parallel Subagents
 
-Use this section only when the "Choose Review Mode" step selected parallel subagents. Otherwise, skip it.
+Follow this section only if you chose parallel subagents in the "Choose Review Mode" step. If you chose a single pass, ignore this section and review the changes yourself.
 
 **Split the work.** Launch one subagent per topic in **What to Review** below: Correctness, Security, Code clarity, Reusability, and Consistency. If only one unit applies, do not use subagents - review it yourself.
 
