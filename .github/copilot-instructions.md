@@ -189,6 +189,7 @@ Detailed guidance with numbered steps
 
 **PR Review Pattern (`gh-pr-code-review.prompt.md`):**
 - Use `gh` CLI to fetch PR data: `gh pr view`, `gh pr diff` (read-only operations only) — except the Copilot version, which routes through the GitHub PR extension instead of `gh pr diff` to avoid crashing VS Code
+- Review against a shared "What to Review" list (Correctness, Security, Code clarity, Reusability, Consistency) that mirrors `local-code-review`
 - Provide suggestions in unified diff format
 - Include merge recommendations (Safe/Needs changes/Blocking issues)
 

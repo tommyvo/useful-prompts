@@ -42,11 +42,11 @@ Follow these steps IN ORDER. DO NOT skip any step:
 
 ## What to Review
 
-1. Correctness (high priority)
-2. Security
-3. Code clarity
-4. Reusability
-5. Consistency (low priority)
+1. Correctness (high priority) - Logic errors, bugs, edge cases
+2. Security - Vulnerabilities, unsafe practices
+3. Code clarity - Readability, maintainability
+4. Reusability - Duplication, opportunities to reuse existing code
+5. Consistency (low priority) - Style, formatting, naming conventions
 
 ## Audience
 

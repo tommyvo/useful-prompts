@@ -42,12 +42,7 @@ You MAY read relevant files in the workspace for additional context if needed.
 
 Provide the review report directly in the chat (do NOT create files).
 
-**Review Focus Areas (in priority order):**
-
-1. 🔴 Correctness - Logic errors, bugs, edge cases
-2. 🟠 Security - Vulnerabilities, unsafe practices
-3. 🟡 Code Quality - Clarity, maintainability, best practices
-4. 🟢 Style - Consistency, formatting, naming conventions
+Review the PR against the areas listed in **What to Review** below.
 
 **Response Guidelines:**
 
@@ -56,6 +51,18 @@ Provide the review report directly in the chat (do NOT create files).
 - Provide suggested fixes using unified diff format (see below)
 - Include up to 3 questions for the PR author if clarification is needed
 - Conclude with a merge recommendation (Safe to merge / Needs changes / Blocking issues)
+
+---
+
+## What to Review
+
+1. Correctness (high priority) - Logic errors, bugs, edge cases
+2. Security - Vulnerabilities, unsafe practices
+3. Code clarity - Readability, maintainability
+4. Reusability - Duplication, opportunities to reuse existing code
+5. Consistency (low priority) - Style, formatting, naming conventions
+
+Also take into account the PR description, existing review comments, and CI/CD status when judging the change.
 
 ---
 
@@ -145,7 +152,7 @@ Brief description of what this PR does:
 
 ### Inconsistent Error Handling
 
-**Priority:** 🟠 HIGH
+**Priority:** 🔴 SHOULD FIX
 
 Multiple files need consistent error handling:
 
