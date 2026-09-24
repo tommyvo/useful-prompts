@@ -26,7 +26,8 @@ Follow these steps IN ORDER. DO NOT skip any step:
 
 1. **STEP 1 - Get Changes via Git (MANDATORY):** Run `git diff HEAD` in the terminal to retrieve ALL uncommitted changes. This is your primary source of truth for what to review. You can read existing files in the current directory for additional context if needed.
 2. **STEP 2 - Check Scope:** If the diff contains no Ruby/Rails files (`.rb`, `.rake`, `.erb`, `Gemfile`, `db/migrate/`, `config/` for a Rails app), output a single line saying there are no Ruby/Rails changes to check, and stop.
-3. **STEP 3 - Generate The Report:** Review the changes against BOTH checklists below and generate the report in markdown format. Only report items that actually appear in the diff. Rate each finding in terms of priority using the emoji system. Do not save the report in the filesystem. You should only output to chat.
+3. **STEP 3 - Choose Review Mode:** Check the size of the diff with `git diff HEAD --shortstat`. If it touches more than 15 files or more than 800 changed lines, or the user asked for subagents, use **parallel subagents** as described in **Large Reviews: Parallel Subagents** below. Otherwise, or if the user asked not to use subagents, review it yourself in a single pass.
+4. **STEP 4 - Generate The Report:** Review the changes against BOTH checklists below and generate the report in markdown format. Only report items that actually appear in the diff. Rate each finding in terms of priority using the emoji system. Do not save the report in the filesystem. You should only output to chat.
 
 ## Instructions
 
@@ -38,6 +39,32 @@ Follow these steps IN ORDER. DO NOT skip any step:
 6. In the report, you can also list a few questions if there are ambiguities.
 7. **Only include files in the report that have specific suggestions or issues.** Do not create sections for files that look good with no changes needed.
 8. Use judgment: a checklist item is a prompt to look, not a rule to enforce. Skip items that are not a real problem in context, and prefer a few well-explained findings over a long list of nitpicks.
+
+## Large Reviews: Parallel Subagents
+
+Use this section only when the "Choose Review Mode" step selected parallel subagents. Otherwise, skip it.
+
+**Split the work.** Launch one subagent per checklist unit: the Ruby Checklist, the Rails Checklist's "Design and data" items, and the Rails Checklist's "Testing" items. Skip any unit that does not apply to the diff. If only one unit applies, do not use subagents - review it yourself.
+
+**Brief each subagent.** Subagents do not see this conversation, so each prompt must be self-contained. Include:
+
+- Its unit: the topic name and description, or the full text of its checklist section, copied from this file
+- The exact command to get the diff (with branch names or the PR number filled in) and the list of changed files
+- The rules: review only the changed lines (and the code they directly affect); read other files only for context; do not modify files, post comments or reviews, or run scanners; never repeat secret values - mask them
+- The return format below
+
+**Return format.** Ask each subagent to return only a list of findings, each with: file, lines, priority (using this skill's priority emojis), topic or checklist item, the issue or risk, the quoted code, and a suggested fix as a unified diff. If it finds nothing, it returns exactly `No findings`.
+
+**How to launch them on this platform.** Use the `runSubagent` tool (part of the `agent` tool set), one call per unit, run in parallel. Wait for all of them to return before merging. If the tool is not available (for example, it is not enabled in the tools picker), use the fallback below.
+
+**Merge the results.** Once every subagent has returned:
+
+1. Check each finding against the diff yourself, and drop any that are not on changed lines or that you cannot confirm.
+2. Merge duplicates: when several subagents flag the same file and lines, keep one finding with the highest priority and note all the topics.
+3. Write a single report in the Report Format below, and mention in its opening description that the review was split across N subagents.
+4. Only you continue after the report (for example, applying fixes). Subagents never edit files, so their work cannot conflict.
+
+**Fall back instead of failing.** If this platform has no subagent tool, the tool is disabled, or launching fails, review everything yourself in a single pass as usual. If some subagents fail or return nothing usable, review those units yourself and continue. The review must always complete.
 
 ## Ruby Checklist (applies to any Ruby code, not just Rails)
 

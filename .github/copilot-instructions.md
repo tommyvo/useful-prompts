@@ -177,6 +177,7 @@ Detailed guidance with numbered steps
 - Auto-apply appropriate fixes (security, bugs, style) that are in scope
 - Create todo lists to track progress using markdown checklist format
 - Only include files in report that have specific suggestions (skip files with no issues)
+- Large reviews (>15 files or >800 changed lines, or on request) are split across parallel subagents, one per "What to Review" topic, then merged by the main agent; falls back to single-pass when subagents are unavailable or fail
 - End with an optional "Suggested Follow-ups" line that recommends `rails-review-checklist`, `react-review-checklist`, and/or `security-review-checklist` (never runs them) when non-trivial Ruby/Rails or JS/TS files changed, or when security-sensitive files changed (Terraform, workflows, Dockerfiles, dependency manifests, auth code) — even for small changes; the pattern→skill table lives in the prompt and is the one place to extend for new checklist skills
 
 **Review Checklist Pattern (`rails-review-checklist.prompt.md` / Cursor+Claude Code `rails-review-checklist` / `opencode/command/rails-review-checklist.md`):**
@@ -184,6 +185,7 @@ Detailed guidance with numbered steps
 - Report-only (never modifies files); exits with a one-line note if the diff has no Ruby/Rails files
 - Same priority emoji coding and report style as `local-code-review`; checklist items are prompts to look, not rules to enforce
 - Checklist content is our own summary of thoughtbot's Ruby Science/Testing Rails and Rails AntiPatterns, not copied text
+- Large reviews (>15 files or >800 changed lines, or on request) are split across parallel subagents, one per checklist section, then merged by the main agent; falls back to single-pass when subagents are unavailable or fail
 - PR variant (`gh-pr-rails-review-checklist`): same checklist, sourced like `gh-pr-code-review` (Copilot uses the GitHub PR extension tools instead of `gh pr diff`, which crashes VS Code); never posts comments or modifies the PR
 - React variant (`react-review-checklist` / `gh-pr-react-review-checklist`): same shape, with TypeScript/JavaScript, React, Next.js, and Testing checklists; the Next.js section applies only when `next` is a dependency and is judged against the project's Next.js major version (caching defaults differ between versions)
 
@@ -191,6 +193,8 @@ Detailed guidance with numbered steps
 - Deep security pass alongside the code review prompts; local variant starts with `git diff HEAD`, PR variant is sourced like `gh-pr-code-review`
 - Sections gated by what the diff touches: Secrets & Credentials (always), Application Security (OWASP + business logic), Supply Chain, Infrastructure (Terraform/Atmos on AWS: IAM, network, S3, encryption, logging, plus ECS, Aurora, ElastiCache, SSM), CI/CD & Containers, and opt-in Compliance & Data Handling (SOC 2, GDPR)
 - Compliance is opt-in via the invocation arguments or a `Compliance:` line in the project's AGENTS.md/CLAUDE.md; findings are tagged with a control area, never a compliance verdict
+- Large reviews (>15 files or >800 changed lines, or on request) are split across parallel subagents, one per applicable checklist section, then merged by the main agent; falls back to single-pass when subagents are unavailable or fail
+- Subagent launch wording is per-platform (Claude Code `Agent`, Cursor subagents, Copilot `runSubagent`, opencode Task tool with `general`); Copilot prompt files must not add `tools:` frontmatter for this, since it replaces the default tool list
 - Report-only; never echoes secret values (masks them); a committed secret means rotate, then remove; scanners are only suggested (`brakeman`, `bundle-audit`, `gitleaks`, `trivy`, `checkov`, `atmos validate stacks`, `actionlint`), never run
 
 **Commit Message Pattern (`commit-message.prompt.md`):**
@@ -207,6 +211,7 @@ Detailed guidance with numbered steps
 - Review against a shared "What to Review" list (Correctness, Security, Code clarity, Reusability, Consistency) that mirrors `local-code-review`
 - Provide suggestions in unified diff format
 - Include merge recommendations (Safe/Needs changes/Blocking issues)
+- Large reviews (>15 files or >800 changed lines, or on request) are split across parallel subagents, one per "What to Review" topic, then merged by the main agent; falls back to single-pass when subagents are unavailable or fail
 - Same optional "Suggested Follow-ups" hook, recommending `gh-pr-rails-review-checklist`, `gh-pr-react-review-checklist`, and/or `gh-pr-security-review-checklist` for non-trivial Ruby/Rails or JS/TS PRs and any security-sensitive PR
 
 **Address PR Comments Pattern (`address-pr-comments.prompt.md`):**

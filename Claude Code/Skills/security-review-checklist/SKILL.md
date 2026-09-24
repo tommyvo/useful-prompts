@@ -35,11 +35,12 @@ Follow these steps IN ORDER. DO NOT skip any step:
    - **CI/CD & Containers** - `.github/workflows/`, `Dockerfile`, compose files, ECS task definitions.
    - **Compliance & Data Handling** - only when opted in (see STEP 4).
 4. **STEP 4 - Determine Compliance Scope:** Check whether compliance frameworks were requested, either in the message that invoked this skill (for example `soc2 gdpr`) or in a `Compliance:` line in the project's `AGENTS.md`, `CLAUDE.md`, or `README.md`. If SOC 2 and/or GDPR are requested, apply the general items plus those framework items in the Compliance & Data Handling checklist. If none are requested but the diff handles personal data, apply only the general items and make no framework claims.
-5. **STEP 5 - Generate The Report:** Review the changes against the applicable checklists and generate the report in markdown format. Only report issues that actually appear in the diff. Rate each finding using the Severity Guide. Do not save the report in the filesystem. You should only output to chat.
+5. **STEP 5 - Choose Review Mode:** Check the size of the diff with `git diff HEAD --shortstat`. If it touches more than 15 files or more than 800 changed lines, or the user asked for subagents, use **parallel subagents** as described in **Large Reviews: Parallel Subagents** below. Otherwise, or if the user asked not to use subagents, review it yourself in a single pass.
+6. **STEP 6 - Generate The Report:** Review the changes against the applicable checklists and generate the report in markdown format. Only report issues that actually appear in the diff. Rate each finding using the Severity Guide. Do not save the report in the filesystem. You should only output to chat.
 
 ## Instructions
 
-1. This skill is report-only. Do NOT modify any files, and do NOT run any scanners or other tools besides reading files and running `git diff HEAD`. The developer can run `local-code-review` if they want fixes applied.
+1. This skill is report-only. Do NOT modify any files, and do NOT run any scanners or other tools besides reading files and running `git diff HEAD`, and launching review subagents (see Large Reviews: Parallel Subagents). The developer can run `local-code-review` if they want fixes applied.
 2. **NEVER repeat a secret's value in the report.** Show the file, line, and a masked value (for example `AKIA****`).
 3. A committed secret is always top priority, and the fix is **rotate it first, then remove it**. Removing it alone is not enough, because it stays in git history.
 4. Only review the lines that changed (and the code or infrastructure they directly affect). Do not audit pre-existing code that the diff did not touch.
@@ -49,6 +50,32 @@ Follow these steps IN ORDER. DO NOT skip any step:
 8. Compliance findings are tagged with the control area they relate to. Never state that the project is or is not compliant.
 9. **Only include files in the report that have specific issues.** Do not create sections for files that look good.
 10. Use judgment: a checklist item is a prompt to look, not a rule to enforce. Skip items that are not a real risk in context, and prefer a few well-explained findings over a long list of nitpicks.
+
+## Large Reviews: Parallel Subagents
+
+Use this section only when the "Choose Review Mode" step selected parallel subagents. Otherwise, skip it.
+
+**Split the work.** Launch one subagent per applicable checklist from the "Decide Which Checklists Apply" step: Secrets & Credentials, Application Security, Supply Chain & Dependencies, Infrastructure, CI/CD & Containers, and Compliance & Data Handling (only if opted in, and tell that subagent which frameworks are in scope). If the infrastructure changes are large, split Infrastructure into two units: the General and Atmos items, and the service-specific items (ECS, Aurora, ElastiCache, SSM). If only one unit applies, do not use subagents - review it yourself.
+
+**Brief each subagent.** Subagents do not see this conversation, so each prompt must be self-contained. Include:
+
+- Its unit: the topic name and description, or the full text of its checklist section, copied from this file
+- The exact command to get the diff (with branch names or the PR number filled in) and the list of changed files
+- The rules: review only the changed lines (and the code they directly affect); read other files only for context; do not modify files, post comments or reviews, or run scanners; never repeat secret values - mask them
+- The return format below
+
+**Return format.** Ask each subagent to return only a list of findings, each with: file, lines, priority (using this skill's priority emojis), topic or checklist item, the issue or risk, the quoted code, and a suggested fix as a unified diff. If it finds nothing, it returns exactly `No findings`.
+
+**How to launch them on this platform.** Use the `Agent` tool with `subagent_type: general-purpose`, one call per unit. Put all the calls in a single message so they run in parallel. Wait for all of them to return before merging.
+
+**Merge the results.** Once every subagent has returned:
+
+1. Check each finding against the diff yourself, and drop any that are not on changed lines or that you cannot confirm.
+2. Merge duplicates: when several subagents flag the same file and lines, keep one finding with the highest priority and note all the topics.
+3. Write a single report in the Report Format below, and mention in its opening description that the review was split across N subagents.
+4. Only you continue after the report (for example, applying fixes). Subagents never edit files, so their work cannot conflict.
+
+**Fall back instead of failing.** If this platform has no subagent tool, the tool is disabled, or launching fails, review everything yourself in a single pass as usual. If some subagents fail or return nothing usable, review those units yourself and continue. The review must always complete.
 
 ## Secrets & Credentials Checklist (always applies)
 

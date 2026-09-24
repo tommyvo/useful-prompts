@@ -58,6 +58,8 @@ Pre-built prompts for common development tasks, available on every platform:
 
 > Note: `local-code-review` and `gh-pr-code-review` end with an optional "Suggested Follow-ups" line that recommends the matching checklist skill when a non-trivial change is reviewed: `rails-review-checklist` / `gh-pr-rails-review-checklist` for Ruby/Rails, `react-review-checklist` / `gh-pr-react-review-checklist` for JavaScript/TypeScript, React, and Next.js, and `security-review-checklist` / `gh-pr-security-review-checklist` for security-sensitive changes (including small ones). The security checklists apply SOC 2 / GDPR items only when asked (e.g. `/security-review-checklist soc2 gdpr`) or when the project's AGENTS.md/CLAUDE.md has a `Compliance:` line, and only suggest scanners, never run them. They only suggest it, never run it.
 
+> Note: the review and checklist skills split large reviews (more than 15 files or 800 changed lines, or when you ask) across parallel subagents, one per review topic or checklist section, and merge the results into one report. They fall back to a normal single-pass review when the platform has no subagent support or a subagent fails. Say "no subagents" to force a single pass.
+
 > Note: the local code review skill is named `local-code-review` (folder/file and slash command) on all four platforms, including Claude Code, to avoid clashing with Claude Code's own `/code-review` review tooling.
 
 Deprecated prompts (kept for reference, not removed) live in [`Github Copilot/Prompt Files/deprecated/`](<./Github Copilot/Prompt Files/deprecated/>).
