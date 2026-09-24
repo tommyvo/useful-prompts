@@ -52,6 +52,8 @@ Pre-built prompts for common development tasks, available on every platform:
 | generate-gitignore | Generate a comprehensive `.gitignore` at the project root | [Prompt File](<./Github Copilot/Prompt Files/generate-gitignore.prompt.md>) | [Skill](<./Cursor/Skills/generate-gitignore/SKILL.md>) | [Skill](<./Claude Code/Skills/generate-gitignore/SKILL.md>) | [Command](./opencode/command/generate-gitignore.md) |
 | linear-implementation-subtickets | Investigate a Linear issue across the API and UI repos, design a shared contract, then create `[API]` / `[UI]` coding-agent subtickets | [Prompt File](<./Github Copilot/Prompt Files/linear-implementation-subtickets.prompt.md>) | [Skill](<./Cursor/Skills/linear-implementation-subtickets/SKILL.md>) | [Skill](<./Claude Code/Skills/linear-implementation-subtickets/SKILL.md>) | [Command](./opencode/command/linear-implementation-subtickets.md) |
 
+> Note: `local-code-review` and `gh-pr-code-review` end with an optional "Suggested Follow-ups" line that recommends the matching `rails-review-checklist` / `gh-pr-rails-review-checklist` skill when a non-trivial Ruby/Rails change is reviewed. They only suggest it, never run it.
+
 > Note: the local code review skill is named `local-code-review` (folder/file and slash command) on all four platforms, including Claude Code, to avoid clashing with Claude Code's own `/code-review` review tooling.
 
 Deprecated prompts (kept for reference, not removed) live in [`Github Copilot/Prompt Files/deprecated/`](<./Github Copilot/Prompt Files/deprecated/>).

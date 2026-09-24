@@ -177,6 +177,7 @@ Detailed guidance with numbered steps
 - Auto-apply appropriate fixes (security, bugs, style) that are in scope
 - Create todo lists to track progress using markdown checklist format
 - Only include files in report that have specific suggestions (skip files with no issues)
+- End with an optional "Suggested Follow-ups" line that recommends `rails-review-checklist` (never runs it) when non-trivial Ruby/Rails files changed; the pattern→skill table lives in the prompt and is the one place to extend for new checklist skills
 
 **Review Checklist Pattern (`rails-review-checklist.prompt.md` / Cursor+Claude Code `rails-review-checklist` / `opencode/command/rails-review-checklist.md`):**
 - Focused second pass alongside `local-code-review`: **ALWAYS** start with `git diff HEAD`, then check the changes against a "Ruby (any)" checklist and a "Rails" checklist
@@ -199,6 +200,7 @@ Detailed guidance with numbered steps
 - Review against a shared "What to Review" list (Correctness, Security, Code clarity, Reusability, Consistency) that mirrors `local-code-review`
 - Provide suggestions in unified diff format
 - Include merge recommendations (Safe/Needs changes/Blocking issues)
+- Same optional "Suggested Follow-ups" hook, recommending `gh-pr-rails-review-checklist` for non-trivial Ruby/Rails PRs
 
 **Address PR Comments Pattern (`address-pr-comments.prompt.md`):**
 - Resolve the PR (from an argument or the current branch via `gh pr view`)

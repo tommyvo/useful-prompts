@@ -47,6 +47,16 @@ Follow these steps IN ORDER. DO NOT skip any step:
 4. Reusability - Duplication, opportunities to reuse existing code
 5. Consistency (low priority) - Style, formatting, naming conventions
 
+## Follow-up Checklists
+
+Some languages and frameworks have a dedicated checklist skill for a deeper second pass. Do NOT run these yourself; only suggest one when it applies.
+
+| If the changes include... | Suggest |
+| --- | --- |
+| `.rb`, `.rake`, `.erb`, `Gemfile`, `db/migrate/` | `rails-review-checklist` (run `/rails-review-checklist`) |
+
+Only suggest a checklist when the change is non-trivial (new or changed logic, models, controllers, migrations, or tests). Skip it for docs, config-only changes, renames, formatting, or very small changes.
+
 ## Audience
 
 1. The audience of this report is the PR reviewer. Please make sure it's easy to follow. Usually, the reviewer also doesn't have all the context.
@@ -123,4 +133,10 @@ File 2: (file_path)
 - Overall code quality: (Good/Needs Work/Requires Significant Changes)
 - Blocking issues: (None/List them)
 - Recommendation: (Safe to merge/Merge after fixes/Needs discussion)
+
+# Suggested Follow-ups
+
+(Optional. Omit this section if no follow-up applies.)
+
+- Ruby/Rails changes detected - consider running `/rails-review-checklist` for a Ruby/Rails smell, antipattern, and testing check.
 ````

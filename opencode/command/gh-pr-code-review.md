@@ -66,6 +66,18 @@ Also take into account the PR description, existing review comments, and CI/CD s
 
 ---
 
+## Follow-up Checklists
+
+Some languages and frameworks have a dedicated checklist skill for a deeper second pass. Do NOT run these yourself; only suggest one when it applies.
+
+| If the changes include... | Suggest |
+| --- | --- |
+| `.rb`, `.rake`, `.erb`, `Gemfile`, `db/migrate/` | `gh-pr-rails-review-checklist` (run `/gh-pr-rails-review-checklist`) |
+
+Only suggest a checklist when the change is non-trivial (new or changed logic, models, controllers, migrations, or tests). Skip it for docs, config-only changes, renames, formatting, or very small changes.
+
+---
+
 ## Unified Diff Format
 
 When suggesting code changes, use unified diff format:
@@ -179,6 +191,12 @@ Multiple files need consistent error handling:
 **Recommendation:** [Safe to merge ✅ | Needs changes ⚠️ | Blocking issues ❌]
 
 **Summary:** [Brief summary of overall assessment]
+
+## Suggested Follow-ups
+
+(Optional. Omit this section if no follow-up applies.)
+
+- Ruby/Rails changes detected - consider running `/gh-pr-rails-review-checklist` for a Ruby/Rails smell, antipattern, and testing check.
 ````
 
 ---
