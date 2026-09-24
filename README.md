@@ -43,6 +43,7 @@ Pre-built prompts for common development tasks, available on every platform:
 | local-code-review | Comprehensive local code review with security analysis | [Prompt File](<./Github Copilot/Prompt Files/local-code-review.prompt.md>) | [Skill](<./Cursor/Skills/local-code-review/SKILL.md>) | [Skill](<./Claude Code/Skills/local-code-review/SKILL.md>) | [Command](./opencode/command/local-code-review.md) |
 | commit-message | Generate standardized commit messages for React/Rails projects | [Prompt File](<./Github Copilot/Prompt Files/commit-message.prompt.md>) | [Skill](<./Cursor/Skills/commit-message/SKILL.md>) | [Skill](<./Claude Code/Skills/commit-message/SKILL.md>) | [Command](./opencode/command/commit-message.md) |
 | rails-review-checklist | Focused second-pass review of uncommitted Ruby/Rails changes against a Ruby smells, Rails antipatterns, and testing checklist | [Prompt File](<./Github Copilot/Prompt Files/rails-review-checklist.prompt.md>) | [Skill](<./Cursor/Skills/rails-review-checklist/SKILL.md>) | [Skill](<./Claude Code/Skills/rails-review-checklist/SKILL.md>) | [Command](./opencode/command/rails-review-checklist.md) |
+| gh-pr-rails-review-checklist | Focused second-pass review of a GitHub PR's Ruby/Rails changes against the Ruby smells, Rails antipatterns, and testing checklist | [Prompt File](<./Github Copilot/Prompt Files/gh-pr-rails-review-checklist.prompt.md>) | [Skill](<./Cursor/Skills/gh-pr-rails-review-checklist/SKILL.md>) | [Skill](<./Claude Code/Skills/gh-pr-rails-review-checklist/SKILL.md>) | [Command](./opencode/command/gh-pr-rails-review-checklist.md) |
 | gh-pr-code-review | Review a GitHub PR using the `gh` CLI with unified diff suggestions | [Prompt File](<./Github Copilot/Prompt Files/gh-pr-code-review.prompt.md>) | [Skill](<./Cursor/Skills/gh-pr-code-review/SKILL.md>) | [Skill](<./Claude Code/Skills/gh-pr-code-review/SKILL.md>) | [Command](./opencode/command/gh-pr-code-review.md) |
 | address-pr-comments | Find, fix, and resolve unresolved GitHub PR review comments via the `gh` CLI | [Prompt File](<./Github Copilot/Prompt Files/address-pr-comments.prompt.md>) | [Skill](<./Cursor/Skills/address-pr-comments/SKILL.md>) | [Skill](<./Claude Code/Skills/address-pr-comments/SKILL.md>) | [Command](./opencode/command/address-pr-comments.md) |
 | rails-controller-docs | Generate comprehensive Rails controller documentation | [Prompt File](<./Github Copilot/Prompt Files/rails-controller-docs.prompt.md>) | [Skill](<./Cursor/Skills/rails-controller-docs/SKILL.md>) | [Skill](<./Claude Code/Skills/rails-controller-docs/SKILL.md>) | [Command](./opencode/command/rails-controller-docs.md) |
@@ -236,6 +237,7 @@ Once installed, invoke them as slash commands in Cursor chat:
 | `/local-code-review` | Review uncommitted local changes with prioritized suggestions |
 | `/commit-message` | Draft a structured commit message (auto-detects React/Rails/Generic) |
 | `/rails-review-checklist` | Check uncommitted Ruby/Rails changes against a Ruby and Rails checklist |
+| `/gh-pr-rails-review-checklist` | Check a GitHub PR's Ruby/Rails changes against a Ruby and Rails checklist |
 | `/gh-pr-code-review` | Review a GitHub PR using the `gh` CLI |
 | `/address-pr-comments` | Find, fix, and resolve unresolved GitHub PR review comments |
 | `/rails-controller-docs` | Generate documentation for a Rails controller |
@@ -264,6 +266,7 @@ Once installed, invoke them as slash commands in Claude Code:
 | `/local-code-review` | Review uncommitted local changes with prioritized suggestions |
 | `/commit-message` | Draft a structured commit message (auto-detects React/Rails/Generic) |
 | `/rails-review-checklist` | Check uncommitted Ruby/Rails changes against a Ruby and Rails checklist |
+| `/gh-pr-rails-review-checklist` | Check a GitHub PR's Ruby/Rails changes against a Ruby and Rails checklist |
 | `/gh-pr-code-review` | Review a GitHub PR using the `gh` CLI |
 | `/address-pr-comments` | Find, fix, and resolve unresolved GitHub PR review comments |
 | `/rails-controller-docs` | Generate documentation for a Rails controller |

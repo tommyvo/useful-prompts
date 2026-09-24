@@ -183,6 +183,7 @@ Detailed guidance with numbered steps
 - Report-only (never modifies files); exits with a one-line note if the diff has no Ruby/Rails files
 - Same priority emoji coding and report style as `local-code-review`; checklist items are prompts to look, not rules to enforce
 - Checklist content is our own summary of thoughtbot's Ruby Science/Testing Rails and Rails AntiPatterns, not copied text
+- PR variant (`gh-pr-rails-review-checklist`): same checklist, sourced like `gh-pr-code-review` (Copilot uses the GitHub PR extension tools instead of `gh pr diff`, which crashes VS Code); never posts comments or modifies the PR
 
 **Commit Message Pattern (`commit-message.prompt.md`):**
 - **ALWAYS** start with `git diff HEAD` to analyze changes
