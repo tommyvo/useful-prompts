@@ -55,8 +55,9 @@ Some languages and frameworks have a dedicated checklist skill for a deeper seco
 | If the changes include... | Suggest |
 | --- | --- |
 | `.rb`, `.rake`, `.erb`, `Gemfile`, `db/migrate/` | `rails-review-checklist` (run `/rails-review-checklist`) |
+| `.js`, `.jsx`, `.ts`, `.tsx`, `.mjs`, `.cjs`, `next.config.*` | `react-review-checklist` (run `/react-review-checklist`) |
 
-Only suggest a checklist when the change is non-trivial (new or changed logic, models, controllers, migrations, or tests). Skip it for docs, config-only changes, renames, formatting, or very small changes.
+If the changes match more than one row (for example, a Rails API and a Next.js frontend), suggest each matching checklist. Only suggest a checklist when the change is non-trivial (new or changed logic, components, models, controllers, migrations, or tests). Skip it for docs, config-only changes, renames, formatting, or very small changes.
 
 ## Audience
 
@@ -137,7 +138,8 @@ File 2: (file_path)
 
 # Suggested Follow-ups
 
-(Optional. Omit this section if no follow-up applies.)
+(Optional. Omit this section if no follow-up applies. Include only the lines for checklists that match the changes.)
 
 - Ruby/Rails changes detected - consider running `/rails-review-checklist` for a Ruby/Rails smell, antipattern, and testing check.
+- JavaScript/TypeScript changes detected - consider running `/react-review-checklist` for a TypeScript, React, Next.js, and testing check.
 ````

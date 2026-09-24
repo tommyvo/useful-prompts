@@ -44,6 +44,8 @@ Pre-built prompts for common development tasks, available on every platform:
 | commit-message | Generate standardized commit messages for React/Rails projects | [Prompt File](<./Github Copilot/Prompt Files/commit-message.prompt.md>) | [Skill](<./Cursor/Skills/commit-message/SKILL.md>) | [Skill](<./Claude Code/Skills/commit-message/SKILL.md>) | [Command](./opencode/command/commit-message.md) |
 | rails-review-checklist | Focused second-pass review of uncommitted Ruby/Rails changes against a Ruby smells, Rails antipatterns, and testing checklist | [Prompt File](<./Github Copilot/Prompt Files/rails-review-checklist.prompt.md>) | [Skill](<./Cursor/Skills/rails-review-checklist/SKILL.md>) | [Skill](<./Claude Code/Skills/rails-review-checklist/SKILL.md>) | [Command](./opencode/command/rails-review-checklist.md) |
 | gh-pr-rails-review-checklist | Focused second-pass review of a GitHub PR's Ruby/Rails changes against the Ruby smells, Rails antipatterns, and testing checklist | [Prompt File](<./Github Copilot/Prompt Files/gh-pr-rails-review-checklist.prompt.md>) | [Skill](<./Cursor/Skills/gh-pr-rails-review-checklist/SKILL.md>) | [Skill](<./Claude Code/Skills/gh-pr-rails-review-checklist/SKILL.md>) | [Command](./opencode/command/gh-pr-rails-review-checklist.md) |
+| react-review-checklist | Focused second-pass review of uncommitted JavaScript/TypeScript changes against a TypeScript, React, Next.js, and testing checklist | [Prompt File](<./Github Copilot/Prompt Files/react-review-checklist.prompt.md>) | [Skill](<./Cursor/Skills/react-review-checklist/SKILL.md>) | [Skill](<./Claude Code/Skills/react-review-checklist/SKILL.md>) | [Command](./opencode/command/react-review-checklist.md) |
+| gh-pr-react-review-checklist | Focused second-pass review of a GitHub PR's JavaScript/TypeScript changes against the TypeScript, React, Next.js, and testing checklist | [Prompt File](<./Github Copilot/Prompt Files/gh-pr-react-review-checklist.prompt.md>) | [Skill](<./Cursor/Skills/gh-pr-react-review-checklist/SKILL.md>) | [Skill](<./Claude Code/Skills/gh-pr-react-review-checklist/SKILL.md>) | [Command](./opencode/command/gh-pr-react-review-checklist.md) |
 | gh-pr-code-review | Review a GitHub PR using the `gh` CLI with unified diff suggestions | [Prompt File](<./Github Copilot/Prompt Files/gh-pr-code-review.prompt.md>) | [Skill](<./Cursor/Skills/gh-pr-code-review/SKILL.md>) | [Skill](<./Claude Code/Skills/gh-pr-code-review/SKILL.md>) | [Command](./opencode/command/gh-pr-code-review.md) |
 | address-pr-comments | Find, fix, and resolve unresolved GitHub PR review comments via the `gh` CLI | [Prompt File](<./Github Copilot/Prompt Files/address-pr-comments.prompt.md>) | [Skill](<./Cursor/Skills/address-pr-comments/SKILL.md>) | [Skill](<./Claude Code/Skills/address-pr-comments/SKILL.md>) | [Command](./opencode/command/address-pr-comments.md) |
 | rails-controller-docs | Generate comprehensive Rails controller documentation | [Prompt File](<./Github Copilot/Prompt Files/rails-controller-docs.prompt.md>) | [Skill](<./Cursor/Skills/rails-controller-docs/SKILL.md>) | [Skill](<./Claude Code/Skills/rails-controller-docs/SKILL.md>) | [Command](./opencode/command/rails-controller-docs.md) |
@@ -52,7 +54,7 @@ Pre-built prompts for common development tasks, available on every platform:
 | generate-gitignore | Generate a comprehensive `.gitignore` at the project root | [Prompt File](<./Github Copilot/Prompt Files/generate-gitignore.prompt.md>) | [Skill](<./Cursor/Skills/generate-gitignore/SKILL.md>) | [Skill](<./Claude Code/Skills/generate-gitignore/SKILL.md>) | [Command](./opencode/command/generate-gitignore.md) |
 | linear-implementation-subtickets | Investigate a Linear issue across the API and UI repos, design a shared contract, then create `[API]` / `[UI]` coding-agent subtickets | [Prompt File](<./Github Copilot/Prompt Files/linear-implementation-subtickets.prompt.md>) | [Skill](<./Cursor/Skills/linear-implementation-subtickets/SKILL.md>) | [Skill](<./Claude Code/Skills/linear-implementation-subtickets/SKILL.md>) | [Command](./opencode/command/linear-implementation-subtickets.md) |
 
-> Note: `local-code-review` and `gh-pr-code-review` end with an optional "Suggested Follow-ups" line that recommends the matching `rails-review-checklist` / `gh-pr-rails-review-checklist` skill when a non-trivial Ruby/Rails change is reviewed. They only suggest it, never run it.
+> Note: `local-code-review` and `gh-pr-code-review` end with an optional "Suggested Follow-ups" line that recommends the matching checklist skill when a non-trivial change is reviewed: `rails-review-checklist` / `gh-pr-rails-review-checklist` for Ruby/Rails, and `react-review-checklist` / `gh-pr-react-review-checklist` for JavaScript/TypeScript, React, and Next.js. They only suggest it, never run it.
 
 > Note: the local code review skill is named `local-code-review` (folder/file and slash command) on all four platforms, including Claude Code, to avoid clashing with Claude Code's own `/code-review` review tooling.
 
@@ -240,6 +242,8 @@ Once installed, invoke them as slash commands in Cursor chat:
 | `/commit-message` | Draft a structured commit message (auto-detects React/Rails/Generic) |
 | `/rails-review-checklist` | Check uncommitted Ruby/Rails changes against a Ruby and Rails checklist |
 | `/gh-pr-rails-review-checklist` | Check a GitHub PR's Ruby/Rails changes against a Ruby and Rails checklist |
+| `/react-review-checklist` | Check uncommitted JS/TS, React, and Next.js changes against a checklist |
+| `/gh-pr-react-review-checklist` | Check a GitHub PR's JS/TS, React, and Next.js changes against a checklist |
 | `/gh-pr-code-review` | Review a GitHub PR using the `gh` CLI |
 | `/address-pr-comments` | Find, fix, and resolve unresolved GitHub PR review comments |
 | `/rails-controller-docs` | Generate documentation for a Rails controller |
@@ -269,6 +273,8 @@ Once installed, invoke them as slash commands in Claude Code:
 | `/commit-message` | Draft a structured commit message (auto-detects React/Rails/Generic) |
 | `/rails-review-checklist` | Check uncommitted Ruby/Rails changes against a Ruby and Rails checklist |
 | `/gh-pr-rails-review-checklist` | Check a GitHub PR's Ruby/Rails changes against a Ruby and Rails checklist |
+| `/react-review-checklist` | Check uncommitted JS/TS, React, and Next.js changes against a checklist |
+| `/gh-pr-react-review-checklist` | Check a GitHub PR's JS/TS, React, and Next.js changes against a checklist |
 | `/gh-pr-code-review` | Review a GitHub PR using the `gh` CLI |
 | `/address-pr-comments` | Find, fix, and resolve unresolved GitHub PR review comments |
 | `/rails-controller-docs` | Generate documentation for a Rails controller |
