@@ -55,8 +55,9 @@ Some languages and frameworks have a dedicated checklist skill for a deeper seco
 | --- | --- |
 | `.rb`, `.rake`, `.erb`, `Gemfile`, `db/migrate/` | `rails-review-checklist` (run `/rails-review-checklist`) |
 | `.js`, `.jsx`, `.ts`, `.tsx`, `.mjs`, `.cjs`, `next.config.*` | `react-review-checklist` (run `/react-review-checklist`) |
+| `.tf`, `.tfvars`, `.hcl`, Atmos files (`atmos.yaml`, `stacks/`), `.github/workflows/`, `Dockerfile`, compose files, dependency manifests and lockfiles, `.env*`, credentials config, or code touching authentication, authorization, payments, file uploads, or personal data | `security-review-checklist` (run `/security-review-checklist`) |
 
-If the changes match more than one row (for example, a Rails API and a Next.js frontend), suggest each matching checklist. Only suggest a checklist when the change is non-trivial (new or changed logic, components, models, controllers, migrations, or tests). Skip it for docs, config-only changes, renames, formatting, or very small changes.
+If the changes match more than one row (for example, a Rails API and a Next.js frontend), suggest each matching checklist. For the language rows, only suggest a checklist when the change is non-trivial (new or changed logic, components, models, controllers, migrations, or tests), and skip it for docs, config-only changes, renames, formatting, or very small changes. The security row is the exception: suggest it even for small changes (a one-line IAM policy or security group change can matter more than a large refactor), skipping it only for documentation- or formatting-only changes.
 
 ## Audience
 
@@ -141,4 +142,5 @@ File 2: (file_path)
 
 - Ruby/Rails changes detected - consider running `/rails-review-checklist` for a Ruby/Rails smell, antipattern, and testing check.
 - JavaScript/TypeScript changes detected - consider running `/react-review-checklist` for a TypeScript, React, Next.js, and testing check.
+- Security-sensitive changes detected - consider running `/security-review-checklist` for a security check (application, secrets, supply chain, infrastructure, CI/CD, and SOC 2/GDPR if requested).
 ````
