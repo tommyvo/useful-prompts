@@ -178,6 +178,12 @@ Detailed guidance with numbered steps
 - Create todo lists to track progress using markdown checklist format
 - Only include files in report that have specific suggestions (skip files with no issues)
 
+**Review Checklist Pattern (`rails-review-checklist.prompt.md` / Cursor+Claude Code `rails-review-checklist` / `opencode/command/rails-review-checklist.md`):**
+- Focused second pass alongside `local-code-review`: **ALWAYS** start with `git diff HEAD`, then check the changes against a "Ruby (any)" checklist and a "Rails" checklist
+- Report-only (never modifies files); exits with a one-line note if the diff has no Ruby/Rails files
+- Same priority emoji coding and report style as `local-code-review`; checklist items are prompts to look, not rules to enforce
+- Checklist content is our own summary of thoughtbot's Ruby Science/Testing Rails and Rails AntiPatterns, not copied text
+
 **Commit Message Pattern (`commit-message.prompt.md`):**
 - **ALWAYS** start with `git diff HEAD` to analyze changes
 - Auto-detect project type from file structure:
