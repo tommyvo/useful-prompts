@@ -422,4 +422,8 @@ Key safety guidelines:
 
 - Some prompts adapted from [GitHub Awesome Copilot](https://github.com/github/awesome-copilot) community collection
 - Inspired by best practices from the AI and developer communities
+- The `rails-review-checklist` skills draw on ideas from thoughtbot's [Ruby Science](https://github.com/thoughtbot/ruby-science) and [Testing Rails](https://github.com/thoughtbot/testing-rails) and Chad Pytel and Tammer Saleh's *Rails AntiPatterns* (paraphrased, not copied)
+- The `react-review-checklist` skills draw on the [React](https://react.dev/) and [Next.js](https://nextjs.org/docs) documentation, [typescript-eslint](https://typescript-eslint.io/), Kent C. Dodds' [Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library), and Dan Vanderkam's *Effective TypeScript*
+- The `security-review-checklist` skills draw on the [OWASP Top 10](https://owasp.org/www-project-top-ten/) and Cheat Sheet Series, the [Rails Security Guide](https://guides.rubyonrails.org/security.html), the AWS Well-Architected Security Pillar, GitHub's Actions hardening guidance, and the SOC 2 Trust Services Criteria and GDPR
+- Each checklist skill lists its full sources in its own "Sources" section
 - Built for use with [GitHub Copilot](https://github.com/features/copilot), [Cursor](https://cursor.com/), [Claude Code](https://claude.com/claude-code), and [Opencode](https://opencode.ai/)
