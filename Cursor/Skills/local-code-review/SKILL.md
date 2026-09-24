@@ -61,6 +61,9 @@ Follow these steps IN ORDER. DO NOT skip any step:
 
 The report should follow this format:
 
+Output the report as normal rendered markdown following the structure below. The code fence below only delimits the template - do not include it in your output or wrap your report in a code fence.
+
+````markdown
 # Description
 
 (Describe what this change is about. Examples:)
@@ -121,3 +124,4 @@ File 2: (file_path)
 - Overall code quality: (Good/Needs Work/Requires Significant Changes)
 - Blocking issues: (None/List them)
 - Recommendation: (Safe to merge/Merge after fixes/Needs discussion)
+````

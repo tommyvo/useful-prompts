@@ -100,6 +100,9 @@ When suggesting code changes, use unified diff format:
 
 Structure your review report as follows:
 
+Output the report as normal rendered markdown following the structure below. The code fence below only delimits the template - do not include it in your output or wrap your report in a code fence.
+
+````markdown
 # Pull Request Review
 
 **PR:** https://github.com/<repo>/pull/<number>
@@ -177,6 +180,7 @@ Multiple files need consistent error handling:
 **Recommendation:** [Safe to merge ✅ | Needs changes ⚠️ | Blocking issues ❌]
 
 **Summary:** [Brief summary of overall assessment]
+````
 
 ---
 
