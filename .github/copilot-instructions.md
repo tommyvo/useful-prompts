@@ -57,7 +57,7 @@ Every current prompt file in this repo uses `agent: agent` (autonomous execution
 **Examples:**
 - `local-code-review.prompt.md` - Runs `git diff HEAD`, generates priority-coded review (🟣🔴🟡🟢), auto-applies appropriate fixes
 - `commit-message.prompt.md` - Auto-detects React/Rails/Generic project, generates structured commit message
-- `gh-pr-code-review.prompt.md` - Fetches PR data via VS Code's GitHub PR extension tools (not `gh pr diff`, which crashes VS Code), provides unified diff suggestions
+- `gh-pr-code-review.prompt.md` - Fetches PR data via the `gh` CLI (not `gh pr diff`, which crashes VS Code), provides unified diff suggestions
 - `address-pr-comments.prompt.md` - Uses `gh` CLI + GitHub GraphQL API to find, fix, and resolve unresolved PR review threads
 
 ### 2. Instructions (`Github Copilot/Instructions/*.instructions.md`) - Auto-Applied Context
@@ -139,7 +139,7 @@ Opencode commands additionally support `{$ARGUMENTS}` for passing a single param
 **The conversion between platforms:**
 1. Copilot `agent: agent` → Cursor/Claude Code `name` + `description` + `disable-model-invocation: true` → Opencode `agent: build`
 2. Body content is a mirror across all four — same steps, same examples, same output format
-3. Deviate from an identical body ONLY when a tool genuinely can't do what another can (e.g. Copilot in VS Code must use the GitHub PR extension instead of `gh pr diff`) — that's the exception, document why inline, don't silently diverge
+3. Deviate from an identical body ONLY when a tool genuinely can't do what another can (e.g. Copilot in VS Code must avoid `gh pr diff`, which crashes VS Code, and use `git diff` instead) — that's the exception, document why inline, don't silently diverge
 4. Add `{$ARGUMENTS}` in the Opencode version wherever the prompt takes a natural single argument
 
 **Example:**
@@ -186,7 +186,7 @@ Detailed guidance with numbered steps
 - Same priority emoji coding and report style as `local-code-review`; checklist items are prompts to look, not rules to enforce
 - Checklist content is our own summary of thoughtbot's Ruby Science/Testing Rails and Rails AntiPatterns, not copied text
 - Large reviews (>15 files or >800 changed lines, or on request) are split across parallel subagents, one per checklist section, then merged by the main agent; falls back to single-pass when subagents are unavailable or fail
-- PR variant (`gh-pr-rails-review-checklist`): same checklist, sourced like `gh-pr-code-review` (Copilot uses the GitHub PR extension tools instead of `gh pr diff`, which crashes VS Code); never posts comments or modifies the PR
+- PR variant (`gh-pr-rails-review-checklist`): same checklist, sourced like `gh-pr-code-review` (all platforms use the `gh` CLI only; Copilot avoids `gh pr diff`, which crashes VS Code); never posts comments or modifies the PR
 - React variant (`react-review-checklist` / `gh-pr-react-review-checklist`): same shape, with TypeScript/JavaScript, React, Next.js, and Testing checklists; the Next.js section applies only when `next` is a dependency and is judged against the project's Next.js major version (caching defaults differ between versions)
 
 **Security Review Checklist Pattern (`security-review-checklist` / `gh-pr-security-review-checklist`):**
@@ -212,7 +212,7 @@ Detailed guidance with numbered steps
 - Omit template sections that don't have relevant changes
 
 **PR Review Pattern (`gh-pr-code-review.prompt.md`):**
-- Use `gh` CLI to fetch PR data: `gh pr view`, `gh pr diff` (read-only operations only) — except the Copilot version, which routes through the GitHub PR extension instead of `gh pr diff` to avoid crashing VS Code
+- Use `gh` CLI to fetch PR data: `gh pr view`, `gh pr diff` (read-only operations only) — except the Copilot version, which uses `git diff` instead of `gh pr diff` to avoid crashing VS Code
 - Review against a shared "What to Review" list (Correctness, Security, Code clarity, Reusability, Consistency) that mirrors `local-code-review`
 - Provide suggestions in unified diff format
 - Include merge recommendations (Safe/Needs changes/Blocking issues)

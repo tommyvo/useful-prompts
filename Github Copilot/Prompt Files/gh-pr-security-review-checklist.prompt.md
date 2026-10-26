@@ -5,7 +5,7 @@ agent: agent
 
 # GitHub PR Security Review Checklist
 
-Review a GitHub Pull Request using the GitHub Pull Request extension and check it against the security checklists below: secrets and obvious exposures, application security, authentication and sessions, client-side and browser, data isolation and lifecycle, messaging and background jobs, resource exhaustion, AI and LLM features, supply chain, infrastructure (Terraform/Atmos on AWS), CI/CD and containers, and optionally compliance and data handling. Every finding must name a real trust boundary and a concrete result, checked against the source; anything that depends on a fact the repository cannot show is reported as a lead to validate, not as a vulnerability. This complements `gh-pr-code-review`, which only covers security at a general level.
+Review a GitHub Pull Request using the `gh` CLI and check it against the security checklists below: secrets and obvious exposures, application security, authentication and sessions, client-side and browser, data isolation and lifecycle, messaging and background jobs, resource exhaustion, AI and LLM features, supply chain, infrastructure (Terraform/Atmos on AWS), CI/CD and containers, and optionally compliance and data handling. Every finding must name a real trust boundary and a concrete result, checked against the source; anything that depends on a fact the repository cannot show is reported as a lead to validate, not as a vulnerability. This complements `gh-pr-code-review`, which only covers security at a general level.
 
 ## CRITICAL: MANDATORY FIRST STEPS
 
@@ -13,11 +13,10 @@ Review a GitHub Pull Request using the GitHub Pull Request extension and check i
 
 ### Step 1: Get PR Details (MANDATORY)
 
-Use the GitHub Pull Request extension tools to gather PR information:
+Use the `gh` CLI to gather PR information:
 
-- **IF** the PR is currently checked out → Use `github-pull-request_activePullRequest` to get PR title, description, changed files, and review comments
-- **IF** the PR is open in VS Code → Use `github-pull-request_openPullRequest` to get PR title, description, changed files, and review comments
-- **IF** user provides a PR number → Use `github-pull-request_issue_fetch` with the PR number to get PR metadata
+- **IF** user provides a PR number → Run `gh pr view <number> --json title,body,changedFiles,reviews,comments`
+- **IF** no PR number provided → Run `gh pr view --json title,body,changedFiles,reviews,comments` to get the current branch's PR
 
 DO NOT proceed without PR metadata.
 
@@ -35,12 +34,12 @@ This is your primary source of truth for the actual code changes.
 
 ### Step 3: Get CI/CD Status (MANDATORY)
 
-Use `github-pull-request_pullRequestStatusChecks` with the PR number to get CI/CD status.
+Run `gh pr checks <number>` to get CI/CD status.
 
 **CRITICAL WARNINGS:**
 - DO NOT use `gh pr diff` under any circumstances — it crashes VS Code
 - DO NOT attempt to review the PR without completing Steps 1-3 first
-- DO NOT use context or memory — use ONLY the output from these tools and commands
+- DO NOT use context or memory — use ONLY the output from these commands
 - DO NOT modify the PR
 
 ### Step 4: Additional Context (Optional)
