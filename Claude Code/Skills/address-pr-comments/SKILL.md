@@ -11,6 +11,8 @@ disable-model-invocation: true
 
 # Address PR Comments
 
+Use ONLY the `gh` CLI for every GitHub operation in this skill (fetching, replying, resolving). Do not use any GitHub MCP server or editor GitHub extension tools: they can't see private repos that `gh` can.
+
 ## Step 1: Identify the PR
 
 - If a PR number/URL is given, use it. Otherwise resolve the current branch's PR:

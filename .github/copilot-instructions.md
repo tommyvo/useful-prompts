@@ -58,7 +58,7 @@ Every current prompt file in this repo uses `agent: agent` (autonomous execution
 - `local-code-review.prompt.md` - Runs `git diff HEAD`, generates priority-coded review (🟣🔴🟡🟢), auto-applies appropriate fixes
 - `commit-message.prompt.md` - Auto-detects React/Rails/Generic project, generates structured commit message
 - `gh-pr-code-review.prompt.md` - Fetches PR data via the `gh` CLI (not `gh pr diff`, which crashes VS Code), provides unified diff suggestions
-- `address-pr-comments.prompt.md` - Uses `gh` CLI + GitHub GraphQL API to find, fix, and resolve unresolved PR review threads
+- `address-pr-comments.prompt.md` - Uses ONLY the `gh` CLI (+ GitHub GraphQL API via `gh api`) to find, fix, and resolve unresolved PR review threads
 
 ### 2. Instructions (`Github Copilot/Instructions/*.instructions.md`) - Auto-Applied Context
 Language/framework-specific guidelines that automatically activate when editing matching files. GitHub Copilot only — there is no Cursor/Claude Code/Opencode equivalent in this repo.

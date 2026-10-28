@@ -5,6 +5,8 @@ agent: build
 
 # Address PR Comments
 
+Use ONLY the `gh` CLI for every GitHub operation in this skill (fetching, replying, resolving). Do not use any GitHub MCP server or editor GitHub extension tools: they can't see private repos that `gh` can.
+
 **PR Number/URL:** {$ARGUMENTS}
 
 ## Step 1: Identify the PR
