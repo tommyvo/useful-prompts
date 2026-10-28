@@ -1,6 +1,6 @@
 ## Overview
 
-**Useful Prompts** is a comprehensive collection of reusable prompts, instructions, and custom chat modes designed to supercharge your development workflow with AI coding assistants. The same prompts are hand-ported across four platforms — **GitHub Copilot**, **Cursor**, **Claude Code**, and **Opencode** — so whichever tool you use, you get the same battle-tested workflows for commit messages, code review, documentation, and more.
+**Useful Prompts** is a comprehensive collection of reusable prompts, and instructions designed to supercharge your development workflow with AI coding assistants. The same prompts are hand-ported across four platforms — **GitHub Copilot**, **Cursor**, **Claude Code**, and **Opencode** — so whichever tool you use, you get the same battle-tested workflows for commit messages, code review, documentation, and more.
 
 ### Why Use This Collection?
 
@@ -27,10 +27,10 @@ This repo maintains four parallel copies of the same prompt library, one per pla
 
 | Directory | Platform | Format |
 | --- | --- | --- |
-| [`Github Copilot/`](./Github%20Copilot/) | GitHub Copilot (VS Code) | `.prompt.md`, `.instructions.md`, `.chatmode.md` |
+| [`Github Copilot/`](./Github%20Copilot/) | GitHub Copilot (VS Code) | `.prompt.md`, `.instructions.md` |
 | [`Cursor/`](./Cursor/) | Cursor | `SKILL.md` under `Cursor/Skills/<name>/` |
 | [`Claude Code/`](./Claude%20Code/) | Claude Code | `SKILL.md` under `Claude Code/Skills/<name>/` |
-| [`opencode/`](./opencode/) | Opencode | `.md` under `opencode/agent/` and `opencode/command/` |
+| [`opencode/`](./opencode/) | Opencode | `.md` under `opencode/command/` |
 
 Content is kept identical across all four; only the frontmatter and, occasionally, tool-specific instructions (e.g. how to fetch a PR diff) differ. See [AGENTS.md](./AGENTS.md) for the exact conversion rules.
 
@@ -64,7 +64,7 @@ Pre-built prompts for common development tasks, available on every platform:
 
 > Note: the local code review skill is named `local-code-review` (folder/file and slash command) on all four platforms, including Claude Code, to avoid clashing with Claude Code's own `/code-review` review tooling.
 
-Deprecated prompts (kept for reference, not removed) live in [`Github Copilot/Prompt Files/deprecated/`](<./Github Copilot/Prompt Files/deprecated/>).
+Deprecated prompts (kept for reference, not removed) live in [`Github Copilot/Prompt Files/deprecated/`](<./Github Copilot/Prompt Files/deprecated/>). Retired chat modes and agents (Beast Mode 3.1, Principal Engineer) live in a top-level [`deprecated/`](<./deprecated/>) tree that mirrors the original paths; the install and import scripts no longer handle chat modes or agents.
 
 ### 🎯 Instructions (GitHub Copilot only)
 
@@ -88,15 +88,6 @@ Always-applied guardrails that Cursor loads into every chat automatically — no
 | [no-git-history-changes](<./Cursor/rules/no-git-history-changes.mdc>) | Never commit, amend, or otherwise rewrite git history without explicit per-instance approval |
 | [no-shell-without-approval](<./Cursor/rules/no-shell-without-approval.mdc>) | Never run shell commands without explicit user approval |
 
-### 💬 Chat Modes / Agents
-
-Custom personas for specialized AI assistance, available on Copilot and Opencode:
-
-| Chat Mode | Description | Copilot | Opencode |
-| --- | --- | --- | --- |
-| Beast Mode 3.1 | Autonomous problem-solving with extensive research capabilities | [Chat Mode](<./Github Copilot/Chat Modes/Beast Mode 3.1.chatmode.md>) | [Agent](./opencode/agent/beast-mode.md) |
-| Principal Engineer | Expert-level engineering guidance and technical leadership | [Chat Mode](<./Github Copilot/Chat Modes/Principal Engineer.chatmode.md>) | [Agent](./opencode/agent/principal-engineer.md) |
-
 ## Usage
 
 ### Using Prompt Files (GitHub Copilot)
@@ -119,13 +110,6 @@ Instructions automatically apply to files matching their `applyTo` pattern. They
 
 **Example usage in code:**
 When editing TypeScript files, the TypeScript instructions automatically activate, ensuring generated code follows your project standards.
-
-### Using Chat Modes / Agents
-
-Activate custom chat modes to get specialized AI assistance:
-
-- **Copilot:** Select a chat mode from the chat mode dropdown in Copilot Chat
-- **Opencode:** `opencode agent beast-mode` / `opencode agent principal-engineer`
 
 ### Using Skills (Cursor / Claude Code)
 
@@ -216,16 +200,14 @@ Runs every `install-*.sh` script in the `scripts/` directory (Copilot, Cursor, C
 
 The script will:
 
-- Copy all chat modes from `Github Copilot/Chat Modes/` to `~/Library/Application Support/Code/User/prompts` (macOS)
-- Copy all prompt files from `Github Copilot/Prompt Files/` to the same directory
+- Copy all prompt files from `Github Copilot/Prompt Files/` to `~/Library/Application Support/Code/User/prompts` (macOS)
 - Show which files will be ADDED (new) and which will be MODIFIED/OVERWRITTEN (existing files with same name)
 - The confirmation prompt defaults to Yes; pressing Enter will proceed with installation
 - **Note:** Restart VS Code after installation if prompts don't appear immediately
 
-After installation, all prompts and chat modes will be available in GitHub Copilot Chat:
+After installation, all prompts will be available in GitHub Copilot Chat:
 
 - Reference prompt files: `Follow instructions in <filename>`
-- Select chat modes from the chat mode dropdown menu
 
 ### Installing for Cursor
 
@@ -295,7 +277,7 @@ Once installed, invoke them as slash commands in Claude Code:
 
 ### Using with Opencode
 
-Pre-converted Opencode versions of all prompts and chat modes are available in the `opencode/` directory. These files use Opencode's frontmatter syntax (`agent: build` / `agent: plan`) and include support for `{$ARGUMENTS}` where applicable.
+Pre-converted Opencode versions of all prompts are available in the `opencode/` directory. These files use Opencode's frontmatter syntax (`agent: build`) and include support for `{$ARGUMENTS}` where applicable.
 
 #### Quick Installation
 
@@ -305,24 +287,13 @@ Pre-converted Opencode versions of all prompts and chat modes are available in t
 
 The script will:
 
-- Show you what will be installed (agents and commands)
+- Show you what will be installed (commands)
 - Preserve your existing Opencode config file
-- Install all agents and commands to `~/.config/opencode/`
+- Install all commands to `~/.config/opencode/`
 - The installer distinguishes between files that will be ADDED (new) and files that will be MODIFIED/OVERWRITTEN (existing with same name).
 - The confirmation prompt defaults to Yes; pressing Enter will proceed with installation.
 
 #### Manual Installation
-
-**Agents** (chat-mode equivalents):
-
-```bash
-# Copy all agent prompts to Opencode config
-cp opencode/agent/*.md ~/.config/opencode/agent/
-
-# Or copy individually
-cp opencode/agent/beast-mode.md ~/.config/opencode/agent/
-cp opencode/agent/principal-engineer.md ~/.config/opencode/agent/
-```
 
 **Commands** (task automation, equivalent to Copilot's prompt files):
 
@@ -343,9 +314,6 @@ opencode command local-code-review
 
 # Run a command with arguments (e.g., PR number for review)
 opencode command gh-pr-code-review 123
-
-# Use an agent mode
-opencode agent beast-mode "your task here"
 ```
 
 #### Key Differences from GitHub Copilot
@@ -353,7 +321,7 @@ opencode agent beast-mode "your task here"
 **Frontmatter:**
 
 - GitHub Copilot prompt files: `agent: agent` (task automation frontmatter key is `agent`, not `mode`)
-- Opencode commands/agents: `agent: build` (autonomous execution) or `agent: plan` (advisory, read-only)
+- Opencode commands: `agent: build` (autonomous execution)
 
 **Arguments:**
 
@@ -364,27 +332,25 @@ For more details, see the [Opencode documentation](https://opencode.ai/docs/) an
 
 ## Importing New Skills
 
-If you've written a new skill/prompt/command/agent directly in one tool's global config (e.g. dropped a new `SKILL.md` in `~/.claude/skills/` or created a Copilot chat mode in VS Code) and want to bring it into this repo, use the matching import script instead of manually copying files around:
+If you've written a new skill/prompt/command directly in one tool's global config (e.g. dropped a new `SKILL.md` in `~/.claude/skills/` or created a Copilot prompt file in VS Code) and want to bring it into this repo, use the matching import script instead of manually copying files around:
 
 ```bash
 ./scripts/import-claude.sh    # ~/.claude/skills/                                   -> Claude Code/Skills/
 ./scripts/import-cursor.sh     # ~/.cursor/skills/                                   -> Cursor/Skills/
                                 # ~/.cursor/rules/                                    -> Cursor/rules/ (Cursor-only, no porting)
-./scripts/import-copilot.sh    # ~/Library/Application Support/Code/User/prompts    -> Github Copilot/Prompt Files/ + Chat Modes/
-./scripts/import-opencode.sh   # ~/.config/opencode/{command,agent}                 -> opencode/command/ + agent/
+./scripts/import-copilot.sh    # ~/Library/Application Support/Code/User/prompts    -> Github Copilot/Prompt Files/
+./scripts/import-opencode.sh   # ~/.config/opencode/command                         -> opencode/command/
 ```
 
 Each script:
 
-- Scans the corresponding global config directory for skills/prompts/commands/agents that don't yet exist in this repo
+- Scans the corresponding global config directory for skills/prompts/commands that don't yet exist in this repo
 - Shows what's new (and what's already tracked, so you can spot local edits worth reconciling by hand) before doing anything
 - Copies the new item into its canonical home directory for that platform
 - Auto-generates best-effort ports to the other platforms (frontmatter translated, body copied as-is)
 
 `import-cursor.sh` additionally imports Cursor rules (`~/.cursor/rules/*.mdc` -> `Cursor/rules/`). Rules are Cursor-only for now — there's no established equivalent format on the other three platforms yet, so no porting happens for them.
 - The confirmation prompt defaults to Yes; pressing Enter proceeds
-
-Chat modes / agents only port between GitHub Copilot and Opencode (Cursor and Claude Code have no chat-mode equivalent), matching the existing four-platform split described in [AGENTS.md](./AGENTS.md).
 
 > [!NOTE]
 > The generated ports are a starting point, not a final draft. Frontmatter is templated automatically, but review the new files for tone and platform-specific instructions (see AGENTS.md's notes on exceptions like `gh-pr-code-review`'s Copilot variant), then update the README tables above and run the relevant `install-*.sh` script(s).
@@ -415,7 +381,6 @@ Key safety guidelines:
 ### Documentation
 
 - **[GitHub Copilot - Prompt Files](https://code.visualstudio.com/docs/copilot/customization/prompt-files)** - Official VS Code documentation
-- **[GitHub Copilot - Custom Chat Modes](https://code.visualstudio.com/docs/copilot/customization/custom-chat-modes)** - Custom chat mode guide
 - **[Cursor - Commands](https://docs.cursor.com/)** - Cursor CLI/chat documentation
 - **[Claude Code - Skills](https://docs.claude.com/en/docs/claude-code)** - Claude Code documentation
 - **[Opencode Commands](https://opencode.ai/docs/commands/)** - Opencode CLI documentation

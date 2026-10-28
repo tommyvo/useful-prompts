@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # GitHub Copilot Prompts Installer
-# Installs prompt files and chat modes to ~/Library/Application Support/Code/User/prompts
+# Installs prompt files to ~/Library/Application Support/Code/User/prompts
 
 set -e
 
@@ -15,15 +15,9 @@ NC='\033[0m' # No Color
 # Configuration
 COPILOT_PROMPTS_DIR="$HOME/Library/Application Support/Code/User/prompts"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CHAT_MODES_DIR="$SCRIPT_DIR/../Github Copilot/Chat Modes"
 PROMPT_FILES_DIR="$SCRIPT_DIR/../Github Copilot/Prompt Files"
 
 # Check if source directories exist
-if [ ! -d "$CHAT_MODES_DIR" ]; then
-    echo -e "${RED}Error: Chat Modes directory not found at $CHAT_MODES_DIR${NC}"
-    exit 1
-fi
-
 if [ ! -d "$PROMPT_FILES_DIR" ]; then
     echo -e "${RED}Error: Prompt Files directory not found at $PROMPT_FILES_DIR${NC}"
     exit 1
@@ -71,20 +65,6 @@ echo ""
 echo -e "${YELLOW}⚠️  This will install the following prompts for GitHub Copilot in VS Code:${NC}"
 echo ""
 
-# List chat modes
-chatmode_files=()
-while IFS= read -r file; do
-    [ -n "$file" ] && chatmode_files+=("$file")
-done < <(list_files "$CHAT_MODES_DIR")
-
-if [ ${#chatmode_files[@]} -gt 0 ]; then
-    echo -e "${GREEN}Chat Modes (${#chatmode_files[@]}):${NC}"
-    for file in "${chatmode_files[@]}"; do
-        echo "  • $file"
-    done
-    echo ""
-fi
-
 # List prompt files
 prompt_files=()
 while IFS= read -r file; do
@@ -103,40 +83,14 @@ fi
 echo -e "${BLUE}Target directory:${NC} $COPILOT_PROMPTS_DIR"
 echo ""
 
-chatmode_conflicts=()
-while IFS= read -r file; do
-    [ -n "$file" ] && chatmode_conflicts+=("$file")
-done < <(check_conflicts "$COPILOT_PROMPTS_DIR" "$CHAT_MODES_DIR")
-
 prompt_conflicts=()
 while IFS= read -r file; do
     [ -n "$file" ] && prompt_conflicts+=("$file")
 done < <(check_conflicts "$COPILOT_PROMPTS_DIR" "$PROMPT_FILES_DIR")
 
 # Compute which files will be added (new files) and which are unchanged (identical)
-chatmode_added=()
-chatmode_unchanged=()
 prompt_added=()
 prompt_unchanged=()
-
-for file in "${chatmode_files[@]}"; do
-    if [ -f "$COPILOT_PROMPTS_DIR/$file" ]; then
-        # File exists - check if it's in conflicts (different) or unchanged (identical)
-        found_conflict=false
-        for conflict in "${chatmode_conflicts[@]}"; do
-            if [ "$file" = "$conflict" ]; then
-                found_conflict=true
-                break
-            fi
-        done
-        if [ "$found_conflict" = false ]; then
-            chatmode_unchanged+=("$file")
-        fi
-    else
-        # File doesn't exist - it will be added
-        chatmode_added+=("$file")
-    fi
-done
 
 for file in "${prompt_files[@]}"; do
     if [ -f "$COPILOT_PROMPTS_DIR/$file" ]; then
@@ -158,16 +112,9 @@ for file in "${prompt_files[@]}"; do
 done
 
 # Show summary of what will change: added vs modified
-if [ ${#chatmode_added[@]} -gt 0 ] || [ ${#prompt_added[@]} -gt 0 ]; then
+if [ ${#prompt_added[@]} -gt 0 ]; then
     echo -e "${GREEN}The following files will be ADDED:${NC}"
     echo ""
-    if [ ${#chatmode_added[@]} -gt 0 ]; then
-        echo -e "${GREEN}Chat Modes:${NC}"
-        for file in "${chatmode_added[@]}"; do
-            echo "  • $file"
-        done
-        echo ""
-    fi
     if [ ${#prompt_added[@]} -gt 0 ]; then
         echo -e "${GREEN}Prompt Files:${NC}"
         for file in "${prompt_added[@]}"; do
@@ -177,17 +124,10 @@ if [ ${#chatmode_added[@]} -gt 0 ] || [ ${#prompt_added[@]} -gt 0 ]; then
     fi
 fi
 
-if [ ${#chatmode_conflicts[@]} -gt 0 ] || [ ${#prompt_conflicts[@]} -gt 0 ]; then
+if [ ${#prompt_conflicts[@]} -gt 0 ]; then
     echo -e "${YELLOW}⚠️  The following files will be MODIFIED / OVERWRITTEN:${NC}"
     echo ""
 
-    if [ ${#chatmode_conflicts[@]} -gt 0 ]; then
-        echo -e "${YELLOW}Chat Modes:${NC}"
-        for file in "${chatmode_conflicts[@]}"; do
-            echo "  • $file"
-        done
-        echo ""
-    fi
 
     if [ ${#prompt_conflicts[@]} -gt 0 ]; then
         echo -e "${YELLOW}Prompt Files:${NC}"
@@ -198,16 +138,9 @@ if [ ${#chatmode_conflicts[@]} -gt 0 ] || [ ${#prompt_conflicts[@]} -gt 0 ]; the
     fi
 fi
 
-if [ ${#chatmode_unchanged[@]} -gt 0 ] || [ ${#prompt_unchanged[@]} -gt 0 ]; then
+if [ ${#prompt_unchanged[@]} -gt 0 ]; then
     echo -e "${BLUE}The following files are already up-to-date (no changes):${NC}"
     echo ""
-    if [ ${#chatmode_unchanged[@]} -gt 0 ]; then
-        echo -e "${BLUE}Chat Modes:${NC}"
-        for file in "${chatmode_unchanged[@]}"; do
-            echo "  • $file"
-        done
-        echo ""
-    fi
     if [ ${#prompt_unchanged[@]} -gt 0 ]; then
         echo -e "${BLUE}Prompt Files:${NC}"
         for file in "${prompt_unchanged[@]}"; do
@@ -218,7 +151,7 @@ if [ ${#chatmode_unchanged[@]} -gt 0 ] || [ ${#prompt_unchanged[@]} -gt 0 ]; the
 fi
 
 # Check if there are any changes to install
-if [ ${#chatmode_added[@]} -eq 0 ] && [ ${#prompt_added[@]} -eq 0 ] && [ ${#chatmode_conflicts[@]} -eq 0 ] && [ ${#prompt_conflicts[@]} -eq 0 ]; then
+if [ ${#prompt_added[@]} -eq 0 ] && [ ${#prompt_conflicts[@]} -eq 0 ]; then
     echo -e "${GREEN}✅ All files are already up-to-date. Nothing to install.${NC}"
     echo ""
     exit 0
@@ -245,16 +178,6 @@ echo ""
 # Create directory if it doesn't exist
 mkdir -p "$COPILOT_PROMPTS_DIR"
 
-# Copy chat modes
-if [ ${#chatmode_files[@]} -gt 0 ]; then
-    echo -e "${GREEN}Installing chat modes...${NC}"
-    for file in "${chatmode_files[@]}"; do
-        cp "$CHAT_MODES_DIR/$file" "$COPILOT_PROMPTS_DIR/"
-        echo "  ✓ $file"
-    done
-    echo ""
-fi
-
 # Copy prompt files
 if [ ${#prompt_files[@]} -gt 0 ]; then
     echo -e "${GREEN}Installing prompt files...${NC}"
@@ -270,12 +193,10 @@ echo ""
 echo -e "${BLUE}Usage in VS Code:${NC}"
 echo "  1. Open GitHub Copilot Chat (Cmd+Shift+I)"
 echo "  2. Reference a prompt file: 'Follow instructions in <filename>'"
-echo "  3. Or select a chat mode from the dropdown menu"
 echo ""
 echo -e "${BLUE}Examples:${NC}"
 echo "  • 'Follow instructions in local-code-review.prompt.md'"
 echo "  • 'Follow instructions in commit-message.prompt.md'"
-echo "  • Select 'Beast Mode' or 'Principal Engineer' from chat modes"
 echo ""
 echo -e "${BLUE}Note:${NC} Restart VS Code if the prompts don't appear immediately."
 echo ""

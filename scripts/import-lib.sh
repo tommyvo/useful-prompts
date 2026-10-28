@@ -75,19 +75,6 @@ write_flat_prompt() {
     } >"$target_file"
 }
 
-to_kebab_case() {
-    echo "$1" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//'
-}
-
-to_title_case() {
-    local input="$1" result="" part
-    IFS='-' read -ra parts <<<"$input"
-    for part in "${parts[@]}"; do
-        result+="$(tr '[:lower:]' '[:upper:]' <<<"${part:0:1}")${part:1} "
-    done
-    echo "${result% }"
-}
-
 # Confirm (default: Yes). Returns 0 to proceed, 1 to cancel.
 confirm_proceed() {
     echo -e "${BLUE}Do you want to proceed with the import? [Y/n]${NC} "
