@@ -64,7 +64,7 @@ Then decide, per thread:
   Update/add specs covering the change. Prefer matching existing patterns in the surrounding code
   over inventing new ones.
 - **Comment instead** — the concern is a false positive, out of scope, a deliberate tradeoff, or
-  you disagree. Draft a short reply explaining why, but **do not post it yet** — see Step 5.
+  you disagree. Draft a short reply explaining why, but **do not post it yet** — see Step 6.
 
 Don't batch unrelated fixes into one giant diff-reading pass; address threads one at a time so each
 fix can be tied back to its thread.
@@ -75,7 +75,11 @@ Before resolving anything, run the affected tests and linter for changed files (
 skills for the exact test/lint commands, e.g. `soraban-running-rspecs` / `soraban-running-rubocop`
 in this repo, or the project's standard test runner otherwise). Fix any failures before proceeding.
 
-## Step 5: Resolve fixed threads, reply only where you didn't fix
+## Step 5: Review the changes
+
+Only if you made code changes in Step 3 (skip this step entirely if every thread was a comment-only reply), run `local-code-review` on the uncommitted changes. Fix any valid findings it raises and re-run the affected tests/lint from Step 4 before moving on.
+
+## Step 6: Resolve fixed threads, reply only where you didn't fix
 
 For each thread you **fixed**: resolve it directly, no reply needed.
 
@@ -103,7 +107,8 @@ gh api repos/<owner>/<repo>/pulls/<number>/comments/<databaseId>/replies -X POST
 Only resolve that thread if the user also confirms it should be marked resolved — posting the
 reply alone doesn't imply resolution.
 
-## Step 6: Summarize
+## Step 7: Summarize
 
 Report back per-thread: what was fixed (with file/line references) and resolved silently, what
-tests/lint were run, and which threads got a reply instead (with their approval/resolution status).
+tests/lint were run, what the code review found (if run), and which threads got a reply instead
+(with their approval/resolution status).
