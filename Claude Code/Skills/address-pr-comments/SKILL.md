@@ -77,7 +77,11 @@ any failures before proceeding.
 
 ## Step 5: Review the changes
 
-Only if you made code changes in Step 3 (skip this step entirely if every thread was a comment-only reply), run `local-code-review` on the uncommitted changes. Fix any valid findings it raises and re-run the affected tests/lint from Step 4 before moving on.
+**This step is required whenever Step 3 changed any file.** Skip it only if Step 3 changed no files (every thread got a comment-only reply). Do not start Step 6 until this step is done.
+
+`local-code-review` can only be started by the user as a slash command, so it won't show up in your list of available skills and you can't invoke it as a tool. Instead, read its instructions from `~/.claude/skills/local-code-review/SKILL.md` and follow them yourself, from its mandatory `git diff HEAD` first step through applying the appropriate fixes. If that file doesn't exist, review `git diff HEAD` yourself for correctness, security, clarity, reuse, and consistency, using its priority emojis (🟣 SHOULD FIX, 🔴 HIGH, 🟡 MEDIUM, 🟢 LOW).
+
+Output the review report in chat, fix any valid findings, and re-run the affected tests/lint from Step 4 before moving on.
 
 ## Step 6: Resolve fixed threads, reply only where you didn't fix
 
@@ -110,5 +114,5 @@ reply alone doesn't imply resolution.
 ## Step 7: Summarize
 
 Report back per-thread: what was fixed (with file/line references) and resolved silently, what
-tests/lint were run, what the code review found (if run), and which threads got a reply instead
-(with their approval/resolution status).
+tests/lint were run, what the `local-code-review` pass found and fixed (or, if it was
+skipped, why), and which threads got a reply instead (with their approval/resolution status).

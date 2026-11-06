@@ -206,6 +206,7 @@ Detailed guidance with numbered steps
 - Fetch unresolved review threads via `gh api graphql` (the REST API doesn't expose resolution state)
 - Per thread: fix in-scope issues directly, or draft a reply for out-of-scope/disagreed concerns — **never post a reply without user approval**
 - Run tests/lint before resolving anything, then run `local-code-review` on the changes if (and only if) code was changed
+- `local-code-review` has `disable-model-invocation: true` (and prompt files/commands can't be invoked as tools), so the agent can't call it directly: Step 5 tells it to read the installed `local-code-review` file by its per-platform path and follow it, with a fallback inline review
 - Resolve fixed threads via a GraphQL `resolveReviewThread` mutation; post approved replies via the REST replies endpoint
 - Read-only until the fix/reply step — no PR mutation happens without a decision per thread
 
